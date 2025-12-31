@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\Filament\Clusters')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
@@ -59,13 +60,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make()
-                    ->globallySearchable(false),
+                    ->globallySearchable(false)
+                    ->navigationGroup(''),
 
                 FilamentDeveloperLoginsPlugin::make()
                     ->enabled(app()->environment('local'))
                     ->users([
                         'Admin' => 'superadmin@bkn.my.id'
                     ])
-            ]);
+            ])
+            ->topNavigation();
     }
 }
