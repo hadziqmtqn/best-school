@@ -3,19 +3,22 @@
 namespace Database\Seeders\Auth;
 
 use App\Enums\BaseRole;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class SuperAdminSeeder extends Seeder
 {
     public function run(): void
     {
-        $baseRole = BaseRole::options();
+        $user = new User();
+        $user->username = 'super-admin';
+        $user->name = 'Super Admin';
+        $user->email = 'superadmin@bkn.my.id';
+        $user->password = Hash::make('superadmin');
+        $user->email_verified_at = now();
+        $user->save();
 
-        foreach ($baseRole as $key => $item) {
-            Role::create([
-                'name' => $key
-            ]);
-        }
+        $user->assignRole(BaseRole::SUPER_ADMIN->value);
     }
 }
