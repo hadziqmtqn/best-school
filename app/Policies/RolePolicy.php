@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
+use App\Enums\BaseRole;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -34,6 +35,8 @@ class RolePolicy
 
     public function delete(AuthUser $authUser, Role $role): bool
     {
+        if ($role->name === BaseRole::SUPER_ADMIN->value) return false;
+
         return $authUser->can('Delete:Role', $role);
     }
 

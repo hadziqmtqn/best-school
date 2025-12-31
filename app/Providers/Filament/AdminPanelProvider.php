@@ -2,12 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Navigations\PanelNavigation;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationBuilder;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -61,7 +63,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make()
                     ->globallySearchable(false)
-                    ->navigationGroup(''),
+                    ->navigationGroup('')
+                    ->navigationIcon('')
+                    ->activeNavigationIcon('')
+                    ->registerNavigation(false),
 
                 FilamentDeveloperLoginsPlugin::make()
                     ->enabled(app()->environment('local'))
@@ -69,6 +74,10 @@ class AdminPanelProvider extends PanelProvider
                         'Admin' => 'superadmin@bkn.my.id'
                     ])
             ])
-            ->topNavigation();
+            ->topNavigation()
+            ->breadcrumbs(false)
+            ->navigation(function (NavigationBuilder $navigationBuilder): NavigationBuilder {
+                return PanelNavigation::menus($navigationBuilder);
+            });
     }
 }
