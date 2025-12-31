@@ -19,19 +19,22 @@ class PermissionGenerator
             foreach ($roleAccess as $resource => $permissionMap) {
 
                 // otomatis slug dari nama Resource
-                $slug = class_exists($resource)
+                $resourceName = class_exists($resource)
                     ? Str::of(class_basename($resource))
                         ->replace('Resource', '')
-                        ->snake()
+                        ->studly()
                         ->toString()
                     : Str::of($resource)
-                        ->snake()
+                        ->studly()
                         ->toString();
 
                 // ambil permission dari KEYS roleAccess
                 foreach ($permissionMap as $perm => $allowedRoles) {
 
-                    $name = $perm . "_" . $slug;
+                    $name = Str::of($perm)
+                            ->studly()
+                            ->toString()
+                        . ':' . $resourceName;
 
                     // Default semua role = NO
                     $row = ['name' => $name];

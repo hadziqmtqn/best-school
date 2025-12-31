@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -30,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Teal,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -57,8 +58,14 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                FilamentShieldPlugin::make(),
-                
+                FilamentShieldPlugin::make()
+                    ->globallySearchable(false),
+
+                FilamentDeveloperLoginsPlugin::make()
+                    ->enabled(app()->environment('local'))
+                    ->users([
+                        'Admin' => 'superadmin@bkn.my.id'
+                    ])
             ]);
     }
 }
