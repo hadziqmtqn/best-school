@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
@@ -21,6 +22,7 @@ class PanelNavigation
                     ->label('Pengaturan')
                     ->icon(Phosphor::Gear)
                     ->items([
+                        ...self::filterResourceNavigationItems(ApplicationResource::class),
                         ...self::filterResourceNavigationItems(RoleResource::class)
                     ])
             ]);

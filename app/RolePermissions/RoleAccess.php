@@ -3,6 +3,7 @@
 namespace App\RolePermissions;
 
 use App\Enums\BaseRole;
+use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 
 class RoleAccess
@@ -30,6 +31,11 @@ class RoleAccess
                 'force_delete' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
+
+            ApplicationResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+            ]
         ];
     }
 

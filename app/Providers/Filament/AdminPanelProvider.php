@@ -78,6 +78,8 @@ class AdminPanelProvider extends PanelProvider
             ->breadcrumbs(false)
             ->navigation(function (NavigationBuilder $navigationBuilder): NavigationBuilder {
                 return PanelNavigation::menus($navigationBuilder);
-            });
+            })
+            ->databaseTransactions()
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
     }
 }
