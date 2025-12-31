@@ -3,8 +3,8 @@
 namespace App\Filament\Clusters\Setting\Resources\Applications\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ApplicationsTable
@@ -13,17 +13,25 @@ class ApplicationsTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nama'),
+
+                TextColumn::make('short_name')
+                    ->label('Nama Singkatan')
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->button()
+                    ->outlined()
+                    ->modalHeading('Ubah Aplikasi')
+                    ->modalWidth('md')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+
                 ]),
             ]);
     }

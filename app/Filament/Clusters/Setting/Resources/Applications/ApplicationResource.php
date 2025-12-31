@@ -19,6 +19,8 @@ class ApplicationResource extends Resource
 
     protected static bool $shouldRegisterNavigation = false;
 
+    protected static ?string $navigationLabel = 'Aplikasi';
+
     public static function form(Schema $schema): Schema
     {
         return ApplicationForm::configure($schema);

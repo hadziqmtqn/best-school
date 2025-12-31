@@ -49,17 +49,29 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => env('OBJECT_STORAGE_KEY'),
+            'secret' => env('OBJECT_STORAGE_SECRET'),
+            'region' => env('OBJECT_STORAGE_REGION'),
+            'bucket' => env('OBJECT_STORAGE_BUCKET'),
+            'url' => env('OBJECT_STORAGE_URL'),
+            'endpoint' => env('OBJECT_STORAGE_ENDPOINT'),
+            'use_path_style_endpoint' => env('OBJECT_STORAGE_USE_PATH_STYLE', false),
             'throw' => false,
             'report' => false,
         ],
 
+        's3_public' => [
+            'driver' => 's3',
+            'key' => env('OBJECT_STORAGE_KEY_PUBLIC'),
+            'secret' => env('OBJECT_STORAGE_SECRET_PUBLIC'),
+            'region' => env('OBJECT_STORAGE_REGION_PUBLIC'),
+            'bucket' => env('OBJECT_STORAGE_BUCKET_PUBLIC'),
+            'url' => env('OBJECT_STORAGE_URL_PUBLIC'),
+            'endpoint' => env('OBJECT_STORAGE_ENDPOINT_PUBLIC'),
+            'use_path_style_endpoint' => env('OBJECT_STORAGE_USE_PATH_STYLE_PUBLIC', false),
+            'throw' => false,
+            'report' => false,
+        ]
     ],
 
     /*

@@ -10,6 +10,8 @@ class ListApplications extends ListRecords
 {
     protected static string $resource = ApplicationResource::class;
 
+    protected static ?string $title = 'Aplikasi';
+
     protected function getHeaderActions(): array
     {
         return [
