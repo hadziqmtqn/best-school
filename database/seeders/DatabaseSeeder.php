@@ -6,6 +6,7 @@ use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\SuperAdminSeeder;
 use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
+use Database\Seeders\Reference\SchoolYearSeeder;
 use Database\Seeders\SchoolManagement\InstitutionSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             // REFERENCE
             PersonnelDepartmentSeeder::class,
             EducationalLevelSeeder::class,
+            SchoolYearSeeder::class,
             // SCHOOL MANAGEMENT
             InstitutionSeeder::class
         ]);

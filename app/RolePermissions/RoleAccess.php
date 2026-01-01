@@ -5,6 +5,7 @@ namespace App\RolePermissions;
 use App\Enums\BaseRole;
 use App\Filament\Clusters\Reference\Resources\EducationalLevels\EducationalLevelResource;
 use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepartmentResource;
+use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
@@ -66,6 +67,13 @@ class RoleAccess
                 'restore' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin']))
             ],
+
+            SchoolYearResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin'])),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
+            ],
         ];
     }
 
@@ -73,6 +81,15 @@ class RoleAccess
     {
         return [
             'admin' => [
+                'view_any' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options()),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
+                'restore' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            'employee' => [
                 'view_any' => array_keys(BaseRole::options()),
                 'create' => array_keys(BaseRole::options(['super_admin'])),
                 'update' => array_keys(BaseRole::options()),
