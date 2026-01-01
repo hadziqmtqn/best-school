@@ -2,9 +2,11 @@
 
 namespace App\Filament\Clusters\Reference\Resources\EducationalLevels\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class EducationalLevelsTable
@@ -13,17 +15,30 @@ class EducationalLevelsTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('full_name')
+                    ->label('Nama')
+                    ->searchable(),
+
+                TextColumn::make('short_name')
+                    ->label('Singkatan')
+                    ->searchable()
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->modalHeading('Ubah Jenjang Pendidikan')
+                        ->modalWidth('md'),
+
+                    DeleteAction::make()
+                        ->modalHeading('Hapus Jenjang Pendidikan')
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //
                 ]),
             ]);
     }

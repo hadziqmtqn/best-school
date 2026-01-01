@@ -6,5 +6,5 @@ use Filament\Clusters\Cluster;
 
 class ReferenceCluster extends Cluster
 {
-    protected static ?string $title = 'Referensi';
+    protected static ?string $navigationLabel = 'Referensi';
 }
