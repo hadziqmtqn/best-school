@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Setting\Resources\Admins\Tables;
 
 use App\Enums\BaseRole;
+use App\Helpers\CanAccess;
 use App\Helpers\UserRole;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -47,17 +48,19 @@ class AdminsTable
                     EditAction::make()
                         ->modalHeading('Ubah Data Admin')
                         ->modalWidth('md')
-                        ->visible(fn($record): bool => UserRole::isSuperAdmin() || auth()->id() === $record->id),
+                        ->visible(fn($record): bool => auth()->id() === $record->id || UserRole::isSuperAdmin()),
 
                     DeleteAction::make()
                         ->modalHeading('Hapus Data Admin')
                         ->visible(fn($record): bool => UserRole::isSuperAdmin() && auth()->id() != $record->id),
 
                     RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+                        ->modalHeading('Pulihkan Data')
+                        ->visible(CanAccess::to('Restore:Admin')),
 
                     ForceDeleteAction::make()
                         ->modalHeading('Hapus Selamanya')
+                        ->visible(CanAccess::to('ForceDelete:Admin'))
                 ])
             ])
             ->toolbarActions([

@@ -6,6 +6,7 @@ use App\Filament\Clusters\Setting\Resources\Admins\Pages\ListAdmins;
 use App\Filament\Clusters\Setting\Resources\Admins\Schemas\AdminForm;
 use App\Filament\Clusters\Setting\Resources\Admins\Tables\AdminsTable;
 use App\Filament\Clusters\Setting\SettingCluster;
+use App\Helpers\CanAccess;
 use App\Models\User;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -21,7 +22,7 @@ class AdminResource extends Resource
 
     public static function canAccess(): bool
     {
-        return auth()->user()->can('ViewAnyAdmin');
+        return CanAccess::to('ViewAny:Admin');
     }
 
     protected static bool $shouldRegisterNavigation = false;

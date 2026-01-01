@@ -65,6 +65,11 @@ class User extends Authenticatable implements HasMedia
             ->saveSlugsTo('username');
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'username';
+    }
+
     // TODO ATTRIBUTES
     protected function avatar(): Attribute
     {

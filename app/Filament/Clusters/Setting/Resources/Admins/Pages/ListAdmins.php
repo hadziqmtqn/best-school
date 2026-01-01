@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Setting\Resources\Admins\Pages;
 
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
+use App\Helpers\CanAccess;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -19,6 +20,7 @@ class ListAdmins extends ListRecords
                 ->label('Tambah Baru')
                 ->modalHeading('Tambah Baru')
                 ->modalWidth('md')
+                ->visible(CanAccess::to('Create:Admin'))
         ];
     }
 }

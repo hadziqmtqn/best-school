@@ -4,6 +4,7 @@ namespace App\Navigations;
 
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
+use App\Helpers\CanAccess;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
@@ -25,7 +26,7 @@ class PanelNavigation
                     ->items([
                         ...self::filterResourceNavigationItems(ApplicationResource::class),
                         ...self::filterResourceNavigationItems(RoleResource::class),
-                        ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAnyAdmin'),
+                        ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAny:Admin'),
                     ])
             ]);
     }
@@ -40,7 +41,7 @@ class PanelNavigation
 
     static function filterCustomResourceNavigationItems($resource, $permission)
     {
-        if (auth()->user()->can($permission)) {
+        if (CanAccess::to($permission)) {
             return $resource::getNavigationItems();
         }
 
