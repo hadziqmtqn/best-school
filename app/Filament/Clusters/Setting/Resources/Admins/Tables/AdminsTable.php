@@ -3,10 +3,13 @@
 namespace App\Filament\Clusters\Setting\Resources\Admins\Tables;
 
 use App\Enums\BaseRole;
+use App\Helpers\UserRole;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -42,11 +45,19 @@ class AdminsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Data Admin'),
+                        ->modalHeading('Ubah Data Admin')
+                        ->modalWidth('md')
+                        ->visible(fn($record): bool => UserRole::isSuperAdmin() || auth()->id() === $record->id),
 
                     DeleteAction::make()
                         ->modalHeading('Hapus Data Admin')
-                        ->visible(fn($record): bool => auth()->id() != $record->id)
+                        ->visible(fn($record): bool => UserRole::isSuperAdmin() && auth()->id() != $record->id),
+
+                    RestoreAction::make()
+                        ->modalHeading('Pulihkan Data'),
+
+                    ForceDeleteAction::make()
+                        ->modalHeading('Hapus Selamanya')
                 ])
             ])
             ->toolbarActions([

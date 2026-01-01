@@ -18,6 +18,7 @@ class ListAdmins extends ListRecords
             CreateAction::make()
                 ->label('Tambah Baru')
                 ->modalHeading('Tambah Baru')
+                ->modalWidth('md')
         ];
     }
 }

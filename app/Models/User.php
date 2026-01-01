@@ -4,18 +4,21 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRoles, HasSlug, SoftDeletes;
+    use HasFactory, Notifiable, HasRoles, HasSlug, SoftDeletes, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -60,5 +63,15 @@ class User extends Authenticatable
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('username');
+    }
+
+    // TODO ATTRIBUTES
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->hasMedia('avatar')
+                ? $this->getFirstTemporaryUrl(now()->addHour(), 'avatar')
+                : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&size=128&background=00bb00&color=ffffff&rounded=true',
+        );
     }
 }
