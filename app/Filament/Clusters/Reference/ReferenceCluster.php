@@ -6,8 +6,5 @@ use Filament\Clusters\Cluster;
 
 class ReferenceCluster extends Cluster
 {
-    public static function canAccess(): bool
-    {
-        return false;
-    }
+    protected static ?string $title = 'Referensi';
 }

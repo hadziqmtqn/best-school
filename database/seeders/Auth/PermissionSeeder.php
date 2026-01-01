@@ -14,6 +14,9 @@ use Spatie\Permission\Models\Role;
 class PermissionSeeder extends Seeder
 {
     /**
+     * @throws InvalidArgument
+     * @throws UnavailableStream
+     * @throws Exception
      */
     public function run(): void
     {
@@ -21,9 +24,9 @@ class PermissionSeeder extends Seeder
         $this->save(PermissionGenerator::generate());
         // Cluster
 
-        /*$this->save(Reader::from(database_path('import/auth/cluster-permissions.csv'))
+        $this->save(Reader::from(database_path('import/auth/cluster-permissions.csv'))
             ->setDelimiter(';')
-            ->setHeaderOffset(0));*/
+            ->setHeaderOffset(0));
     }
 
     private function save($rows): void
