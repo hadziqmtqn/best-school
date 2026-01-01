@@ -3,6 +3,7 @@
 namespace App\Navigations;
 
 use App\Filament\Clusters\Reference\ReferenceCluster;
+use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use App\Helpers\CanAccess;
@@ -21,6 +22,13 @@ class PanelNavigation
                 ...Dashboard::getNavigationItems()
             ])
             ->groups([
+                NavigationGroup::make()
+                    ->label('Manajemen')
+                    ->icon(Phosphor::GraduationCap)
+                    ->items([
+                        ...self::filterResourceNavigationItems(InstitutionResource::class),
+                    ]),
+
                 NavigationGroup::make()
                     ->label('Pengaturan')
                     ->icon(Phosphor::Gear)

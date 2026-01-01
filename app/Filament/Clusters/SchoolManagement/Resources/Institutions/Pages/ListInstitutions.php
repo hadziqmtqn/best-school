@@ -10,10 +10,15 @@ class ListInstitutions extends ListRecords
 {
     protected static string $resource = InstitutionResource::class;
 
+    protected static ?string $title = 'Lembaga';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Tambah Baru')
+                ->modalHeading('Tambah Lembaga')
+                ->modalWidth('lg')
         ];
     }
 }
