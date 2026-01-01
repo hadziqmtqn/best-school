@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -18,6 +19,10 @@ class InstitutionsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('logo')
+                    ->label('Logo')
+                    ->imageHeight(30),
+
                 TextColumn::make('name')
                     ->label('Nama')
                     ->searchable(),

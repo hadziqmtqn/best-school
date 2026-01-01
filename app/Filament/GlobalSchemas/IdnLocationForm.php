@@ -2,9 +2,10 @@
 
 namespace App\Filament\GlobalSchemas;
 
+use App\Services\Reference\IndonesiaLocationService;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Support\Facades\Http;
+use Filament\Schemas\Components\Utilities\Get;
 
 class IdnLocationForm
 {
@@ -13,12 +14,7 @@ class IdnLocationForm
         return Select::make($customField ?? 'province')
             ->label('Provinsi')
             ->searchable()
-            ->getSearchResultsUsing(function (string $search) {
-                $response = Http::get('https://idn-location.bkn.my.id/api/v1/provinces', [
-                    'q' => $search,
-                ]);
-                return collect($response->json())->pluck('name', 'name')->toArray();
-            })
+            ->getSearchResultsUsing(fn (string $search) => IndonesiaLocationService::search('https://idn-location.bkn.my.id/api/v1/provinces', $search))
             ->required($required)
             ->getOptionLabelUsing(fn ($value) => $value)
             ->dehydrated()
@@ -36,14 +32,18 @@ class IdnLocationForm
         return Select::make($customField ?? 'city')
             ->label('Kota/Kabupaten')
             ->searchable()
-            ->getSearchResultsUsing(function (string $search, $get) {
+            ->getSearchResultsUsing(function (string $search, Get $get) {
                 $province = $get('province');
-                if (!$province) return [];
-                $response = Http::get('https://idn-location.bkn.my.id/api/v1/cities', [
-                    'province' => $province,
-                    'q' => $search,
-                ]);
-                return collect($response->json())->pluck('name', 'name')->toArray();
+
+                if (! $province) {
+                    return [];
+                }
+
+                return IndonesiaLocationService::search(
+                    'https://idn-location.bkn.my.id/api/v1/cities',
+                    $search,
+                    ['province' => $province]
+                );
             })
             ->required($required)
             ->getOptionLabelUsing(fn ($value) => $value)
@@ -61,14 +61,18 @@ class IdnLocationForm
         return Select::make($customField ?? 'district')
             ->label('Kecamatan')
             ->searchable()
-            ->getSearchResultsUsing(function (string $search, $get) {
+            ->getSearchResultsUsing(function (string $search, Get $get) {
                 $city = $get('city');
-                if (!$city) return [];
-                $response = Http::get('https://idn-location.bkn.my.id/api/v1/districts', [
-                    'city' => $city,
-                    'q' => $search,
-                ]);
-                return collect($response->json())->pluck('name', 'name')->toArray();
+
+                if (! $city) {
+                    return [];
+                }
+
+                return IndonesiaLocationService::search(
+                    'https://idn-location.bkn.my.id/api/v1/districts',
+                    $search,
+                    ['city' => $city]
+                );
             })
             ->required($required)
             ->getOptionLabelUsing(fn ($value) => $value)
@@ -85,14 +89,18 @@ class IdnLocationForm
         return Select::make($customField ?? 'village')
             ->label('Desa/Kelurahan')
             ->searchable()
-            ->getSearchResultsUsing(function (string $search, $get) {
+            ->getSearchResultsUsing(function (string $search, Get $get) {
                 $district = $get('district');
-                if (!$district) return [];
-                $response = Http::get('https://idn-location.bkn.my.id/api/v1/villages', [
-                    'district' => $district,
-                    'q' => $search,
-                ]);
-                return collect($response->json())->pluck('name', 'name')->toArray();
+
+                if (! $district) {
+                    return [];
+                }
+
+                return IndonesiaLocationService::search(
+                    'https://idn-location.bkn.my.id/api/v1/villages',
+                    $search,
+                    ['district' => $district]
+                );
             })
             ->required($required)
             ->getOptionLabelUsing(fn ($value) => $value)

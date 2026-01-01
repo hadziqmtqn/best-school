@@ -6,6 +6,7 @@ use App\Filament\GlobalSchemas\IdnLocationForm;
 use App\Models\EducationalLevel;
 use App\Repositories\References\EducationalLevelRepository;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
@@ -51,6 +52,18 @@ class InstitutionForm
                                 IdnLocationForm::village(),
                                 IdnLocationForm::street(),
                                 IdnLocationForm::postalCode(),
+                            ]),
+
+                        Tabs\Tab::make('Media')
+                            ->schema([
+                                SpatieMediaLibraryFileUpload::make('logo')
+                                    ->label('Logo')
+                                    ->disk('s3_public')
+                                    ->collection('logo')
+                                    ->visibility('public')
+                                    ->acceptedFileTypes(['image/*'])
+                                    ->maxSize(200)
+                                    ->openable()
                             ])
                     ])
             ]);
