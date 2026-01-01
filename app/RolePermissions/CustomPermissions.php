@@ -2,6 +2,8 @@
 
 namespace App\RolePermissions;
 
+use Illuminate\Support\Str;
+
 class CustomPermissions
 {
     public static function permissions(): array
@@ -11,11 +13,8 @@ class CustomPermissions
         $custom = RoleAccess::customPermissions();
 
         foreach ($custom as $slug => $permissionMap) {
-
             foreach ($permissionMap as $perm => $roles) {
-
-                // hasil: "view_any" + "_" + "conversation"
-                $permissions[] = $perm . "_" . $slug;
+                $permissions[] = Str::of($perm)->studly()->toString() . Str::of($slug)->studly()->toString();
             }
         }
 

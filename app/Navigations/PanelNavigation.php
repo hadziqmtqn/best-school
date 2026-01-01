@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Navigation\NavigationBuilder;
@@ -23,13 +24,23 @@ class PanelNavigation
                     ->icon(Phosphor::Gear)
                     ->items([
                         ...self::filterResourceNavigationItems(ApplicationResource::class),
-                        ...self::filterResourceNavigationItems(RoleResource::class)
+                        ...self::filterResourceNavigationItems(RoleResource::class),
+                        ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAnyAdmin'),
                     ])
             ]);
     }
 
     static function filterResourceNavigationItems($resource) {
         if (auth()->user()->can("ViewAny:" . class_basename($resource::getModel()))) {
+            return $resource::getNavigationItems();
+        }
+
+        return [];
+    }
+
+    static function filterCustomResourceNavigationItems($resource, $permission)
+    {
+        if (auth()->user()->can($permission)) {
             return $resource::getNavigationItems();
         }
 
