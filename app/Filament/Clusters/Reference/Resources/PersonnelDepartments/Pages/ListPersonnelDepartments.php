@@ -10,10 +10,15 @@ class ListPersonnelDepartments extends ListRecords
 {
     protected static string $resource = PersonnelDepartmentResource::class;
 
+    protected static ?string $title = 'Jabatan Pegawai';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Tambah Baru')
+                ->modalHeading('Tambah Jabatan Pegawai')
+                ->modalWidth('md')
         ];
     }
 }

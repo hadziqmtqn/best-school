@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
+            $table->integer('level');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

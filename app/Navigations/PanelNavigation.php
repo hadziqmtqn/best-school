@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepartmentResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use App\Helpers\CanAccess;
@@ -21,13 +22,20 @@ class PanelNavigation
             ])
             ->groups([
                 NavigationGroup::make()
+                    ->label('Referensi')
+                    ->icon(Phosphor::GitBranch)
+                    ->items([
+                        ...self::filterResourceNavigationItems(PersonnelDepartmentResource::class),
+                    ]),
+
+                NavigationGroup::make()
                     ->label('Pengaturan')
                     ->icon(Phosphor::Gear)
                     ->items([
                         ...self::filterResourceNavigationItems(ApplicationResource::class),
                         ...self::filterResourceNavigationItems(RoleResource::class),
                         ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAny:Admin'),
-                    ])
+                    ]),
             ]);
     }
 
