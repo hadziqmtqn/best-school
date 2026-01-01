@@ -2,9 +2,12 @@
 
 namespace App\Filament\Clusters\Reference\Resources\SchoolYears\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class SchoolYearsTable
@@ -13,17 +16,39 @@ class SchoolYearsTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('first_year')
+                    ->label('Tahun Awal')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('last_year')
+                    ->label('Tahun Akhir')
+                    ->searchable()
+                    ->sortable(),
+
+                IconColumn::make('is_active')
+                    ->label('Status Aktif')
+                    ->sortable()
+                    ->boolean()
             ])
+            ->defaultSort('first_year', 'DESC')
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->modalHeading('Ubah Tahun Ajaran')
+                        ->modalWidth('md'),
+
+                    DeleteAction::make()
+                        ->modalHeading('Hapus Tahun Ajaran')
+                        ->modalWidth('md')
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //
                 ]),
             ]);
     }
