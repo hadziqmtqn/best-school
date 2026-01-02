@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\SchoolManagement\Resources\Employees;
 
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\CreateEmployee;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ListEmployees;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ViewEmployee;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeForm;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
 use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
@@ -52,6 +53,7 @@ class EmployeeResource extends Resource
         return [
             'index' => ListEmployees::route('/'),
             'create' => CreateEmployee::route('/create'),
+            'view' => ViewEmployee::route('/{record}')
         ];
     }
 
@@ -66,6 +68,12 @@ class EmployeeResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
+            ->with([
+                'employee',
+                'homebaseActive.institution',
+                'homebases.institution',
+                'employeePositions.personnelDepartment'
+            ])
             ->whereHas('employee');
     }
 }

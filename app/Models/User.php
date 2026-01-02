@@ -88,6 +88,12 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Homebase::class, 'user_id');
     }
 
+    public function homebaseActive(): HasOne
+    {
+        return $this->hasOne(Homebase::class, 'user_id')
+            ->where('is_active', true);
+    }
+
     // TODO ATTRIBUTES
     protected function avatar(): Attribute
     {
