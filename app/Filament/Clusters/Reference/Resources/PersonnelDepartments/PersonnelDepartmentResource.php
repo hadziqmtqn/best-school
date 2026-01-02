@@ -27,6 +27,8 @@ class PersonnelDepartmentResource extends Resource
 
     protected static ?string $navigationLabel = 'Jabatan Pegawai';
 
+    protected static ?string $label = 'Jabatan Pegawai';
+
     public static function form(Schema $schema): Schema
     {
         return PersonnelDepartmentForm::configure($schema);

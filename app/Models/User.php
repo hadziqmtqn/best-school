@@ -6,6 +6,8 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -68,6 +70,22 @@ class User extends Authenticatable implements HasMedia
     public function getRouteKeyName(): string
     {
         return 'username';
+    }
+
+    // TODO RELATIONSHIP
+    public function employee(): HasOne
+    {
+        return $this->hasOne(Employee::class, 'user_id');
+    }
+
+    public function employeePositions(): HasMany
+    {
+        return $this->hasMany(EmployeePosition::class, 'user_id');
+    }
+
+    public function homebases(): HasMany
+    {
+        return $this->hasMany(Homebase::class, 'user_id');
     }
 
     // TODO ATTRIBUTES

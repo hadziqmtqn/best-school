@@ -20,7 +20,7 @@ class ListAdmins extends ListRecords
                 ->label('Tambah Baru')
                 ->modalHeading('Tambah Baru')
                 ->modalWidth('md')
-                ->visible(CanAccess::to('Create:Admin'))
+                ->visible(CanAccess::to('CreateAdmin'))
         ];
     }
 }

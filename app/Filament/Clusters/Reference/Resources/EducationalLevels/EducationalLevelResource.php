@@ -25,6 +25,8 @@ class EducationalLevelResource extends Resource
 
     protected static ?string $navigationLabel = 'Jenjang Pendidikan';
 
+    protected static ?string $label = 'Jenjang Pendidikan';
+
     public static function form(Schema $schema): Schema
     {
         return EducationalLevelForm::configure($schema);

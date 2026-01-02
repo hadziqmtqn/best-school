@@ -3,7 +3,6 @@
 namespace App\Filament\Clusters\Setting\Resources\Admins\Tables;
 
 use App\Enums\BaseRole;
-use App\Helpers\CanAccess;
 use App\Helpers\UserRole;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -42,6 +41,7 @@ class AdminsTable
             ->filters([
                 TrashedFilter::make()
                     ->native(false)
+                    ->visible(UserRole::isSuperAdmin())
             ])
             ->recordActions([
                 ActionGroup::make([
@@ -55,12 +55,10 @@ class AdminsTable
                         ->visible(fn($record): bool => UserRole::isSuperAdmin() && auth()->id() != $record->id),
 
                     RestoreAction::make()
-                        ->modalHeading('Pulihkan Data')
-                        ->visible(CanAccess::to('RestoreAdmin')),
+                        ->modalHeading('Pulihkan Data'),
 
                     ForceDeleteAction::make()
                         ->modalHeading('Hapus Selamanya')
-                        ->visible(CanAccess::to('ForceDeleteAdmin'))
                 ])
             ])
             ->toolbarActions([

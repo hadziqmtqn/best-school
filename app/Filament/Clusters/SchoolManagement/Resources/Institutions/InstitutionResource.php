@@ -21,6 +21,8 @@ class InstitutionResource extends Resource
 
     protected static ?string $navigationLabel = 'Lembaga';
 
+    protected static ?string $label = 'Lembaga';
+
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema

@@ -25,6 +25,8 @@ class SchoolYearResource extends Resource
 
     protected static ?string $navigationLabel = 'Tahun Ajaran';
 
+    protected static ?string $label = 'Tahun Ajaran';
+
     public static function form(Schema $schema): Schema
     {
         return SchoolYearForm::configure($schema);
