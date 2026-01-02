@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('school_year_id')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

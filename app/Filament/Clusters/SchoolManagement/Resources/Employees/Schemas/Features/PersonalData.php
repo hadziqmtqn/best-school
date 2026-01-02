@@ -2,7 +2,9 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\Features;
 
+use App\Enums\Gender;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Group;
@@ -41,6 +43,16 @@ class PersonalData
                             ->maxDate(now()->subYears(10))
                             ->native(false)
                             ->closeOnDateSelection()
+                    ]),
+
+                Group::make()
+                    ->relationship('employee')
+                    ->schema([
+                        Radio::make('gender')
+                            ->label('Jenis Kelamin')
+                            ->options(Gender::options())
+                            ->required()
+                            ->inline()
                     ]),
 
                 Group::make()
