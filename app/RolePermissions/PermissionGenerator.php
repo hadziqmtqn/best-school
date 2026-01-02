@@ -31,7 +31,13 @@ class PermissionGenerator
                 // ambil permission dari KEYS roleAccess
                 foreach ($permissionMap as $perm => $allowedRoles) {
 
-                    $name = Str::of($perm)->studly()->toString() . ':' . $resourceName;
+                    $permission = Str::of($perm)->studly()->toString();
+
+                    // RESOURCE → ViewAny:Role
+                    // CUSTOM   → ViewAnyAdmin
+                    $name = class_exists($resource)
+                        ? $permission . ':' . $resourceName
+                        : $permission . $resourceName;
 
                     // Default semua role = NO
                     $row = ['name' => $name];

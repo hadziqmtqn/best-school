@@ -55,6 +55,11 @@ class Institution extends Model implements HasMedia
         return $this->hasMany(Homebase::class, 'institution_id');
     }
 
+    public function employeePositions(): HasMany
+    {
+        return $this->hasMany(EmployeePosition::class, 'institution_id');
+    }
+
     // TODO ATTRIBUTES
     protected function logo(): Attribute
     {

@@ -35,14 +35,14 @@ class PanelNavigation
                     ->items([
                         ...self::filterResourceNavigationItems(ApplicationResource::class),
                         ...self::filterResourceNavigationItems(RoleResource::class),
-                        ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAny:Admin'),
+                        ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAnyAdmin'),
                         ...self::filterClusterNavigationItems(ReferenceCluster::class)
                     ]),
             ]);
     }
 
     static function filterResourceNavigationItems($resource) {
-        if (auth()->user()->can("ViewAny:" . class_basename($resource::getModel()))) {
+        if (CanAccess::to('ViewAny:' . class_basename($resource::getModel()))) {
             return $resource::getNavigationItems();
         }
 

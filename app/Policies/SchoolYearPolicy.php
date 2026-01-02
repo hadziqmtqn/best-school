@@ -32,6 +32,9 @@ class SchoolYearPolicy
 
     public function delete(User $user, SchoolYear $schoolYear): bool
     {
-        return $user->can('Delete:SchoolYear', $schoolYear);
+        $schoolYear->loadCount('employeePositions');
+
+        return $user->can('Delete:SchoolYear') &&
+            $schoolYear->employee_positions_count === 0;
     }
 }

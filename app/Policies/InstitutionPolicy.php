@@ -32,9 +32,12 @@ class InstitutionPolicy
 
     public function delete(User $user, Institution $institution): bool
     {
-        $institution->loadCount('homebases');
+        $institution->loadCount('homebases')
+            ->loadCount('employeePositions');
 
-        return $user->can('Delete:Institution') && $institution->homebases_count === 0;
+        return $user->can('Delete:Institution') &&
+            $institution->homebases_count === 0 &&
+            $institution->employee_positions_count === 0;
     }
 
     public function restore(User $user, Institution $institution): bool

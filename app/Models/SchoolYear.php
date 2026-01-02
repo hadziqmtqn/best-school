@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class SchoolYear extends Model
@@ -39,6 +40,12 @@ class SchoolYear extends Model
                     ->update(['is_active' => false]);
             }
         });
+    }
+
+    // TODO RELATIONSHIP
+    public function employeePositions(): HasMany
+    {
+        return $this->hasMany(EmployeePosition::class, 'school_year_id');
     }
 
     // TODO ATTRIBUTES

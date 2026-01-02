@@ -56,11 +56,11 @@ class AdminsTable
 
                     RestoreAction::make()
                         ->modalHeading('Pulihkan Data')
-                        ->visible(CanAccess::to('Restore:Admin')),
+                        ->visible(CanAccess::to('RestoreAdmin')),
 
                     ForceDeleteAction::make()
                         ->modalHeading('Hapus Selamanya')
-                        ->visible(CanAccess::to('ForceDelete:Admin'))
+                        ->visible(CanAccess::to('ForceDeleteAdmin'))
                 ])
             ])
             ->toolbarActions([
