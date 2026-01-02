@@ -7,11 +7,10 @@ use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ListEmploye
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeForm;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
 use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
+use App\Helpers\CanAccess;
 use App\Models\User;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -20,9 +19,16 @@ class EmployeeResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
     protected static ?string $cluster = SchoolManagementCluster::class;
+
+    protected static ?string $navigationLabel = 'Pegawai';
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    public static function canAccess(): bool
+    {
+        return CanAccess::to('ViewAnyEmployee');
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -3,6 +3,7 @@
 namespace App\Navigations;
 
 use App\Filament\Clusters\Reference\ReferenceCluster;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
@@ -27,6 +28,7 @@ class PanelNavigation
                     ->icon(Phosphor::GraduationCap)
                     ->items([
                         ...self::filterResourceNavigationItems(InstitutionResource::class),
+                        ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee')
                     ]),
 
                 NavigationGroup::make()
