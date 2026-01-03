@@ -35,6 +35,11 @@ class PostCategory extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     // TODO RELATIONSHIP
     public function user(): BelongsTo
     {

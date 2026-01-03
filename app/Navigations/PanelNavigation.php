@@ -2,6 +2,8 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
+use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\ReferenceCluster;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
@@ -23,6 +25,14 @@ class PanelNavigation
                 ...Dashboard::getNavigationItems()
             ])
             ->groups([
+                NavigationGroup::make()
+                    ->label('Post')
+                    ->icon(Phosphor::Note)
+                    ->items([
+                        ...self::filterResourceNavigationItems(PostResource::class),
+                        ...self::filterResourceNavigationItems(PostCategoryResource::class),
+                    ]),
+
                 NavigationGroup::make()
                     ->label('Manajemen')
                     ->icon(Phosphor::GraduationCap)

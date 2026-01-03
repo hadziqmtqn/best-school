@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Clusters\Setting;
+namespace App\Filament\Clusters\Post;
 
 use Filament\Clusters\Cluster;
 
-class SettingCluster extends Cluster
+class PostCluster extends Cluster
 {
     protected static bool $shouldRegisterNavigation = false;
 

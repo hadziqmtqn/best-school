@@ -3,6 +3,8 @@
 namespace App\RolePermissions;
 
 use App\Enums\BaseRole;
+use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
+use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\Resources\EducationalLevels\EducationalLevelResource;
 use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepartmentResource;
 use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
@@ -73,6 +75,26 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin'])),
                 'update' => array_keys(BaseRole::options(['super_admin'])),
                 'delete' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            PostCategoryResource::class => [
+                'view_any' => array_keys(BaseRole::options()),
+                'view' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'update' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+            ],
+
+            PostResource::class => [
+                'view_any' => array_keys(BaseRole::options()),
+                'view' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'update' => array_keys(BaseRole::options()),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin']))
             ],
         ];
     }
