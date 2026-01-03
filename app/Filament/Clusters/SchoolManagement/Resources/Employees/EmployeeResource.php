@@ -5,6 +5,7 @@ namespace App\Filament\Clusters\SchoolManagement\Resources\Employees;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\CreateEmployee;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ListEmployees;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ViewEmployee;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\EmployeePositionsRelationManager;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\HomebasesRelationManager;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeForm;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
@@ -47,6 +48,7 @@ class EmployeeResource extends Resource
     {
         return [
             HomebasesRelationManager::class,
+            EmployeePositionsRelationManager::class
         ];
     }
 

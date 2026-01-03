@@ -12,36 +12,36 @@ class EmployeePositionPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:EmployeePosition');
+        return $user->can('ViewAnyEmployeePosition');
     }
 
     public function view(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('View:EmployeePosition', $employeePosition);
+        return $user->can('ViewEmployeePosition', $employeePosition);
     }
 
     public function create(User $user): bool
     {
-        return $user->can('Create:EmployeePosition');
+        return $user->can('CreateEmployeePosition');
     }
 
     public function update(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('Update:EmployeePosition', $employeePosition);
+        return $user->can('UpdateEmployeePosition', $employeePosition);
     }
 
     public function delete(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('Delete:EmployeePosition', $employeePosition);
+        return $user->can('DeleteEmployeePosition', $employeePosition);
     }
 
     public function restore(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('Restore:EmployeePosition', $employeePosition);
+        return $user->can('RestoreEmployeePosition', $employeePosition);
     }
 
     public function forceDelete(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('ForceDelete:EmployeePosition', $employeePosition);
+        return $user->can('ForceDeleteEmployeePosition', $employeePosition);
     }
 }

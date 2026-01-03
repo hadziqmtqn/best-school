@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class EmployeePosition extends Model
@@ -55,5 +57,13 @@ class EmployeePosition extends Model
     public function personnelDepartment(): BelongsTo
     {
         return $this->belongsTo(PersonnelDepartment::class);
+    }
+
+    // TODO ATTRIBUTES
+    protected function period(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->start_date && $this->end_date ? Carbon::parse($this->start_date)->isoFormat('D MMM Y') . ' - ' . Carbon::parse($this->end_date)->isoFormat('D MMM Y') : null
+        );
     }
 }
