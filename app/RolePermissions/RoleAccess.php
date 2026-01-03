@@ -115,6 +115,15 @@ class RoleAccess
                 'restore' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin'])),
             ],
+
+            'educational_history' => [
+                'view_any' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
+                'restore' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+            ],
         ];
     }
 }

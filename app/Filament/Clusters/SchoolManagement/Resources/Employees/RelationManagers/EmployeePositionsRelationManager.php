@@ -15,6 +15,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -58,7 +59,7 @@ class EmployeePositionsRelationManager extends RelationManager
             ->filters([
                 TrashedFilter::make()
                     ->native(false)
-            ])
+            ], layout: FiltersLayout::Modal)
             ->headerActions([
                 CreateAction::make()
                     ->label('Tambah Baru')

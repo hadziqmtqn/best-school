@@ -18,12 +18,12 @@ class EditEmployeeAction
                     $address = $record->employee?->address;
 
                     if ($address) {
-                        $data['province'] = $address['province'] ?? null;
-                        $data['city'] = $address['city'] ?? null;
-                        $data['district'] = $address['district'] ?? null;
-                        $data['village'] = $address['village'] ?? null;
-                        $data['street'] = $address['street'] ?? null;
-                        $data['postal_code'] = $address['postal_code'] ?? null;
+                        $data['province'] = $address['Provinsi'] ?? null;
+                        $data['city'] = $address['Kota/Kab'] ?? null;
+                        $data['district'] = $address['Kecamatan'] ?? null;
+                        $data['village'] = $address['Desa'] ?? null;
+                        $data['street'] = $address['Jalan'] ?? null;
+                        $data['postal_code'] = $address['Kode Pos'] ?? null;
                     }
 
                     return $data;

@@ -2,8 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers;
 
-use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\Features\HomebaseData;
-use App\Helpers\UserRole;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\Features\EducationalHistoryData;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -13,70 +12,80 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class HomebasesRelationManager extends RelationManager
+class EducationalHistoriesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'homebases';
+    protected static string $relationship = 'educationalHistories';
 
-    protected static ?string $title = 'Unit Kerja';
+    protected static ?string $title = 'Riwayat Pendidikan';
 
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->components(HomebaseData::schemas());
+            ->components(EducationalHistoryData::schemas());
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
             ->columns([
-                TextColumn::make('institution.name')
-                    ->label('Lembaga')
+                TextColumn::make('educationalLevel.full_name')
+                    ->label('Jenjang')
                     ->searchable(),
 
-                TextColumn::make('appointment_date')
-                    ->label('Tanggal Pengangkatan')
-                    ->isoDate('D MMM Y'),
+                TextColumn::make('major')
+                    ->label('Jurusan')
+                    ->searchable(),
 
-                IconColumn::make('is_active')
-                    ->label('Status Aktif')
-                    ->boolean()
-                    ->sortable()
+                TextColumn::make('institution_name')
+                    ->label('Institusi')
+                    ->searchable(),
+
+                TextColumn::make('graduation_year')
+                    ->label('Tahun Lulus')
+                    ->searchable()
+                    ->sortable(),
             ])
+            ->defaultSort('graduation_year', 'DESC')
             ->deferFilters(false)
             ->filters([
+                SelectFilter::make('educational_level_id')
+                    ->label('Jenjang')
+                    ->relationship(name: 'educationalLevel', titleAttribute: 'full_name')
+                    ->searchable()
+                    ->preload()
+                    ->native(false),
+
                 TrashedFilter::make()
                     ->native(false)
-                    ->visible(UserRole::isSuperAdmin())
             ], layout: FiltersLayout::Modal)
             ->headerActions([
                 CreateAction::make()
-                    ->label('Tambah Unit Kerja')
-                    ->modalHeading('Tambah Unit Kerja')
+                    ->label('Tambah Baru')
+                    ->modalHeading('Tambah riwayat pendidikan')
                     ->modalWidth('md')
             ])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Unit Kerja')
+                        ->modalHeading('Ubah riwayat pendidikan')
                         ->modalWidth('md'),
 
                     DeleteAction::make()
-                        ->modalHeading('Hapus Unit Kerja'),
+                        ->modalHeading('Hapus riwayat pendidikan'),
 
                     ForceDeleteAction::make()
                         ->modalHeading('Hapus Selamanya'),
 
                     RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+                        ->modalHeading('Pulihkan Data')
                 ])
             ])
             ->toolbarActions([

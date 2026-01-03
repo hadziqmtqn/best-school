@@ -100,6 +100,11 @@ class User extends Authenticatable implements HasMedia
             ->where('is_active', true);
     }
 
+    public function educationalHistories(): HasMany
+    {
+        return $this->hasMany(EducationalHistory::class, 'user_id');
+    }
+
     // TODO ATTRIBUTES
     protected function avatar(): Attribute
     {
