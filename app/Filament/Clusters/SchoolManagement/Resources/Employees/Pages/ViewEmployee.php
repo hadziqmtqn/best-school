@@ -17,8 +17,6 @@ class ViewEmployee extends ViewRecord
 {
     protected static string $resource = EmployeeResource::class;
 
-    protected static ?string $title = 'Detail Pegawai';
-
     protected function getHeaderActions(): array
     {
         return EditEmployeeAction::action();

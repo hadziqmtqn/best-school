@@ -39,17 +39,13 @@ class PersonnelDepartmentsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Jabatan Pegawai')
                         ->modalWidth('md'),
 
-                    DeleteAction::make()
-                        ->modalHeading('Hapus Jabatan Pegawai'),
+                    DeleteAction::make(),
 
-                    RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+                    RestoreAction::make(),
 
                     ForceDeleteAction::make()
-                        ->modalHeading('Hapus Selamanya')
                 ])
             ])
             ->toolbarActions([

@@ -16,8 +16,6 @@ class ListInstitutions extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Tambah Baru')
-                ->modalHeading('Tambah Lembaga')
                 ->modalWidth('lg')
         ];
     }

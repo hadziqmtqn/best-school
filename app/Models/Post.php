@@ -75,9 +75,4 @@ class Post extends Model implements HasMedia
     {
         return $this->belongsTo(PostCategory::class);
     }
-
-    public function postTags(): HasMany
-    {
-        return $this->hasMany(PostTag::class, 'post_id');
-    }
 }

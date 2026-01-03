@@ -11,14 +11,10 @@ class ListAdmins extends ListRecords
 {
     protected static string $resource = AdminResource::class;
 
-    protected static ?string $title = 'Admin';
-
     protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()
-                ->label('Tambah Baru')
-                ->modalHeading('Tambah Baru')
                 ->modalWidth('md')
                 ->visible(CanAccess::to('CreateAdmin'))
         ];

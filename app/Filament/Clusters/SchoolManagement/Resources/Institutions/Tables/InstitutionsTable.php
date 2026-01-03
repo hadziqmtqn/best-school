@@ -50,14 +50,13 @@ class InstitutionsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Lembaga')
                         ->modalWidth('lg'),
-                    DeleteAction::make()
-                        ->modalHeading('Hapus Lembaga'),
-                    RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+
+                    DeleteAction::make(),
+
+                    RestoreAction::make(),
+
                     ForceDeleteAction::make()
-                        ->modalHeading('Hapus Selamanya')
                 ])
             ])
             ->toolbarActions([

@@ -14,8 +14,6 @@ class ListSchoolYears extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Tambah Baru')
-                ->modalHeading('Tambah Tahun Ajaran')
                 ->modalWidth('md')
         ];
     }

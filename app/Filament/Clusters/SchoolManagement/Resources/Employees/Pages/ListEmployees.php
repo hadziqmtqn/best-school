@@ -11,13 +11,10 @@ class ListEmployees extends ListRecords
 {
     protected static string $resource = EmployeeResource::class;
 
-    protected static ?string $title = 'Pegawai';
-
     protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()
-                ->label('Tambah Baru')
                 ->visible(CanAccess::to('CreateEmployee'))
         ];
     }

@@ -11,8 +11,6 @@ class CreateEmployee extends CreateRecord
 {
     protected static string $resource = EmployeeResource::class;
 
-    protected static ?string $title = 'Tambah Pegawai';
-
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['password'] = Hash::make(Str::random());

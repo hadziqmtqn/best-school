@@ -38,12 +38,9 @@ class SchoolYearsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Tahun Ajaran')
                         ->modalWidth('md'),
 
                     DeleteAction::make()
-                        ->modalHeading('Hapus Tahun Ajaran')
-                        ->modalWidth('md')
                 ])
             ])
             ->toolbarActions([

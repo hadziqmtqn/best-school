@@ -20,6 +20,8 @@ class AdminResource extends Resource
 
     protected static ?string $cluster = SettingCluster::class;
 
+    protected static ?string $label = 'Admin';
+
     public static function canAccess(): bool
     {
         return CanAccess::to('ViewAnyAdmin');

@@ -26,7 +26,6 @@ class ApplicationsTable
                 EditAction::make()
                     ->button()
                     ->outlined()
-                    ->modalHeading('Ubah Aplikasi')
                     ->modalWidth('md')
             ])
             ->toolbarActions([

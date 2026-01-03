@@ -46,12 +46,10 @@ class AdminsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Data Admin')
                         ->modalWidth('md')
                         ->visible(fn($record): bool => auth()->id() === $record->id || UserRole::isSuperAdmin()),
 
                     DeleteAction::make()
-                        ->modalHeading('Hapus Data Admin')
                         ->visible(fn($record): bool => UserRole::isSuperAdmin() && auth()->id() != $record->id),
 
                     RestoreAction::make()

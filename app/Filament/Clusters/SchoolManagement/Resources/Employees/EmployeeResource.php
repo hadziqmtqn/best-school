@@ -28,6 +28,8 @@ class EmployeeResource extends Resource
 
     protected static ?string $navigationLabel = 'Pegawai';
 
+    protected static ?string $label = 'Pegawai';
+
     protected static bool $shouldRegisterNavigation = false;
 
     public static function canAccess(): bool

@@ -29,11 +29,9 @@ class EducationalLevelsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Ubah Jenjang Pendidikan')
                         ->modalWidth('md'),
 
                     DeleteAction::make()
-                        ->modalHeading('Hapus Jenjang Pendidikan')
                 ])
             ])
             ->toolbarActions([

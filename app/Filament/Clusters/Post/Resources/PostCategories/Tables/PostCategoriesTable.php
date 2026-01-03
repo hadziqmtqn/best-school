@@ -37,17 +37,13 @@ class PostCategoriesTable
                     ViewAction::make(),
 
                     EditAction::make()
-                        ->modalHeading('Ubah Kategori Post')
                         ->modalWidth('md'),
 
-                    DeleteAction::make()
-                        ->modalHeading('Hapus Kategori Post'),
+                    DeleteAction::make(),
 
-                    RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+                    RestoreAction::make(),
 
                     ForceDeleteAction::make()
-                        ->modalHeading('Hapus Selamanya')
                 ])
             ])
             ->toolbarActions([
