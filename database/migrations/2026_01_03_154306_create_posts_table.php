@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->enum('visibility', array_keys(PostVisibility::options()));
             $table->string('password')->nullable();
             $table->boolean('allow_comment')->default(true);
+            $table->json('tags')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

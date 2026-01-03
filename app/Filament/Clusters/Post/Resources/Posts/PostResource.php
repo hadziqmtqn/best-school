@@ -6,6 +6,7 @@ use App\Filament\Clusters\Post\PostCluster;
 use App\Filament\Clusters\Post\Resources\Posts\Pages\CreatePost;
 use App\Filament\Clusters\Post\Resources\Posts\Pages\EditPost;
 use App\Filament\Clusters\Post\Resources\Posts\Pages\ListPosts;
+use App\Filament\Clusters\Post\Resources\Posts\Pages\ViewPost;
 use App\Filament\Clusters\Post\Resources\Posts\Schemas\PostForm;
 use App\Filament\Clusters\Post\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
@@ -46,6 +47,7 @@ class PostResource extends Resource
             'index' => ListPosts::route('/'),
             'create' => CreatePost::route('/create'),
             'edit' => EditPost::route('/{record}/edit'),
+            'view' => ViewPost::route('/{rocord}')
         ];
     }
 
