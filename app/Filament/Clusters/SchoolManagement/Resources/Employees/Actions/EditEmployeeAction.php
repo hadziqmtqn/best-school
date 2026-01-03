@@ -36,12 +36,12 @@ class EditEmployeeAction
 
                     $employee->update([
                         'address' => [
-                            'province' => $data['province'] ?? null,
-                            'city' => $data['city'] ?? null,
-                            'district' => $data['district'] ?? null,
-                            'village' => $data['village'] ?? null,
-                            'street' => $data['street'] ?? null,
-                            'postal_code' => $data['postal_code'] ?? null,
+                            'Provinsi' => $data['province'] ?? null,
+                            'Kota/Kab' => $data['city'] ?? null,
+                            'Kecamatan' => $data['district'] ?? null,
+                            'Desa' => $data['village'] ?? null,
+                            'Jalan' => $data['street'] ?? null,
+                            'Kode Pos' => $data['postal_code'] ?? null,
                         ]
                     ]);
                     return $record;

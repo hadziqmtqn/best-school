@@ -5,6 +5,7 @@ namespace App\Filament\Clusters\SchoolManagement\Resources\Employees;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\CreateEmployee;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ListEmployees;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ViewEmployee;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\HomebasesRelationManager;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeForm;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
 use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
@@ -14,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployeeResource extends Resource
@@ -44,7 +46,7 @@ class EmployeeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            HomebasesRelationManager::class,
         ];
     }
 
@@ -72,8 +74,28 @@ class EmployeeResource extends Resource
                 'employee',
                 'homebaseActive.institution',
                 'homebases.institution',
-                'employeePositions.personnelDepartment'
+                'employeePositions.personnelDepartment',
+                'employeePositionActive.personnelDepartment'
             ])
             ->whereHas('employee');
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'employee.nip', 'employee.nuptk', 'email'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->name;
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'NUPTK' => $record->employee?->nuptk,
+            'Lembaga' => $record->homebaseActive?->institution?->name,
+            'Jabatan' => $record->employeePositionActive?->personnelDepartment?->name
+        ];
     }
 }

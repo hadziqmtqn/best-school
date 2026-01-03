@@ -94,6 +94,12 @@ class User extends Authenticatable implements HasMedia
             ->where('is_active', true);
     }
 
+    public function employeePositionActive(): HasOne
+    {
+        return $this->hasOne(EmployeePosition::class, 'user_id')
+            ->where('is_active', true);
+    }
+
     // TODO ATTRIBUTES
     protected function avatar(): Attribute
     {

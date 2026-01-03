@@ -12,36 +12,36 @@ class HomebasePolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:Homebase');
+        return $user->can('ViewAnyHomebase');
     }
 
     public function view(User $user, Homebase $homebase): bool
     {
-        return $user->can('View:Homebase', $homebase);
+        return $user->can('ViewHomebase', $homebase);
     }
 
     public function create(User $user): bool
     {
-        return $user->can('Create:Homebase');
+        return $user->can('CreateHomebase');
     }
 
     public function update(User $user, Homebase $homebase): bool
     {
-        return $user->can('Update:Homebase', $homebase);
+        return $user->can('UpdateHomebase', $homebase);
     }
 
     public function delete(User $user, Homebase $homebase): bool
     {
-        return $user->can('Delete:Homebase', $homebase);
+        return $user->can('DeleteHomebase', $homebase);
     }
 
     public function restore(User $user, Homebase $homebase): bool
     {
-        return $user->can('Restore:Homebase', $homebase);
+        return $user->can('RestoreHomebase', $homebase);
     }
 
     public function forceDelete(User $user, Homebase $homebase): bool
     {
-        return $user->can('ForceDelete:Homebase', $homebase);
+        return $user->can('ForceDeleteHomebase', $homebase);
     }
 }

@@ -32,6 +32,10 @@ class EmployeesTable
                     ->label('Unit Kerja')
                     ->searchable(),
 
+                TextColumn::make('employeePositionActive.personnelDepartment.name')
+                    ->label('Jabatan')
+                    ->searchable(),
+
                 IconColumn::make('is_active')
                     ->label('Status Aktif')
                     ->boolean()

@@ -5,10 +5,12 @@ namespace App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages;
 use App\Enums\Gender;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Actions\EditEmployeeAction;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
+use App\Models\User;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
 
 class ViewEmployee extends ViewRecord
@@ -38,42 +40,61 @@ class ViewEmployee extends ViewRecord
                 Group::make()
                     ->columnSpan(['lg' => 2])
                     ->schema([
-                        Section::make('Data Pribadi')
-                            ->inlineLabel()
-                            ->columns()
+                        Tabs::make()
                             ->schema([
-                                TextEntry::make('name')
-                                    ->label('Nama'),
+                                Tabs\Tab::make('Data Pribadi')
+                                    ->columns()
+                                    ->inlineLabel()
+                                    ->schema([
+                                        TextEntry::make('name')
+                                            ->label('Nama'),
 
-                                TextEntry::make('email')
-                                    ->label('Email'),
+                                        TextEntry::make('email')
+                                            ->label('Email'),
 
-                                TextEntry::make('employee.nuptk')
-                                    ->label('NUPTK'),
+                                        TextEntry::make('employee.nuptk')
+                                            ->label('NUPTK'),
 
-                                TextEntry::make('employee.nip')
-                                    ->label('NIP'),
+                                        TextEntry::make('employee.nip')
+                                            ->label('NIP'),
 
-                                TextEntry::make('employee.place_of_birth')
-                                    ->label('Tempat Lahir'),
+                                        TextEntry::make('employee.place_of_birth')
+                                            ->label('Tempat Lahir'),
 
-                                TextEntry::make('employee.date_of_birth')
-                                    ->label('Tanggal Lahir')
-                                    ->isoDate('D MMM Y'),
+                                        TextEntry::make('employee.date_of_birth')
+                                            ->label('Tanggal Lahir')
+                                            ->isoDate('D MMM Y'),
 
-                                TextEntry::make('employee.gender')
-                                    ->label('JK.')
-                                    ->formatStateUsing(fn($state): string => Gender::tryFrom($state)?->getLabel() ?? $state),
+                                        TextEntry::make('employee.gender')
+                                            ->label('JK.')
+                                            ->formatStateUsing(fn($state): string => Gender::tryFrom($state)?->getLabel() ?? $state),
 
-                                TextEntry::make('employee.religion')
-                                    ->label('Agama'),
+                                        TextEntry::make('employee.religion')
+                                            ->label('Agama')
+                                    ]),
 
-                                TextEntry::make('employee.address')
-                                    ->label('Alamat')
-                                    ->inlineLabel(false)
-                                    ->columnSpanFull()
+                                Tabs\Tab::make('Alamat')
+                                    ->columns()
+                                    ->inlineLabel()
+                                    ->schema(fn($record) => $this->address($record))
                             ])
                     ]),
             ]);
+    }
+
+    private function address(User $record): array
+    {
+        $record->loadMissing('employee');
+        $addresses = $record->employee?->address ?? [];
+
+        $schemas = [];
+
+        foreach ($addresses as $key => $address) {
+            $schemas[] = TextEntry::make('employee.user_id')
+                ->label($key)
+                ->formatStateUsing(fn() => $address);
+        }
+
+        return $schemas;
     }
 }
