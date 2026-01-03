@@ -2,17 +2,26 @@
 
 namespace App\Filament\Clusters\Post\Resources\Posts\Schemas;
 
+use App\Enums\PostVisibility;
+use App\Enums\StatusData;
 use App\Filament\Clusters\Post\Resources\PostCategories\Schemas\PostCategoryForm;
+use App\Helpers\UserRole;
 use App\Models\PostCategory;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class PostForm
 {
@@ -61,6 +70,43 @@ class PostForm
                                             'tableDelete',
                                         ],
                                     ])
+                            ]),
+
+                        Section::make()
+                            ->columns()
+                            ->schema([
+                                ToggleButtons::make('status')
+                                    ->label('Status')
+                                    ->options(function (): array {
+                                        return StatusData::options(UserRole::isWriter() ? ['draft', 'pending_review'] : []);
+                                    })
+                                    ->inline()
+                                    ->required(),
+
+                                ToggleButtons::make('visibility')
+                                    ->label('Visibilitas')
+                                    ->options(PostVisibility::options())
+                                    ->inline()
+                                    ->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set): void {
+                                        $set('password', null);
+                                    }),
+
+                                TextInput::make('password')
+                                    ->label('Kata Sandi')
+                                    ->required()
+                                    ->visible(fn(Get $get) => $get('visibility') === PostVisibility::PRIVATE->value)
+                                    ->reactive()
+                                    ->placeholder('Masukkan kata sandi')
+                                    ->suffixAction(
+                                        Action::make('generateToken')
+                                            ->icon(Phosphor::Lock)
+                                            ->tooltip('Buat Kata Sandi')
+                                            ->action(function ($set) {
+                                                $set('password', Str::random(6));
+                                            })
+                                    )
                             ])
                     ]),
 
@@ -88,7 +134,13 @@ class PostForm
                                 TagsInput::make('tags')
                                     ->label('Tag')
                                     ->placeholder('Masukkan tag')
-                                    ->splitKeys(['Tab', ' '])
+                                    ->splitKeys(['Tab', ' ']),
+
+                                Radio::make('allow_comment')
+                                    ->label('Izinkan Komentar')
+                                    ->boolean()
+                                    ->inline()
+                                    ->required()
                             ]),
 
                         Section::make('Thumbnail')

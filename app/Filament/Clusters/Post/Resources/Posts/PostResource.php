@@ -47,7 +47,7 @@ class PostResource extends Resource
             'index' => ListPosts::route('/'),
             'create' => CreatePost::route('/create'),
             'edit' => EditPost::route('/{record}/edit'),
-            'view' => ViewPost::route('/{rocord}')
+            'view' => ViewPost::route('/{record}')
         ];
     }
 
@@ -56,6 +56,16 @@ class PostResource extends Resource
         return parent::getRecordRouteBindingEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with([
+                'postCategory',
+                'user',
+                'reviewedBy'
             ]);
     }
 }
