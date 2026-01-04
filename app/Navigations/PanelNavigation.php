@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\Pages\PageResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
@@ -33,6 +34,7 @@ class PanelNavigation
                         ...self::filterResourceNavigationItems(PostResource::class),
                         ...self::filterResourceNavigationItems(PostCategoryResource::class),
                         ...self::filterResourceNavigationItems(PageResource::class),
+                        ...self::filterResourceNavigationItems(LeadershipGreetingResource::class),
                     ]),
 
                 NavigationGroup::make()

@@ -2,6 +2,7 @@
 
 namespace App\RolePermissions;
 
+use App\Filament\Clusters\Post\Resources\Pages\PageResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 
@@ -11,7 +12,8 @@ class ShieldExcludeResources
     {
         return [
             AdminResource::class,
-            EmployeeResource::class
+            EmployeeResource::class,
+            PageResource::class
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\RolePermissions;
 
 use App\Enums\BaseRole;
+use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\Resources\EducationalLevels\EducationalLevelResource;
@@ -95,6 +96,13 @@ class RoleAccess
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin']))
+            ],
+
+            LeadershipGreetingResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin'])),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
             ],
         ];
     }

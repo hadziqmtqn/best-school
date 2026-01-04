@@ -60,12 +60,6 @@ class PostForm
                                         ['undo', 'redo'],
                                     ])
                                     ->floatingToolbars([
-                                        'paragraph' => [
-                                            'bold', 'italic', 'underline', 'bulletList', 'orderedList'
-                                        ],
-                                        'heading' => [
-                                            'h1', 'h2', 'h3',
-                                        ],
                                         'table' => [
                                             'tableAddColumnBefore', 'tableAddColumnAfter', 'tableDeleteColumn',
                                             'tableAddRowBefore', 'tableAddRowAfter', 'tableDeleteRow',
