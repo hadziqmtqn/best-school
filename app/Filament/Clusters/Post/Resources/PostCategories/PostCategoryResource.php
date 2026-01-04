@@ -5,6 +5,7 @@ namespace App\Filament\Clusters\Post\Resources\PostCategories;
 use App\Filament\Clusters\Post\PostCluster;
 use App\Filament\Clusters\Post\Resources\PostCategories\Pages\ListPostCategories;
 use App\Filament\Clusters\Post\Resources\PostCategories\Pages\ViewPostCategory;
+use App\Filament\Clusters\Post\Resources\PostCategories\RelationManagers\PostsRelationManager;
 use App\Filament\Clusters\Post\Resources\PostCategories\Schemas\PostCategoryForm;
 use App\Filament\Clusters\Post\Resources\PostCategories\Tables\PostCategoriesTable;
 use App\Models\PostCategory;
@@ -39,7 +40,7 @@ class PostCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostsRelationManager::class
         ];
     }
 
@@ -57,5 +58,11 @@ class PostCategoryResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withCount('posts');
     }
 }

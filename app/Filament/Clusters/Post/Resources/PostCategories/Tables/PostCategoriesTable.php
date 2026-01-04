@@ -25,6 +25,11 @@ class PostCategoriesTable
                     ->description(fn($record) => Str::limit($record->description))
                     ->wrap()
                     ->searchable(),
+
+                TextColumn::make('posts_count')
+                    ->label('Jumlah Post')
+                    ->sortable()
+                    ->suffix(' artikel')
             ])
             ->deferFilters(false)
             ->defaultSort('created_at', 'DESC')

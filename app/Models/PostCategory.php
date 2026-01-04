@@ -63,10 +63,4 @@ class PostCategory extends Model
     }
 
     // TODO ATTRIBUTES
-    protected function totalPosts(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->posts->count()
-        );
-    }
 }

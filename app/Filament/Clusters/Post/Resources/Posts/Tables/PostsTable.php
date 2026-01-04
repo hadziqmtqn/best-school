@@ -23,46 +23,7 @@ class PostsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('title')
-                    ->label('Judul')
-                    ->searchable(),
-
-                TextColumn::make('postCategory.name')
-                    ->label('Kategori')
-                    ->searchable(),
-
-                TextColumn::make('user.name')
-                    ->label('Penulis')
-                    ->searchable(),
-
-                TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
-                    ->color(fn($state): string => StatusData::tryFrom($state)?->getColor() ?? 'gray')
-                    ->formatStateUsing(fn($state): string => StatusData::tryFrom($state)?->getLabel() ?? $state)
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('visibility')
-                    ->label('Visibilitas')
-                    ->badge()
-                    ->color(fn($state): string => PostVisibility::tryFrom($state)?->getColor() ?? 'gray')
-                    ->formatStateUsing(fn($state): string => PostVisibility::tryFrom($state)?->getLabel() ?? $state)
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('reviewedBy.name')
-                    ->label('Ditinjau Oleh')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-
-                TextColumn::make('created_at')
-                    ->label('Dibuat Pada')
-                    ->isoDateTime('D MMM Y HH:mm')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-            ])
+            ->columns(self::columns())
             ->deferLoading()
             ->deferFilters(false)
             ->defaultSort('created_at', 'DESC')
@@ -82,5 +43,49 @@ class PostsTable
                     RestoreBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function columns(): array
+    {
+        return [
+            TextColumn::make('title')
+                ->label('Judul')
+                ->searchable(),
+
+            TextColumn::make('postCategory.name')
+                ->label('Kategori')
+                ->searchable(),
+
+            TextColumn::make('user.name')
+                ->label('Penulis')
+                ->searchable(),
+
+            TextColumn::make('status')
+                ->label('Status')
+                ->badge()
+                ->color(fn($state): string => StatusData::tryFrom($state)?->getColor() ?? 'gray')
+                ->formatStateUsing(fn($state): string => StatusData::tryFrom($state)?->getLabel() ?? $state)
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('visibility')
+                ->label('Visibilitas')
+                ->badge()
+                ->color(fn($state): string => PostVisibility::tryFrom($state)?->getColor() ?? 'gray')
+                ->formatStateUsing(fn($state): string => PostVisibility::tryFrom($state)?->getLabel() ?? $state)
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('reviewedBy.name')
+                ->label('Ditinjau Oleh')
+                ->toggleable()
+                ->toggledHiddenByDefault(),
+
+            TextColumn::make('created_at')
+                ->label('Dibuat Pada')
+                ->isoDateTime('D MMM Y HH:mm')
+                ->toggleable()
+                ->toggledHiddenByDefault(),
+        ];
     }
 }
