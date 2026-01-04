@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Clusters\Post\Resources\Posts;
+namespace App\Filament\Clusters\Post\Resources\Pages;
 
 use App\Enums\PostType;
 use App\Filament\Clusters\Post\PostCluster;
-use App\Filament\Clusters\Post\Resources\Posts\Pages\CreatePost;
-use App\Filament\Clusters\Post\Resources\Posts\Pages\EditPost;
-use App\Filament\Clusters\Post\Resources\Posts\Pages\ListPosts;
-use App\Filament\Clusters\Post\Resources\Posts\Pages\ViewPost;
-use App\Filament\Clusters\Post\Resources\Posts\Schemas\PostForm;
-use App\Filament\Clusters\Post\Resources\Posts\Tables\PostsTable;
+use App\Filament\Clusters\Post\Resources\Pages\Pages\CreatePage;
+use App\Filament\Clusters\Post\Resources\Pages\Pages\EditPage;
+use App\Filament\Clusters\Post\Resources\Pages\Pages\ListPages;
+use App\Filament\Clusters\Post\Resources\Pages\Schemas\PageForm;
+use App\Filament\Clusters\Post\Resources\Pages\Tables\PagesTable;
 use App\Models\Post;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,22 +16,24 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PostResource extends Resource
+class PageResource extends Resource
 {
     protected static ?string $model = Post::class;
 
     protected static ?string $cluster = PostCluster::class;
 
+    protected static ?string $label = 'Laman';
+
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema
     {
-        return PostForm::configure($schema);
+        return PageForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return PostsTable::configure($table);
+        return PagesTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -45,10 +46,9 @@ class PostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPosts::route('/'),
-            'create' => CreatePost::route('/create'),
-            'edit' => EditPost::route('/{record}/edit'),
-            'view' => ViewPost::route('/{record}')
+            'index' => ListPages::route('/'),
+            'create' => CreatePage::route('/create'),
+            'edit' => EditPage::route('/{record}/edit'),
         ];
     }
 
@@ -63,11 +63,7 @@ class PostResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with([
-                'postCategory',
-                'user',
-                'reviewedBy'
-            ])
-            ->where('type', PostType::POST->value);
+            ->with('institution')
+            ->where('type', PostType::PAGE->value);
     }
 }

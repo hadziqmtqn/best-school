@@ -17,17 +17,19 @@ return new class extends Migration {
             $table->enum('type', array_keys(PostType::options()));
             $table->longText('content');
             $table->unsignedBigInteger('post_category_id')->nullable();
+            $table->unsignedBigInteger('institution_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('reviewed_by')->nullable();
             $table->enum('status', array_keys(StatusData::options(['published', 'draft', 'pending_review'])));
             $table->enum('visibility', array_keys(PostVisibility::options()));
             $table->string('password')->nullable();
-            $table->boolean('allow_comment')->default(true);
+            $table->boolean('allow_comment')->default(false);
             $table->json('tags')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('post_category_id')->references('id')->on('post_categories')->nullOnDelete();
+            $table->foreign('institution_id')->references('id')->on('institutions')->nullOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('reviewed_by')->references('id')->on('users')->cascadeOnDelete();
         });

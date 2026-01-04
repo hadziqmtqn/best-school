@@ -25,8 +25,12 @@ use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class PostForm
 {
-    public static function configure(Schema $schema): Schema
-    {
+    public static function configure(
+        Schema $schema,
+        bool $useCategory = true,
+        bool $useTag = true,
+        bool $useAllowComment = true
+    ): Schema {
         return $schema
             ->columns(3)
             ->components([
@@ -115,6 +119,11 @@ class PostForm
                     ->schema([
                         Section::make()
                             ->schema([
+                                Select::make('institution_id')
+                                    ->label('Lembaga')
+                                    ->relationship(name: 'institution', titleAttribute: 'name')
+                                    ->native(false),
+
                                 Select::make('post_category_id')
                                     ->label('Kategori')
                                     ->relationship(
@@ -129,18 +138,21 @@ class PostForm
                                     ->createOptionModalHeading('Tambah Kategori')
                                     ->createOptionUsing(function (array $data): int {
                                         return PostCategory::create($data)->getKey();
-                                    }),
+                                    })
+                                    ->visible($useCategory),
 
                                 TagsInput::make('tags')
                                     ->label('Tag')
                                     ->placeholder('Masukkan tag')
-                                    ->splitKeys(['Tab', ' ']),
+                                    ->splitKeys(['Tab', ' '])
+                                    ->visible($useTag),
 
                                 Radio::make('allow_comment')
                                     ->label('Izinkan Komentar')
                                     ->boolean()
                                     ->inline()
                                     ->required()
+                                    ->visible($useAllowComment)
                             ]),
 
                         Section::make('Thumbnail')

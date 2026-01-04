@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Post\Resources\Pages\PageResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\ReferenceCluster;
@@ -31,6 +32,7 @@ class PanelNavigation
                     ->items([
                         ...self::filterResourceNavigationItems(PostResource::class),
                         ...self::filterResourceNavigationItems(PostCategoryResource::class),
+                        ...self::filterResourceNavigationItems(PageResource::class),
                     ]),
 
                 NavigationGroup::make()

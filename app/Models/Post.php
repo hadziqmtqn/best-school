@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\StatusData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -21,6 +21,7 @@ class Post extends Model implements HasMedia
         'type',
         'content',
         'post_category_id',
+        'institution_id',
         'user_id',
         'reviewed_by',
         'status',
@@ -44,6 +45,12 @@ class Post extends Model implements HasMedia
 
         static::creating(function (Post $post) {
             $post->user_id = auth()->id();
+        });
+
+        static::saving(function (Post $post) {
+            if ($post->status === StatusData::PUBLISHED->value && is_null($post->reviewed_by)) {
+                $post->reviewed_by = auth()->id();
+            }
         });
     }
 
@@ -74,5 +81,10 @@ class Post extends Model implements HasMedia
     public function postCategory(): BelongsTo
     {
         return $this->belongsTo(PostCategory::class);
+    }
+
+    public function institution(): BelongsTo
+    {
+        return $this->belongsTo(Institution::class);
     }
 }

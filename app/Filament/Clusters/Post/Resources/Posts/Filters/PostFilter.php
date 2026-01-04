@@ -26,6 +26,11 @@ class PostFilter
                 ->preload()
                 ->native(false),
 
+            SelectFilter::make('institution_id')
+                ->label('Lembaga')
+                ->relationship(name: 'institution', titleAttribute: 'name')
+                ->native(false),
+
             SelectFilter::make('status')
                 ->label('Status')
                 ->options(StatusData::options(['published', 'draft', 'pending_review']))

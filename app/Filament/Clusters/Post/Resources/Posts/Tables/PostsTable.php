@@ -14,6 +14,7 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
@@ -30,6 +31,7 @@ class PostsTable
             ->filters(PostFilter::schemas(), layout: FiltersLayout::Modal)
             ->recordActions([
                 ActionGroup::make([
+                    ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                     RestoreAction::make(),
@@ -45,7 +47,7 @@ class PostsTable
             ]);
     }
 
-    public static function columns(): array
+    public static function columns(bool $isPost = true): array
     {
         return [
             TextColumn::make('title')
@@ -54,7 +56,8 @@ class PostsTable
 
             TextColumn::make('postCategory.name')
                 ->label('Kategori')
-                ->searchable(),
+                ->searchable()
+                ->visible($isPost),
 
             TextColumn::make('user.name')
                 ->label('Penulis')
