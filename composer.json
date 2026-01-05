@@ -17,7 +17,8 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "marcelweidum/filament-expiration-notice": "^1.0",
         "spatie/laravel-sluggable": "^3.7",
-        "tonegabes/filament-phosphor-icons": "^1.2"
+        "tonegabes/filament-phosphor-icons": "^1.2",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
