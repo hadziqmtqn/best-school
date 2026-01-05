@@ -8,6 +8,8 @@ use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\ReferenceCluster;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
+use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
+use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
@@ -42,7 +44,9 @@ class PanelNavigation
                     ->icon(Phosphor::GraduationCap)
                     ->items([
                         ...self::filterResourceNavigationItems(InstitutionResource::class),
-                        ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee')
+                        ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee'),
+                        ...self::filterResourceNavigationItems(FacilityResource::class),
+                        ...self::filterResourceNavigationItems(ExtracurricularResource::class),
                     ]),
 
                 NavigationGroup::make()
