@@ -3,6 +3,7 @@
 namespace App\RolePermissions;
 
 use App\Enums\BaseRole;
+use App\Filament\Clusters\Event\Resources\Agendas\AgendaResource;
 use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
@@ -103,6 +104,15 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin'])),
                 'update' => array_keys(BaseRole::options(['super_admin'])),
                 'delete' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            AgendaResource::class => [
+                'view_any' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'update' => array_keys(BaseRole::options()),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin']))
             ],
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Navigations;
 
+use App\Filament\Clusters\Event\Resources\Agendas\AgendaResource;
 use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\Pages\PageResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
@@ -47,6 +48,13 @@ class PanelNavigation
                         ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee'),
                         ...self::filterResourceNavigationItems(FacilityResource::class),
                         ...self::filterResourceNavigationItems(ExtracurricularResource::class),
+                    ]),
+
+                NavigationGroup::make()
+                    ->label('Event')
+                    ->icon(Phosphor::CalendarCheck)
+                    ->items([
+                        ...self::filterResourceNavigationItems(AgendaResource::class),
                     ]),
 
                 NavigationGroup::make()
