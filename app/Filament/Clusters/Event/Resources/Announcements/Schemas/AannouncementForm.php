@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\Event\Resources\Agendas\Schemas;
+namespace App\Filament\Clusters\Event\Resources\Announcements\Schemas;
 
 use App\Enums\StatusData;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -12,7 +11,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Schema;
 
-class AgendaForm
+class AannouncementForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -33,27 +32,9 @@ class AgendaForm
 
                         Textarea::make('description')
                             ->label('Deskripsi')
+                            ->required()
                             ->autosize()
                             ->placeholder('Masukkan deskripsi'),
-
-                        DateTimePicker::make('start_date')
-                            ->label('Mulai')
-                            ->required()
-                            ->native(false)
-                            ->placeholder('Masukkan tanggal mulai')
-                            ->closeOnDateSelection(),
-
-                        DateTimePicker::make('end_date')
-                            ->label('Sampai')
-                            ->required()
-                            ->native(false)
-                            ->placeholder('Masukkan tanggal sampai')
-                            ->closeOnDateSelection(),
-
-                        TextInput::make('location')
-                            ->label('Lokasi')
-                            ->required()
-                            ->placeholder('Masukkan nama lokasi'),
 
                         ToggleButtons::make('status')
                             ->label('Status')

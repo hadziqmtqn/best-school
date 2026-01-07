@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Clusters\Event\Resources\Agendas\Tables;
+namespace App\Filament\Clusters\Event\Resources\Announcements\Tables;
 
 use App\Enums\StatusData;
-use App\Models\Agenda;
+use App\Models\Announcement;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
@@ -19,7 +18,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class AgendasTable
+class AannouncementsTable
 {
     public static function configure(Table $table): Table
     {
@@ -33,27 +32,12 @@ class AgendasTable
                     ->label('Nama')
                     ->searchable(),
 
-                TextColumn::make('start_date')
-                    ->label('Mulai')
-                    ->isoDateTime('D MMM Y HH:mm')
-                    ->sortable(),
-
-                TextColumn::make('end_date')
-                    ->label('Sampai')
-                    ->isoDateTime('D MMM Y HH:mm')
-                    ->sortable(),
-
-                TextColumn::make('location')
-                    ->label('Lokasi')
-                    ->searchable(),
-
                 TextColumn::make('status')
                     ->label('Status')
-                    ->searchable()
-                    ->sortable()
                     ->badge()
                     ->color(fn($state): string => StatusData::tryFrom($state)?->getColor() ?? 'gray')
-                    ->formatStateUsing(fn($state): string => StatusData::tryFrom($state)?->getLabel() ?? $state),
+                    ->formatStateUsing(fn($state): string => StatusData::tryFrom($state)?->getLabel() ?? $state)
+                    ->sortable(),
 
                 TextColumn::make('user.name')
                     ->label('Penulis')
@@ -76,8 +60,6 @@ class AgendasTable
                     ->boolean()
                     ->sortable()
             ])
-            ->deferFilters(false)
-            ->defaultSort('created_at', 'DESC')
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')
@@ -88,11 +70,10 @@ class AgendasTable
             ])
             ->recordActions([
                 ActionGroup::make([
-                    EditAction::make()
-                        ->modalWidth('md')
-                        ->mutateDataUsing(function (Agenda $agenda, array $data): array {
+                    EditAction::make()->modalWidth('md')
+                        ->mutateDataUsing(function (Announcement $announcement, array $data): array {
                             if ($data['status'] === StatusData::PUBLISHED->value) {
-                                if (!$agenda->validated_by) {
+                                if (!$announcement->validated_by) {
                                     $data['validated_by'] = auth()->id();
                                 }
 
@@ -103,8 +84,10 @@ class AgendasTable
                         }),
 
                     DeleteAction::make(),
+
                     RestoreAction::make(),
-                    ForceDeleteAction::make()
+
+                    DeleteAction::make()
                 ])
             ])
             ->toolbarActions([

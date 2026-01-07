@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Clusters\Event\Resources\Agendas\Pages;
+namespace App\Filament\Clusters\Event\Resources\Announcements\Pages;
 
 use App\Enums\StatusData;
-use App\Filament\Clusters\Event\Resources\Agendas\AgendaResource;
+use App\Filament\Clusters\Event\Resources\Announcements\AnnouncementResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListAgendas extends ListRecords
+class ListAannouncements extends ListRecords
 {
-    protected static string $resource = AgendaResource::class;
+    protected static string $resource = AnnouncementResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -3,6 +3,7 @@
 namespace App\Navigations;
 
 use App\Filament\Clusters\Event\Resources\Agendas\AgendaResource;
+use App\Filament\Clusters\Event\Resources\Announcements\AnnouncementResource;
 use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\Pages\PageResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
@@ -55,6 +56,7 @@ class PanelNavigation
                     ->icon(Phosphor::CalendarCheck)
                     ->items([
                         ...self::filterResourceNavigationItems(AgendaResource::class),
+                        ...self::filterResourceNavigationItems(AnnouncementResource::class),
                     ]),
 
                 NavigationGroup::make()
