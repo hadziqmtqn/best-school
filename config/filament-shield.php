@@ -125,6 +125,7 @@ return [
             'create',
             'update',
             'delete',
+            'deleteAny',
             'restore',
             'forceDelete',
             'forceDeleteAny',

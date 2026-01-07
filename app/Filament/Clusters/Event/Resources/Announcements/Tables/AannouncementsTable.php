@@ -60,6 +60,8 @@ class AannouncementsTable
                     ->boolean()
                     ->sortable()
             ])
+            ->deferFilters(false)
+            ->defaultSort('created_at', 'DESC')
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')
@@ -70,7 +72,7 @@ class AannouncementsTable
             ])
             ->recordActions([
                 ActionGroup::make([
-                    EditAction::make()->modalWidth('md')
+                    EditAction::make()
                         ->mutateDataUsing(function (Announcement $announcement, array $data): array {
                             if ($data['status'] === StatusData::PUBLISHED->value) {
                                 if (!$announcement->validated_by) {

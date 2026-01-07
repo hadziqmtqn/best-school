@@ -35,13 +35,28 @@ class AgendaPolicy
         return $user->can('Delete:Agenda', $agenda);
     }
 
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAny:Agenda');
+    }
+
     public function restore(User $user, Agenda $agenda): bool
     {
         return $user->can('Restore:Agenda', $agenda);
     }
 
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAny:Agenda');
+    }
+
     public function forceDelete(User $user, Agenda $agenda): bool
     {
         return $user->can('ForceDelete:Agenda', $agenda);
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:Agenda');
     }
 }

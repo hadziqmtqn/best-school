@@ -98,8 +98,11 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'update' => array_keys(BaseRole::options()),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
 
             LeadershipGreetingResource::class => [
@@ -114,8 +117,11 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'update' => array_keys(BaseRole::options()),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
 
             AnnouncementResource::class => [
@@ -123,8 +129,11 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'update' => array_keys(BaseRole::options()),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
 
             FacilityResource::class => [
@@ -132,8 +141,11 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'update' => array_keys(BaseRole::options()),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
 
             ExtracurricularResource::class => [
@@ -141,8 +153,11 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'writer'])),
                 'update' => array_keys(BaseRole::options()),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'writer'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'writer'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin']))
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
         ];
     }

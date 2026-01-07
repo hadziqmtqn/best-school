@@ -35,13 +35,28 @@ class AnnouncementPolicy
         return $user->can('Delete:Announcement', $announcement);
     }
 
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAny:Announcement');
+    }
+
     public function restore(User $user, Announcement $announcement): bool
     {
         return $user->can('Restore:Announcement', $announcement);
     }
 
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAny:Announcement');
+    }
+
     public function forceDelete(User $user, Announcement $announcement): bool
     {
         return $user->can('ForceDelete:Announcement', $announcement);
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:Announcement');
     }
 }

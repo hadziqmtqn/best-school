@@ -35,13 +35,23 @@ class FacilityPolicy
         return $user->can('Delete:Facility', $facility);
     }
 
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAny:Facility');
+    }
+
     public function restore(User $user, Facility $facility): bool
     {
         return $user->can('Restore:Facility', $facility);
     }
 
-    public function forceDelete(User $user, Facility $facility): bool
+    public function restoreAny(User $user): bool
     {
-        return $user->can('ForceDelete:Facility', $facility);
+        return $user->can('RestoreAny:Facility');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:Facility');
     }
 }

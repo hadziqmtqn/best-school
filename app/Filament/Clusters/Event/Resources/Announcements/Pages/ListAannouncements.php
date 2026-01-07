@@ -14,7 +14,7 @@ class ListAannouncements extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->modalWidth('md')
+            CreateAction::make()
                 ->mutateDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
 
