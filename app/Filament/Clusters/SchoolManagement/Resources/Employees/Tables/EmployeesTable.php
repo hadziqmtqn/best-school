@@ -2,6 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables;
 
+use App\Models\PersonnelDepartment;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -10,8 +11,10 @@ use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmployeesTable
 {
@@ -48,8 +51,25 @@ class EmployeesTable
             ->deferLoading()
             ->defaultSort('name')
             ->filters([
-                TrashedFilter::make()
+                SelectFilter::make('personnel_department')
+                    ->label('Jabatan')
+                    ->options(function (): array {
+                        return PersonnelDepartment::query()
+                            ->orderBy('level')
+                            ->get()
+                            ->mapWithKeys(fn($item) => [$item->id => $item->name])
+                            ->toArray();
+                    })
                     ->native(false)
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when($data['value'], function (Builder $query) use ($data) {
+                            $query->whereHas('employeePositions', function ($query) use ($data) {
+                                $query->where('personnel_department_id', $data['value']);
+                            });
+                        });
+                    }),
+
+                TrashedFilter::make()->native(false)
             ])
             ->recordActions([
                 ActionGroup::make([

@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('location');
-            $table->string('gmap_embed')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('validated_by')->nullable();
             $table->unsignedBigInteger('institution_id')->nullable();

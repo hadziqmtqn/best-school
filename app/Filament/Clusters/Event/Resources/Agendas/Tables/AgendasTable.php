@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Event\Resources\Agendas\Tables;
 
 use App\Enums\StatusData;
+use App\Models\Agenda;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -13,6 +14,7 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -71,12 +73,25 @@ class AgendasTable
             ->deferFilters(false)
             ->defaultSort('created_at', 'DESC')
             ->filters([
+                SelectFilter::make('status')
+                    ->label('Status')
+                    ->options(StatusData::options())
+                    ->native(false),
+
                 TrashedFilter::make()->native(false)
             ])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalWidth('md'),
+                        ->modalWidth('md')
+                        ->mutateDataUsing(function (Agenda $agenda, array $data): array {
+                            if ($data['status'] === StatusData::PUBLISHED->value && !$agenda->validated_by) {
+                                $data['validated_by'] = auth()->id();
+                            }
+
+                            return $data;
+                        }),
+
                     DeleteAction::make(),
                     RestoreAction::make(),
                     ForceDeleteAction::make()

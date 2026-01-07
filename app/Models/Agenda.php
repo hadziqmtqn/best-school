@@ -18,7 +18,6 @@ class Agenda extends Model
         'start_date',
         'end_date',
         'location',
-        'gmap_embed',
         'user_id',
         'validated_by',
         'institution_id',
