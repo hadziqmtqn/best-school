@@ -49,6 +49,7 @@ class ExtracurricularForm
                                     ->multiple()
                                     ->openable()
                                     ->deletable()
+                                    ->maxSize(300)
                             ])
                     ]),
             ]);

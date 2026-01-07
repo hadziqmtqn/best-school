@@ -64,6 +64,7 @@ class FacilityForm
                                     ->multiple()
                                     ->openable()
                                     ->deletable()
+                                    ->maxSize(300)
                             ])
                     ]),
             ]);
