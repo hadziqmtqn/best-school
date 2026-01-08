@@ -7,8 +7,11 @@ use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,11 +26,38 @@ class AdminForm
                     ->schema([
                         Tabs\Tab::make('Data Pribadi')
                             ->schema([
+                                ToggleButtons::make('level')
+                                    ->label('Level')
+                                    ->options([
+                                        'high_level' => 'Level Tertinggi',
+                                        'medium_level' => 'Level Sedang'
+                                    ])
+                                    ->required()
+                                    ->dehydrated(false)
+                                    ->inline()
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set): void {
+                                        $set('roles', []);
+                                    }),
+
                                 Select::make('roles')
                                     ->label('Peran')
                                     ->relationship(
                                         name: 'roles',
-                                        titleAttribute: 'name'
+                                        titleAttribute: 'name',
+                                        modifyQueryUsing: function (Builder $query, Get $get): Builder {
+                                            $level = $get('level');
+
+                                            return $query->when($level ?? false, function (Builder $query) use ($level) {
+                                                if ($level === 'high_level') {
+                                                    $query->where('name', BaseRole::SUPER_ADMIN->value);
+                                                }
+
+                                                if ($level === 'medium_level') {
+                                                    $query->whereIn('name', [BaseRole::CONTRIBUTOR->value, BaseRole::WRITER->value]);
+                                                }
+                                            });
+                                        }
                                     )
                                     ->getOptionLabelFromRecordUsing(fn (Model $record) => BaseRole::tryFrom($record->name)?->getLabel() ?? $record->name)
                                     ->required()
@@ -35,6 +65,8 @@ class AdminForm
                                     ->multiple()
                                     ->native(false)
                                     ->searchable(false)
+                                    ->reactive()
+                                    ->disabled(fn(Get $get): bool => is_null($get('level')))
                                     ->visible(fn(?User $user): bool => !($user && $user->hasRole('super_admin'))),
 
                                 TextInput::make('name')
