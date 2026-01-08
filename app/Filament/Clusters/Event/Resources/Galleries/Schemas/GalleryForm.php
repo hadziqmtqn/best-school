@@ -32,18 +32,16 @@ class GalleryForm
 
                         Textarea::make('description')
                             ->label('Deskripsi')
-                            ->autosize(),
+                            ->autosize()
+                            ->placeholder('Masukkan deskripsi'),
 
                         Radio::make('type')
                             ->label('Jenis')
-                            ->options([
-                                'photo' => 'Foto',
-                                'video' => 'Video'
-                            ])
+                            ->options(collect(['photo', 'video'])->mapWithKeys(fn($item) => [$item => ucfirst($item)])->toArray())
                             ->required()
                             ->inline()
                             ->reactive()
-                            ->formatStateUsing(function ($state, callable $set): void {
+                            ->afterStateUpdated(function ($state, callable $set): void {
                                 if ($state === 'photo') {
                                     $set('images', null);
                                 }
@@ -68,6 +66,7 @@ class GalleryForm
                         TextInput::make('youtube_id')
                             ->label('ID Youtube')
                             ->required()
+                            ->placeholder('Masukkan ID Video Youtube')
                             ->visible(fn(Get $get): bool => $get('type') === 'video')
                     ])
             ]);

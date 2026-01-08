@@ -27,6 +27,12 @@ class ExtracurricularsTable
 
                 TextColumn::make('name')
                     ->label('Nama')
+                    ->searchable(),
+
+                TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->wrap()
+                    ->limit()
                     ->searchable()
             ])
             ->deferFilters(false)
