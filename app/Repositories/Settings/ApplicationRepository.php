@@ -15,7 +15,7 @@ class ApplicationRepository
             'title' => null,
             'shortName' => $application?->short_name,
             'description' => $application?->description,
-            'logo' => null,
+            'logo' => $application?->logo,
             'whatsappNumber' => null,
             'email' => null,
             'headerImg' => null

@@ -8,6 +8,7 @@ use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
 use Database\Seeders\Reference\SchoolYearSeeder;
 use Database\Seeders\SchoolManagement\InstitutionSeeder;
+use Database\Seeders\SchoolManagement\SchoolStatsOverviewSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -32,7 +33,8 @@ class DatabaseSeeder extends Seeder
             EducationalLevelSeeder::class,
             SchoolYearSeeder::class,
             // SCHOOL MANAGEMENT
-            InstitutionSeeder::class
+            InstitutionSeeder::class,
+            SchoolStatsOverviewSeeder::class
         ]);
     }
 }

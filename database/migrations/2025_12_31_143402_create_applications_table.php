@@ -13,6 +13,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('short_name');
             $table->text('description')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,9 @@ class ApplicationSeeder extends Seeder
         $application->slug = Str::uuid()->toString();
         $application->name = 'Best School';
         $application->short_name = 'BS';
+        $application->email = 'superadmin@bkn.my.id';
+        $application->phone_number = '6285157088717';
+        $application->description = 'Portal informasi terpadu yang menyajikan profil, prestasi, dan agenda kegiatan sebagai wajah digital sekolah yang profesional, transparan, dan mudah diakses publik';
         $application->save();
     }
 }
