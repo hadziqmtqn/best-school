@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
@@ -69,27 +70,33 @@ class AdminForm
                                     ->disabled(fn(Get $get): bool => is_null($get('level')))
                                     ->visible(fn(?User $user): bool => !($user && $user->hasRole('super_admin'))),
 
-                                TextInput::make('name')
-                                    ->label('Nama')
-                                    ->required()
-                                    ->placeholder('Masukkan nama lengkap'),
+                                Group::make()
+                                    ->columnSpanFull()
+                                    ->visible(fn(Get $get): bool => $get('level') === 'high_level')
+                                    ->schema([
+                                        TextInput::make('name')
+                                            ->label('Nama')
+                                            ->required()
+                                            ->placeholder('Masukkan nama lengkap'),
 
-                                TextInput::make('email')
-                                    ->label('Email')
-                                    ->required()
-                                    ->unique(ignoreRecord: true)
-                                    ->placeholder('Masukkan email'),
+                                        TextInput::make('email')
+                                            ->label('Email')
+                                            ->required()
+                                            ->unique(ignoreRecord: true)
+                                            ->placeholder('Masukkan email'),
 
-                                SpatieMediaLibraryFileUpload::make('avatar')
-                                    ->label('Foto Profil')
-                                    ->disk('s3')
-                                    ->collection('avatar')
-                                    ->visibility('private')
-                                    ->acceptedFileTypes(['images/*'])
-                                    ->maxSize(200)
+                                        SpatieMediaLibraryFileUpload::make('avatar')
+                                            ->label('Foto Profil')
+                                            ->disk('s3')
+                                            ->collection('avatar')
+                                            ->visibility('private')
+                                            ->acceptedFileTypes(['images/*'])
+                                            ->maxSize(200)
+                                    ])
                             ]),
 
                         Tabs\Tab::make('Keamanan')
+                            ->visible(fn(Get $get): bool => $get('level') === 'high_level')
                             ->schema([
                                 TextInput::make('password')
                                     ->label('Kata Sandi')
