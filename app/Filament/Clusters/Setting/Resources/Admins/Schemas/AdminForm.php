@@ -4,6 +4,9 @@ namespace App\Filament\Clusters\Setting\Resources\Admins\Schemas;
 
 use App\Enums\BaseRole;
 use App\Models\User;
+use App\Repositories\References\PersonnelDepartmentRepository;
+use App\Repositories\SchoolManagements\EmployeeRepository;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -39,6 +42,19 @@ class AdminForm
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set): void {
                                         $set('roles', []);
+
+                                        if ($state === 'high_level') {
+                                            $set('institution_id', []);
+                                            $set('personnel_department_id', []);
+                                        }
+
+                                        if ($state === 'medium_level') {
+                                            $set('name', null);
+                                            $set('email', null);
+                                            $set('avatar', null);
+                                            $set('password', null);
+                                            $set('password_confirmation', null);
+                                        }
                                     }),
 
                                 Select::make('roles')
@@ -92,6 +108,40 @@ class AdminForm
                                             ->visibility('private')
                                             ->acceptedFileTypes(['images/*'])
                                             ->maxSize(200)
+                                    ]),
+
+                                Group::make()
+                                    ->columnSpanFull()
+                                    ->visible(fn(Get $get): bool => $get('level') === 'medium_level')
+                                    ->schema([
+                                        Select::make('institution_id')
+                                            ->label('Lembaga')
+                                            ->options(InstitutionRepository::options())
+                                            ->required()
+                                            ->native(false)
+                                            ->dehydrated(false)
+                                            ->reactive(),
+
+                                        Select::make('personnal_department_id')
+                                            ->label('Jabatan')
+                                            ->options(PersonnelDepartmentRepository::options())
+                                            ->required()
+                                            ->native(false)
+                                            ->dehydrated(false)
+                                            ->reactive(),
+
+                                        Select::make('user_id')
+                                            ->label('Pegawai')
+                                            ->options(function (Get $get): array {
+                                                $institutionId = $get('institution_id');
+                                                $personnelDepartmentId = $get('personnel_department_id');
+
+                                                if (!$institutionId && !$personnelDepartmentId) return [];
+
+                                                return EmployeeRepository::options(institutionId: $institutionId, personnelDepartmentId: $personnelDepartmentId);
+                                            })
+                                            ->required()
+                                            ->native(false)
                                     ])
                             ]),
 

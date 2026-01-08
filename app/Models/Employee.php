@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 class Employee extends Model
@@ -35,5 +36,11 @@ class Employee extends Model
         static::creating(function (Employee $employee) {
             $employee->slug = Str::uuid()->toString();
         });
+    }
+
+    // TODO RELATIONSHIP
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

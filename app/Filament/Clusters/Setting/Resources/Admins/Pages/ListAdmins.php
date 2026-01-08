@@ -19,7 +19,7 @@ class ListAdmins extends ListRecords
                 ->modalWidth('md')
                 ->visible(CanAccess::to('CreateAdmin'))
                 ->using(function (array $data, string $model): Model {
-                    //dd($data);
+                    dd($data);
                     return $model::create($data);
                 })
         ];
