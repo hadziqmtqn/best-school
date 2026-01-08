@@ -120,15 +120,21 @@ class AdminForm
                                             ->required()
                                             ->native(false)
                                             ->dehydrated(false)
-                                            ->reactive(),
+                                            ->reactive()
+                                            ->afterStateUpdated(function ($state, callable $set): void {
+                                                $set('user_id', null);
+                                            }),
 
-                                        Select::make('personnal_department_id')
+                                        Select::make('personnel_department_id')
                                             ->label('Jabatan')
                                             ->options(PersonnelDepartmentRepository::options())
                                             ->required()
                                             ->native(false)
                                             ->dehydrated(false)
-                                            ->reactive(),
+                                            ->reactive()
+                                            ->afterStateUpdated(function ($state, callable $set): void {
+                                                $set('user_id', null);
+                                            }),
 
                                         Select::make('user_id')
                                             ->label('Pegawai')
@@ -142,6 +148,7 @@ class AdminForm
                                             })
                                             ->required()
                                             ->native(false)
+                                            ->reactive()
                                     ])
                             ]),
 
