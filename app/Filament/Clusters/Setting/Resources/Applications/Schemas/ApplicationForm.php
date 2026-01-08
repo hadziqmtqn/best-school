@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\Setting\Resources\Applications\Schemas;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ApplicationForm
@@ -14,8 +14,9 @@ class ApplicationForm
     {
         return $schema
             ->components([
-                Group::make()
+                Section::make()
                     ->columnSpanFull()
+                    ->columns()
                     ->schema([
                         TextInput::make('name')
                             ->label('Nama')
@@ -30,7 +31,8 @@ class ApplicationForm
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->placeholder('Masukkan deskripsi aplikasi')
-                            ->autosize(),
+                            ->autosize()
+                            ->columnSpanFull(),
 
                         SpatieMediaLibraryFileUpload::make('logo')
                             ->label('Logo')

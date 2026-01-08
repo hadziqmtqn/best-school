@@ -14,7 +14,7 @@
                         </div>
                         <div class="btn-area">
                             <div class="btn5">
-                                <a href="{{ auth()->check() ? (auth()->user()->hasRole('student') ? route('filament.student.pages.student-dashboard') : route('filament.admin.pages.dashboard')) : route('filament.student.auth.login') }}" class="btn-priamry1">{{ auth()->check() ? 'Dasbor' : 'Masuk' }} <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                                <a href="{{ auth()->check() ? route('filament.admin.pages.dashboard') : route('filament.admin.auth.login') }}" class="btn-priamry1">{{ auth()->check() ? 'Dasbor' : 'Masuk' }} <span><i class="fa-solid fa-arrow-right"></i></span></a>
                             </div>
                         </div>
                     </div>

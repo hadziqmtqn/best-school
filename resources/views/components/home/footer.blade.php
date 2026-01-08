@@ -39,7 +39,7 @@
                             <span><img src="https://html.vikinglab.agency/helpy/assets/img/icons/vl-footer-2.1.svg" alt=""></span>
                         </div>
                         <div class="vl-footer-text">
-                            <a href="https://wa.me/{{ $application['whatsappNumber'] }}" target="_blank">{{ $application['whatsappNumber'] }}</a>
+                            <a href="https://wa.me/{{ $application['phoneNumber'] }}" target="_blank">{{ $application['phoneNumber'] }}</a>
                         </div>
                     </div>
                 </div>

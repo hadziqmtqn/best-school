@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Event\Resources\Agendas\Tables;
 
 use App\Enums\StatusData;
 use App\Models\Agenda;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -82,6 +83,11 @@ class AgendasTable
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options(StatusData::options())
+                    ->native(false),
+
+                SelectFilter::make('institution_id')
+                    ->label('Lembaga')
+                    ->options(InstitutionRepository::options())
                     ->native(false),
 
                 TrashedFilter::make()->native(false)

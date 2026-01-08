@@ -2,6 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Facilities\Schemas;
 
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -24,7 +25,7 @@ class FacilityForm
                             ->schema([
                                 Select::make('institution_id')
                                     ->label('Lembaga')
-                                    ->relationship(name: 'institution', titleAttribute: 'name')
+                                    ->options(InstitutionRepository::options())
                                     ->native(false),
 
                                 TextInput::make('name')

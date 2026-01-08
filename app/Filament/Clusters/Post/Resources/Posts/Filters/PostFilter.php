@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Post\Resources\Posts\Filters;
 
 use App\Enums\PostVisibility;
 use App\Enums\StatusData;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\FusedGroup;
@@ -28,7 +29,7 @@ class PostFilter
 
             SelectFilter::make('institution_id')
                 ->label('Lembaga')
-                ->relationship(name: 'institution', titleAttribute: 'name')
+                ->options(InstitutionRepository::options())
                 ->native(false),
 
             SelectFilter::make('status')

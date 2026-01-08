@@ -14,9 +14,9 @@
                             <span><img src="https://html.vikinglab.agency/helpy/assets/img/icons/vl-top-ic-1.1.svg" alt=""></span>
                         </div>
                         <div class="top-content">
-                            {{--@if($application['email'])
+                            @if($application['email'])
                                 <a href="mailto:{{ $application['email'] }}">{{ $application['email'] }}</a>
-                            @endif--}}
+                            @endif
                         </div>
                     </div>
                     <div class="vl-header-top-icbox">
@@ -24,9 +24,9 @@
                             <span><img src="https://html.vikinglab.agency/helpy/assets/img/icons/vl-top-ic-1.2.svg" alt=""></span>
                         </div>
                         <div class="top-content">
-                            {{--@if($application['whatsappNumber'])
-                                <a href="tel:{{ $application['whatsappNumber'] }}">{{ $application['whatsappNumber'] }}</a>
-                            @endif--}}
+                            @if($application['phoneNumber'])
+                                <a href="tel:{{ $application['phoneNumber'] }}">{{ $application['phoneNumber'] }}</a>
+                            @endif
                         </div>
                     </div>
                 </div>

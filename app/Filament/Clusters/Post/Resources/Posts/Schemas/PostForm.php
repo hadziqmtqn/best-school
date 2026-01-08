@@ -7,6 +7,7 @@ use App\Enums\StatusData;
 use App\Filament\Clusters\Post\Resources\PostCategories\Schemas\PostCategoryForm;
 use App\Helpers\UserRole;
 use App\Models\PostCategory;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
@@ -115,7 +116,7 @@ class PostForm
                             ->schema([
                                 Select::make('institution_id')
                                     ->label('Lembaga')
-                                    ->relationship(name: 'institution', titleAttribute: 'name')
+                                    ->options(InstitutionRepository::options())
                                     ->native(false),
 
                                 Select::make('post_category_id')

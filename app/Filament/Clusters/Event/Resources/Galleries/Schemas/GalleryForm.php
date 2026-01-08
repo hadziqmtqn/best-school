@@ -2,6 +2,7 @@
 
 namespace App\Filament\Clusters\Event\Resources\Galleries\Schemas;
 
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -22,7 +23,7 @@ class GalleryForm
                     ->schema([
                         Select::make('institution_id')
                             ->label('Lembaga')
-                            ->relationship(name: 'institution', titleAttribute: 'name')
+                            ->options(InstitutionRepository::options())
                             ->native(false),
 
                         TextInput::make('name')

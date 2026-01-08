@@ -16,8 +16,8 @@ class ApplicationRepository
             'shortName' => $application?->short_name,
             'description' => $application?->description,
             'logo' => $application?->logo,
-            'whatsappNumber' => null,
-            'email' => null,
+            'phoneNumber' => $application?->phone_number,
+            'email' => $application?->email,
             'headerImg' => null
         ];
     }

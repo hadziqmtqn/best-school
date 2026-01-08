@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Event\Resources\Agendas\Schemas;
 
 use App\Enums\StatusData;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -23,7 +24,7 @@ class AgendaForm
                     ->schema([
                         Select::make('institution_id')
                             ->label('Lembaga')
-                            ->relationship(name: 'institution', titleAttribute: 'name')
+                            ->options(InstitutionRepository::options())
                             ->native(false),
 
                         TextInput::make('name')

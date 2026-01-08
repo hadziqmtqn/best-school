@@ -24,7 +24,8 @@
                     <div class="vl-work-thumb-wrap-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
                         <!-- large thumb -->
                         <div class="vl-work-thumb-1 mb-30">
-                            <img class="w-100" src="{{ $application['headerImg'] }}" alt="">
+                            {{--<img class="w-100" src="{{ $application['headerImg'] }}" alt="">--}}
+                            <img class="w-100" src="https://ppdb.bkn.my.id/assets/theme/2SLWp7PdsX8.jpg" alt="">
                         </div>
                     </div>
                 </div>

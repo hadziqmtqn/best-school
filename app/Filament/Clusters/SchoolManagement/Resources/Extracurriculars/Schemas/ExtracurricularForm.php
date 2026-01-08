@@ -2,6 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\Schemas;
 
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -23,7 +24,7 @@ class ExtracurricularForm
                             ->schema([
                                 Select::make('institution_id')
                                     ->label('Lembaga')
-                                    ->relationship(name: 'institution', titleAttribute: 'name')
+                                    ->options(InstitutionRepository::options())
                                     ->required()
                                     ->native(false),
 

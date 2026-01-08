@@ -43,7 +43,7 @@
                             <i class="fa-solid fa-phone-volume"></i>
                         </div>
                         <div class="contact-info-text">
-                            <a href="https://wa.me/{{ $application['whatsappNumber'] }}">{{ $application['whatsappNumber'] }}</a>
+                            <a href="https://wa.me/{{ $application['phoneNumber'] }}">{{ $application['phoneNumber'] }}</a>
                         </div>
                     </div>
 

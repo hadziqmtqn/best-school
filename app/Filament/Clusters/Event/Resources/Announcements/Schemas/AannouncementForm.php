@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Event\Resources\Announcements\Schemas;
 
 use App\Enums\StatusData;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -18,7 +19,7 @@ class AannouncementForm
             ->components([
                 Select::make('institution_id')
                     ->label('Lembaga')
-                    ->relationship(name: 'institution', titleAttribute: 'name')
+                    ->options(InstitutionRepository::options())
                     ->native(false),
 
                 TextInput::make('name')

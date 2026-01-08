@@ -54,4 +54,13 @@ class SchoolStatsOverviewResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with([
+                'institution',
+                'schoolYear'
+            ]);
+    }
 }

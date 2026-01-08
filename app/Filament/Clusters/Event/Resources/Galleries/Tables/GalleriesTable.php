@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Event\Resources\Galleries\Tables;
 
 use App\Models\Gallery;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -14,6 +15,7 @@ use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -50,6 +52,11 @@ class GalleriesTable
             ->deferFilters(false)
             ->defaultSort('created_at', 'DESC')
             ->filters([
+                SelectFilter::make('institution_id')
+                    ->label('Lembaga')
+                    ->options(InstitutionRepository::options())
+                    ->native(false),
+
                 TrashedFilter::make()->native(false)
             ])
             ->recordActions([

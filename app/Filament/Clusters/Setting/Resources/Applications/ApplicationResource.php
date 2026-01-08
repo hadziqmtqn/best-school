@@ -2,11 +2,15 @@
 
 namespace App\Filament\Clusters\Setting\Resources\Applications;
 
+use App\Filament\Clusters\Setting\Resources\Applications\Pages\AppAssets;
+use App\Filament\Clusters\Setting\Resources\Applications\Pages\EditApplication;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\ListApplications;
 use App\Filament\Clusters\Setting\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Clusters\Setting\Resources\Applications\Tables\ApplicationsTable;
 use App\Filament\Clusters\Setting\SettingCluster;
 use App\Models\Application;
+use Filament\Pages\Enums\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -22,6 +26,8 @@ class ApplicationResource extends Resource
     protected static ?string $navigationLabel = 'Aplikasi';
 
     protected static ?string $label = 'Aplikasi';
+
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Schema $schema): Schema
     {
@@ -44,6 +50,16 @@ class ApplicationResource extends Resource
     {
         return [
             'index' => ListApplications::route('/'),
+            'edit' => EditApplication::route('/{record}'),
+            'assets' => AppAssets::route('/{record}/assets')
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            EditApplication::class,
+            AppAssets::class
+        ]);
     }
 }
