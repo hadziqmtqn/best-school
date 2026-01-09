@@ -54,7 +54,6 @@ class User extends Authenticatable implements HasMedia
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'deleted_at' => 'timestamp',
             'is_active' => 'boolean'
         ];
     }

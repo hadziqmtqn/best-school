@@ -56,13 +56,11 @@ class AdminsTable
                         ->visible(fn($record): bool => auth()->id() === $record->id || UserRole::isSuperAdmin()),
 
                     DeleteAction::make()
-                        ->visible(fn($record): bool => UserRole::isSuperAdmin() && auth()->id() != $record->id),
+                        ->visible(fn($record): bool => !$record->employee && UserRole::isSuperAdmin() && auth()->id() != $record->id),
 
-                    RestoreAction::make()
-                        ->modalHeading('Pulihkan Data'),
+                    RestoreAction::make(),
 
                     ForceDeleteAction::make()
-                        ->modalHeading('Hapus Selamanya')
                 ])
             ])
             ->toolbarActions([

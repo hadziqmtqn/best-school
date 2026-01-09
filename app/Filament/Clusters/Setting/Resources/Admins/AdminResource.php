@@ -66,7 +66,7 @@ class AdminResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with(['roles', 'homebaseActive.institution', 'employeePositionActive.personnelDepartment'])
+            ->with(['roles', 'employee', 'homebaseActive.institution', 'employeePositionActive.personnelDepartment'])
             ->whereHas('roles');
     }
 }

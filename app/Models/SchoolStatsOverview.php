@@ -11,8 +11,6 @@ class SchoolStatsOverview extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'school_stats_overviews';
-
     protected $fillable = [
         'slug',
         'school_year_id',
@@ -26,7 +24,6 @@ class SchoolStatsOverview extends Model
     {
         return [
             'slug' => 'string',
-            'deleted_at' => 'timestime'
         ];
     }
 
