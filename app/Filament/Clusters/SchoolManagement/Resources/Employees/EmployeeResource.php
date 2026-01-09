@@ -12,6 +12,7 @@ use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeF
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
 use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
 use App\Helpers\CanAccess;
+use App\Helpers\UserRole;
 use App\Models\User;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,6 +20,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeResource extends Resource
 {
@@ -75,6 +77,8 @@ class EmployeeResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
+        $employee = Auth::user()->loadMissing('homebaseActive');
+
         return parent::getEloquentQuery()
             ->with([
                 'employee',
@@ -84,7 +88,11 @@ class EmployeeResource extends Resource
                 'employeePositionActive.personnelDepartment',
                 'educationalHistories.educationalLevel'
             ])
-            ->whereHas('employee');
+            ->whereHas('employee', function ($query) use ($employee) {
+                if (!UserRole::isSuperAdmin()) {
+                    $query->where('institution_id', $employee->homebaseActive?->institution_id);
+                }
+            });
     }
 
     public static function getGloballySearchableAttributes(): array

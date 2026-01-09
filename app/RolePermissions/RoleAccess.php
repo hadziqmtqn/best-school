@@ -9,8 +9,10 @@ use App\Filament\Clusters\Event\Resources\Galleries\GalleryResource;
 use App\Filament\Clusters\Post\Resources\LeadershipGreetings\LeadershipGreetingResource;
 use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
+use App\Filament\Clusters\Reference\Resources\Classrooms\ClassroomResource;
 use App\Filament\Clusters\Reference\Resources\EducationalLevels\EducationalLevelResource;
 use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepartmentResource;
+use App\Filament\Clusters\Reference\Resources\Rombels\RombelResource;
 use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
@@ -182,6 +184,30 @@ class RoleAccess
                 'delete_any' => array_keys(BaseRole::options(['super_admin'])),
                 'restore' => array_keys(BaseRole::options(['super_admin'])),
                 'restore_any' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            ClassroomResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'create' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'update' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            RombelResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'create' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'update' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],

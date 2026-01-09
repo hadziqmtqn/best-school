@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\SuperAdminSeeder;
+use Database\Seeders\Reference\ClassroomRombelSeeder;
 use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
 use Database\Seeders\Reference\SchoolYearSeeder;
@@ -33,10 +34,11 @@ class DatabaseSeeder extends Seeder
             PersonnelDepartmentSeeder::class,
             EducationalLevelSeeder::class,
             SchoolYearSeeder::class,
+            ClassroomRombelSeeder::class,
             // SCHOOL MANAGEMENT
             InstitutionSeeder::class,
             SchoolStatsOverviewSeeder::class,
-
+            // EMPLOYEE
             EmployeeSeeder::class
         ]);
     }

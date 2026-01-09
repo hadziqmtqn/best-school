@@ -44,4 +44,19 @@ class PersonnelDepartmentPolicy
     {
         return $user->can('ForceDelete:PersonnelDepartment', $personnelDepartment);
     }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAny:PersonnelDepartment');
+    }
+
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAny:PersonnelDepartment');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:PersonnelDepartment');
+    }
 }

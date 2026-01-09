@@ -32,7 +32,9 @@ class PostCategoryPolicy
 
     public function delete(User $user, PostCategory $postCategory): bool
     {
-        return $user->can('Delete:PostCategory');
+        $postCategory->loadCount('posts');
+
+        return $user->can('Delete:PostCategory') && $postCategory->posts_count === 0;
     }
 
     public function restore(User $user, PostCategory $postCategory): bool
@@ -43,5 +45,20 @@ class PostCategoryPolicy
     public function forceDelete(User $user, PostCategory $postCategory): bool
     {
         return $user->can('ForceDelete:PostCategory', $postCategory);
+    }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('Delete:PostCategory');
+    }
+
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAny:PostCategory');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:PostCategory');
     }
 }

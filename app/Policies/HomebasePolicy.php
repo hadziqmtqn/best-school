@@ -44,4 +44,19 @@ class HomebasePolicy
     {
         return $user->can('ForceDeleteHomebase', $homebase);
     }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAnyHomebase');
+    }
+
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAnyHomebase');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAnyHomebase');
+    }
 }

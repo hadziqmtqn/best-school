@@ -44,4 +44,19 @@ class GalleryPolicy
     {
         return $user->can('ForceDelete:Gallery', $gallery);
     }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAny:Gallery');
+    }
+
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAny:Gallery');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAny:Gallery');
+    }
 }

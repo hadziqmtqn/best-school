@@ -44,4 +44,19 @@ class EducationalHistoryPolicy
     {
         return $user->can('ForceDeleteEducationalHistory', $educationalHistory);
     }
+
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('DeleteAnyEducationalHistory');
+    }
+
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('RestoreAnyEducationalHistory');
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('ForceDeleteAnyEducationalHistory');
+    }
 }
