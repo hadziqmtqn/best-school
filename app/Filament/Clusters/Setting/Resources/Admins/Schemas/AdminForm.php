@@ -13,11 +13,13 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Traits\HasRoles;
 
 class AdminForm
 {
@@ -37,7 +39,6 @@ class AdminForm
                                         'medium_level' => 'Level Sedang'
                                     ])
                                     ->required()
-                                    ->dehydrated(false)
                                     ->inline()
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set): void {
@@ -55,25 +56,26 @@ class AdminForm
                                             $set('password', null);
                                             $set('password_confirmation', null);
                                         }
-                                    }),
+                                    })
+                                    ->visible(fn(?User $user): bool => !($user)),
 
                                 Select::make('roles')
                                     ->label('Peran')
                                     ->relationship(
                                         name: 'roles',
                                         titleAttribute: 'name',
-                                        modifyQueryUsing: function (Builder $query, Get $get): Builder {
-                                            $level = $get('level');
+                                        modifyQueryUsing: function (Builder $query, Get $get, ?User $user): Builder {
+                                            $highLevelOrSuperAdminRole = $get('level') === 'high_level' || ($user && $user->hasRole('super_admin'));
 
-                                            return $query->when($level ?? false, function (Builder $query) use ($level) {
-                                                if ($level === 'high_level') {
-                                                    $query->where('name', BaseRole::SUPER_ADMIN->value);
-                                                }
+                                            if ($highLevelOrSuperAdminRole) {
+                                                $query->where('name', BaseRole::SUPER_ADMIN->value);
+                                            }
 
-                                                if ($level === 'medium_level') {
-                                                    $query->whereIn('name', [BaseRole::CONTRIBUTOR->value, BaseRole::WRITER->value]);
-                                                }
-                                            });
+                                            if (!$highLevelOrSuperAdminRole) {
+                                                $query->whereIn('name', [BaseRole::CONTRIBUTOR->value, BaseRole::WRITER->value]);
+                                            }
+
+                                            return $query;
                                         }
                                     )
                                     ->getOptionLabelFromRecordUsing(fn (Model $record) => BaseRole::tryFrom($record->name)?->getLabel() ?? $record->name)
@@ -83,12 +85,18 @@ class AdminForm
                                     ->native(false)
                                     ->searchable(false)
                                     ->reactive()
-                                    ->disabled(fn(Get $get): bool => is_null($get('level')))
+                                    ->disabled(function (?User $user, Get $get): bool {
+                                        if (!$user) {
+                                            return is_null($get('level'));
+                                        }else {
+                                            return false;
+                                        }
+                                    })
                                     ->visible(fn(?User $user): bool => !($user && $user->hasRole('super_admin'))),
 
                                 Group::make()
                                     ->columnSpanFull()
-                                    ->visible(fn(Get $get): bool => $get('level') === 'high_level')
+                                    ->visible(fn(?User $user, Get $get): bool => $user?->hasRole('super_admin') || $get('level') === 'high_level')
                                     ->schema([
                                         TextInput::make('name')
                                             ->label('Nama')
@@ -151,37 +159,42 @@ class AdminForm
                                             ->reactive()
                                     ])
                             ]),
-
-                        Tabs\Tab::make('Keamanan')
-                            ->visible(fn(Get $get): bool => $get('level') === 'high_level')
-                            ->schema([
-                                TextInput::make('password')
-                                    ->label('Kata Sandi')
-                                    ->password()
-                                    ->confirmed()
-                                    ->minLength(8)
-                                    ->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/')
-                                    ->maxLength(20)
-                                    ->autocomplete('new-password')
-                                    ->dehydrated(fn (?string $state): bool => filled($state))
-                                    ->required(fn (string $operation): bool => $operation === 'create')
-                                    ->placeholder('Masukkan Kata Sandi Baru')
-                                    ->dehydrateStateUsing(fn($state) => filled($state) ? Hash::make($state) : null)
-                                    ->revealable(),
-
-                                TextInput::make('password_confirmation')
-                                    ->label('Konfirmasi Kata Sandi')
-                                    ->password()
-                                    ->minLength(8)
-                                    ->maxLength(20)
-                                    ->autocomplete('new-password')
-                                    ->dehydrated(fn (?string $state): bool => filled($state))
-                                    ->required(fn (string $operation): bool => $operation === 'create')
-                                    ->placeholder('Konfirmasi Kata Sandi Baru')
-                                    ->dehydrateStateUsing(fn($state) => filled($state) ? Hash::make($state) : null)
-                                    ->revealable()
-                            ])
+                        
+                        self::security()
                     ])
+            ]);
+    }
+
+    private static function security(): Tab
+    {
+        return Tab::make('Keamanan')
+            ->visible(fn(?User $user, $get): bool => $user?->hasRole('super_admin') || $get('level') === 'high_level')
+            ->schema([
+                TextInput::make('password')
+                    ->label('Kata Sandi')
+                    ->password()
+                    ->confirmed()
+                    ->minLength(8)
+                    ->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/')
+                    ->maxLength(20)
+                    ->autocomplete('new-password')
+                    ->dehydrated(fn (?string $state): bool => filled($state))
+                    ->required(fn (string $operation): bool => $operation === 'create')
+                    ->placeholder('Masukkan Kata Sandi Baru')
+                    ->dehydrateStateUsing(fn($state) => filled($state) ? Hash::make($state) : null)
+                    ->revealable(),
+
+                TextInput::make('password_confirmation')
+                    ->label('Konfirmasi Kata Sandi')
+                    ->password()
+                    ->minLength(8)
+                    ->maxLength(20)
+                    ->autocomplete('new-password')
+                    ->dehydrated(fn (?string $state): bool => filled($state))
+                    ->required(fn (string $operation): bool => $operation === 'create')
+                    ->placeholder('Konfirmasi Kata Sandi Baru')
+                    ->dehydrateStateUsing(fn($state) => filled($state) ? Hash::make($state) : null)
+                    ->revealable()
             ]);
     }
 }

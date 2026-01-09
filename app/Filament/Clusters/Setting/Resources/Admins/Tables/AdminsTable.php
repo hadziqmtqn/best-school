@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Setting\Resources\Admins\Tables;
 
 use App\Enums\BaseRole;
 use App\Helpers\UserRole;
+use App\Models\User;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -22,6 +23,11 @@ class AdminsTable
             ->columns([
                 TextColumn::make('name')
                     ->label('Nama')
+                    ->description(fn(User $user): string|null => $user->employeePositionActive?->personnelDepartment?->name)
+                    ->searchable(),
+
+                TextColumn::make('homebaseActive.institution.name')
+                    ->label('Unit Kerja')
                     ->searchable(),
 
                 TextColumn::make('roles.name')
