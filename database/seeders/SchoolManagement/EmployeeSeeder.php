@@ -47,14 +47,15 @@ class EmployeeSeeder extends Seeder
             'nuptk' => $faker->numerify('##########'),
             'place_of_birth' => $faker->city(),
             'date_of_birth' => $faker->dateTimeBetween('-40 years', now()->subYears(20)),
-            'religion' => $faker->randomElements(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Khonghuchu'])
+            'religion' => 'Islam'
         ]);
 
         // TODO Create Homebase
         Homebase::create([
+            'slug' => Str::uuid()->toString(),
             'user_id' => $user->id,
             'institution_id' => $institutionSelected,
-            'appointment_date' => $faker->dateTimeBetween(['-10 Years', 'now'])
+            'appointment_date' => $faker->dateTimeBetween('-10 Years', 'now')
         ]);
 
         // TODO Employee Position
@@ -67,9 +68,12 @@ class EmployeeSeeder extends Seeder
         }
 
         EmployeePosition::create([
+            'slug' => Str::uuid()->toString(),
+            'user_id' => $user->id,
             'school_year_id' => $schoolYear?->id,
             'institution_id' => $institutionSelected,
-            'personnel_department_id' => $personnelDepartmentSelected
+            'personnel_department_id' => $personnelDepartmentSelected,
+            'is_active' => true
         ]);
     }
 }
