@@ -24,7 +24,7 @@ class PersonnelDepartmentSeeder extends Seeder
         return [
             'Kepala Sekolah',
             'Wakil Kepala Sekolah',
-            'Guru Kelas',
+            'Wali Kelas',
             'Guru Pengganti',
             'Bendahara',
             'Sekretaris',
