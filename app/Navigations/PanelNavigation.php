@@ -41,7 +41,6 @@ class PanelNavigation
                         ...self::filterResourceNavigationItems(PostCategoryResource::class),
                         ...self::filterResourceNavigationItems(PageResource::class),
                         ...self::filterResourceNavigationItems(LeadershipGreetingResource::class),
-                        ...self::filterResourceNavigationItems(SchoolStatsOverviewResource::class)
                     ]),
 
                 NavigationGroup::make()
@@ -52,6 +51,7 @@ class PanelNavigation
                         ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee'),
                         ...self::filterResourceNavigationItems(FacilityResource::class),
                         ...self::filterResourceNavigationItems(ExtracurricularResource::class),
+                        ...self::filterResourceNavigationItems(SchoolStatsOverviewResource::class)
                     ]),
 
                 NavigationGroup::make()

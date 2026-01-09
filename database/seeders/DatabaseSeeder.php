@@ -7,6 +7,7 @@ use Database\Seeders\Auth\SuperAdminSeeder;
 use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
 use Database\Seeders\Reference\SchoolYearSeeder;
+use Database\Seeders\SchoolManagement\EmployeeSeeder;
 use Database\Seeders\SchoolManagement\InstitutionSeeder;
 use Database\Seeders\SchoolManagement\SchoolStatsOverviewSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
@@ -34,7 +35,9 @@ class DatabaseSeeder extends Seeder
             SchoolYearSeeder::class,
             // SCHOOL MANAGEMENT
             InstitutionSeeder::class,
-            SchoolStatsOverviewSeeder::class
+            SchoolStatsOverviewSeeder::class,
+
+            EmployeeSeeder::class
         ]);
     }
 }
