@@ -54,4 +54,15 @@ class NumberOfStudentResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with([
+                'employeePosition.schoolYear',
+                'employeePosition.institution',
+                'employeePosition.user',
+            ])
+            ->whereHas('employeePosition.user', fn($query) => $query->whereNull('deleted_at'));
+    }
 }

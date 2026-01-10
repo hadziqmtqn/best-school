@@ -59,6 +59,11 @@ class EmployeePosition extends Model
         return $this->belongsTo(PersonnelDepartment::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // TODO ATTRIBUTES
     protected function period(): Attribute
     {
