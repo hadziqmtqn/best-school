@@ -2,17 +2,13 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents;
 
-use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\Pages\CreateNumberOfStudent;
-use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\Pages\EditNumberOfStudent;
 use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\Pages\ListNumberOfStudents;
 use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\Schemas\NumberOfStudentForm;
 use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\Tables\NumberOfStudentsTable;
 use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
 use App\Models\NumberOfStudent;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -22,6 +18,10 @@ class NumberOfStudentResource extends Resource
     protected static ?string $model = NumberOfStudent::class;
 
     protected static ?string $cluster = SchoolManagementCluster::class;
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $label = 'Jumlah Siswa';
 
     public static function form(Schema $schema): Schema
     {

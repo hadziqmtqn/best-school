@@ -3,8 +3,6 @@
 namespace App\Filament\Clusters\Reference\Resources\Classrooms;
 
 use App\Filament\Clusters\Reference\ReferenceCluster;
-use App\Filament\Clusters\Reference\Resources\Classrooms\Pages\CreateClassroom;
-use App\Filament\Clusters\Reference\Resources\Classrooms\Pages\EditClassroom;
 use App\Filament\Clusters\Reference\Resources\Classrooms\Pages\ListClassrooms;
 use App\Filament\Clusters\Reference\Resources\Classrooms\Schemas\ClassroomForm;
 use App\Filament\Clusters\Reference\Resources\Classrooms\Tables\ClassroomsTable;
@@ -12,18 +10,22 @@ use App\Models\Classroom;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class ClassroomResource extends Resource
 {
     protected static ?string $model = Classroom::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Phosphor::BuildingApartment;
 
     protected static ?string $cluster = ReferenceCluster::class;
+
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $label = 'Ruang Kelas';
 
     public static function form(Schema $schema): Schema
     {
@@ -46,8 +48,6 @@ class ClassroomResource extends Resource
     {
         return [
             'index' => ListClassrooms::route('/'),
-            'create' => CreateClassroom::route('/create'),
-            'edit' => EditClassroom::route('/{record}/edit'),
         ];
     }
 
