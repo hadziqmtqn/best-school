@@ -6,6 +6,8 @@ use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\SuperAdminSeeder;
 use Database\Seeders\Events\AgendaSeeder;
 use Database\Seeders\Events\AnnouncementSeeder;
+use Database\Seeders\Posts\PostCategorySeeder;
+use Database\Seeders\Posts\PostSeeder;
 use Database\Seeders\Reference\ClassroomRombelSeeder;
 use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
@@ -44,7 +46,9 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             NumberOfStudentSeeder::class,
             AgendaSeeder::class,
-            AnnouncementSeeder::class
+            AnnouncementSeeder::class,
+            PostCategorySeeder::class,
+            PostSeeder::class
         ]);
     }
 }

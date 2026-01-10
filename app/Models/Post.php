@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\StatusData;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Post extends Model implements HasMedia
 {
-    use SoftDeletes, HasSlug, InteractsWithMedia;
+    use SoftDeletes, HasSlug, InteractsWithMedia, HasFactory;
 
     protected $fillable = [
         'slug',
