@@ -17,7 +17,7 @@ use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
-use App\Filament\Clusters\SchoolManagement\Resources\SchoolStatsOverviews\SchoolStatsOverviewResource;
+use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\NumberOfStudentResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 
@@ -164,18 +164,6 @@ class RoleAccess
                 'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
 
-            SchoolStatsOverviewResource::class => [
-                'view_any' => array_keys(BaseRole::options(['super_admin'])),
-                'create' => array_keys(BaseRole::options(['super_admin'])),
-                'update' => array_keys(BaseRole::options(['super_admin'])),
-                'delete' => array_keys(BaseRole::options(['super_admin'])),
-                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
-                'restore' => array_keys(BaseRole::options(['super_admin'])),
-                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
-                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
-                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
-            ],
-
             GalleryResource::class => [
                 'view_any' => array_keys(BaseRole::options(['super_admin'])),
                 'create' => array_keys(BaseRole::options(['super_admin'])),
@@ -201,6 +189,18 @@ class RoleAccess
             ],
 
             RombelResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'create' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'update' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            NumberOfStudentResource::class => [
                 'view_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'create' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'update' => array_keys(BaseRole::options(['super_admin', 'contributor'])),

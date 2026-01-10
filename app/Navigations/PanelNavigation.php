@@ -14,7 +14,7 @@ use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
-use App\Filament\Clusters\SchoolManagement\Resources\SchoolStatsOverviews\SchoolStatsOverviewResource;
+use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\NumberOfStudentResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
 use App\Helpers\CanAccess;
@@ -51,7 +51,7 @@ class PanelNavigation
                         ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee'),
                         ...self::filterResourceNavigationItems(FacilityResource::class),
                         ...self::filterResourceNavigationItems(ExtracurricularResource::class),
-                        ...self::filterResourceNavigationItems(SchoolStatsOverviewResource::class)
+                        ...self::filterResourceNavigationItems(NumberOfStudentResource::class),
                     ]),
 
                 NavigationGroup::make()

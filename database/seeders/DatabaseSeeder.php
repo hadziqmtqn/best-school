@@ -10,7 +10,7 @@ use Database\Seeders\Reference\PersonnelDepartmentSeeder;
 use Database\Seeders\Reference\SchoolYearSeeder;
 use Database\Seeders\SchoolManagement\EmployeeSeeder;
 use Database\Seeders\SchoolManagement\InstitutionSeeder;
-use Database\Seeders\SchoolManagement\SchoolStatsOverviewSeeder;
+use Database\Seeders\SchoolManagement\NumberOfStudentSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,9 +37,10 @@ class DatabaseSeeder extends Seeder
             ClassroomRombelSeeder::class,
             // SCHOOL MANAGEMENT
             InstitutionSeeder::class,
-            SchoolStatsOverviewSeeder::class,
             // EMPLOYEE
-            EmployeeSeeder::class
+            EmployeeSeeder::class,
+            // ADDITIONAL
+            NumberOfStudentSeeder::class,
         ]);
     }
 }
