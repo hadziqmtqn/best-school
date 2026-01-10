@@ -65,6 +65,7 @@ class EmployeePositionsRelationManager extends RelationManager
                     ->label('Tambah Baru')
                     ->modalHeading('Tambah Jabatan')
                     ->modalWidth('md')
+                    ->visible(fn(): bool => $this->ownerRecord->is_active)
             ])
             ->recordActions([
                 ActionGroup::make([

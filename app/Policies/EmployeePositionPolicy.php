@@ -27,7 +27,9 @@ class EmployeePositionPolicy
 
     public function update(User $user, EmployeePosition $employeePosition): bool
     {
-        return $user->can('UpdateEmployeePosition', $employeePosition);
+        $employeePosition->loadMissing('user');
+
+        return $user->can('UpdateEmployeePosition') && $employeePosition->user?->is_active;
     }
 
     public function delete(User $user, EmployeePosition $employeePosition): bool

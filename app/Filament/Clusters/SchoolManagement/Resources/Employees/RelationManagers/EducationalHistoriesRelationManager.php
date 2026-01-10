@@ -71,6 +71,7 @@ class EducationalHistoriesRelationManager extends RelationManager
                     ->label('Tambah Baru')
                     ->modalHeading('Tambah riwayat pendidikan')
                     ->modalWidth('md')
+                    ->visible(fn(): bool => $this->ownerRecord->is_active)
             ])
             ->recordActions([
                 ActionGroup::make([

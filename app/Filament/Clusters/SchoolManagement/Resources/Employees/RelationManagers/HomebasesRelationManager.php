@@ -62,6 +62,7 @@ class HomebasesRelationManager extends RelationManager
                     ->label('Tambah Unit Kerja')
                     ->modalHeading('Tambah Unit Kerja')
                     ->modalWidth('md')
+                    ->visible(fn(): bool => $this->ownerRecord->is_active)
             ])
             ->recordActions([
                 ActionGroup::make([

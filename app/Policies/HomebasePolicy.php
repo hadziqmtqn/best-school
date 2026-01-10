@@ -27,7 +27,9 @@ class HomebasePolicy
 
     public function update(User $user, Homebase $homebase): bool
     {
-        return $user->can('UpdateHomebase', $homebase);
+        $homebase->loadMissing('user');
+
+        return $user->can('UpdateHomebase') && $homebase->user?->is_active;
     }
 
     public function delete(User $user, Homebase $homebase): bool
