@@ -14,12 +14,12 @@ class PostCategoryFactory extends Factory
 
     public function definition(): array
     {
-        $name = $this->faker->text(50);
+        $name = $this->faker->sentence();
 
         return [
             'slug' => Str::slug($name),
             'name' => $name,
-            'description' => $this->faker->text(),
+            'description' => $this->faker->realText(),
             'updated_at' => Carbon::now(),
             'created_at' => Carbon::now(),
 

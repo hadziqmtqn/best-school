@@ -13,6 +13,8 @@ use Database\Seeders\Reference\EducationalLevelSeeder;
 use Database\Seeders\Reference\PersonnelDepartmentSeeder;
 use Database\Seeders\Reference\SchoolYearSeeder;
 use Database\Seeders\SchoolManagement\EmployeeSeeder;
+use Database\Seeders\SchoolManagement\ExtracurricularSeeder;
+use Database\Seeders\SchoolManagement\FacilitySeeder;
 use Database\Seeders\SchoolManagement\InstitutionSeeder;
 use Database\Seeders\SchoolManagement\NumberOfStudentSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
@@ -48,7 +50,9 @@ class DatabaseSeeder extends Seeder
             AgendaSeeder::class,
             AnnouncementSeeder::class,
             PostCategorySeeder::class,
-            PostSeeder::class
+            PostSeeder::class,
+            FacilitySeeder::class,
+            ExtracurricularSeeder::class
         ]);
     }
 }

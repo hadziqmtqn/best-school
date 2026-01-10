@@ -6,6 +6,7 @@ use App\Enums\PostVisibility;
 use App\Enums\StatusData;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -16,15 +17,23 @@ class PostFactory extends Factory
 
     public function definition(): array
     {
-        $title = $this->faker->text(100);
+        $title = $this->faker->sentence();
         $visibility = $this->faker->randomElement(array_keys(PostVisibility::options()));
         $postCategory = PostCategory::pluck('id');
+
+        $content = '<p>'. $this->faker->realText(500) .'</p>';
+        $content .= '<p>'. $this->faker->realText() .'</p>';
+        $content .= '<p>'. $this->faker->realText(300) .'</p>';
+        $content .= '<p>'. $this->faker->realText() .'</p>';
+
+        $writer = User::whereHas('roles', fn($query) => $query->where('name', '!=', 'super_admin'))
+            ->pluck('id');
 
         return [
             'slug' => Str::slug($title),
             'title' => $title,
             'type' => 'post',
-            'content' => $this->faker->text(500),
+            'content' => $content,
             'post_category_id' => $postCategory->random(),
             'status' => $this->faker->randomElement(array_keys(StatusData::options())),
             'visibility' => $visibility,
@@ -34,7 +43,7 @@ class PostFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'user_id' => 1,
+            'user_id' => $writer->random(),
             'reviewed_by' => 1,
         ];
     }

@@ -75,7 +75,7 @@ class AdminPanelProvider extends PanelProvider
                     ])
             ])
             ->topNavigation()
-            ->breadcrumbs(false)
+            ->breadcrumbs()
             ->navigation(function (NavigationBuilder $navigationBuilder): NavigationBuilder {
                 return PanelNavigation::menus($navigationBuilder);
             })

@@ -52,6 +52,8 @@ class PostsTable
         return [
             TextColumn::make('title')
                 ->label('Judul')
+                ->limit(60)
+                ->tooltip(fn($state): string => $state)
                 ->searchable(),
 
             TextColumn::make('postCategory.name')
