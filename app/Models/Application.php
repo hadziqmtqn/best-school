@@ -17,13 +17,15 @@ class Application extends Model implements HasMedia
         'short_name',
         'description',
         'phone_number',
-        'email'
+        'email',
+        'social_media'
     ];
 
     protected function casts(): array
     {
         return [
             'slug' => 'string',
+            'social_media' => 'array'
         ];
     }
 
