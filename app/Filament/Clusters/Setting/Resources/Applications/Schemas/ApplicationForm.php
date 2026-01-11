@@ -2,6 +2,8 @@
 
 namespace App\Filament\Clusters\Setting\Resources\Applications\Schemas;
 
+use App\Enums\Theme;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -27,6 +29,12 @@ class ApplicationForm
                             ->label('Nama Singkatan')
                             ->required()
                             ->placeholder('Masukkan nama singkatan'),
+
+                        Select::make('theme')
+                            ->label('Tema')
+                            ->options(Theme::options())
+                            ->required()
+                            ->native(false),
 
                         Textarea::make('description')
                             ->label('Deskripsi')

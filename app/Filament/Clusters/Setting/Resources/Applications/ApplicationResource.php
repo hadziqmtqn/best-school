@@ -5,6 +5,7 @@ namespace App\Filament\Clusters\Setting\Resources\Applications;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\AppAssets;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\EditApplication;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\ListApplications;
+use App\Filament\Clusters\Setting\Resources\Applications\Pages\SocialMedias;
 use App\Filament\Clusters\Setting\Resources\Applications\Schemas\ApplicationForm;
 use App\Filament\Clusters\Setting\Resources\Applications\Tables\ApplicationsTable;
 use App\Filament\Clusters\Setting\SettingCluster;
@@ -27,7 +28,7 @@ class ApplicationResource extends Resource
 
     protected static ?string $label = 'Aplikasi';
 
-    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Start;
 
     public static function form(Schema $schema): Schema
     {
@@ -51,7 +52,8 @@ class ApplicationResource extends Resource
         return [
             'index' => ListApplications::route('/'),
             'edit' => EditApplication::route('/{record}'),
-            'assets' => AppAssets::route('/{record}/assets')
+            'assets' => AppAssets::route('/{record}/assets'),
+            'social-media' => SocialMedias::route('/{record}/social-media'),
         ];
     }
 
@@ -59,7 +61,8 @@ class ApplicationResource extends Resource
     {
         return $page->generateNavigationItems([
             EditApplication::class,
-            AppAssets::class
+            AppAssets::class,
+            SocialMedias::class
         ]);
     }
 }
