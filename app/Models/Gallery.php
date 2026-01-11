@@ -21,6 +21,8 @@ class Gallery extends Model implements HasMedia
         'description',
         'type',
         'youtube_id',
+        'action_url',
+        'action_name'
     ];
 
     protected function casts(): array

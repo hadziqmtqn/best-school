@@ -18,7 +18,7 @@
                                 <h1 class="vl-title text-anime-style-3">{{ $slider['title'] }}</h1>
                                 <p>{{ $slider['description'] }}</p>
                                 <div class="vl-hero-btn">
-                                    <a href="#" class="header-btn1">Join The Relief Effort <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                                    <a href="{{ $slider['action_url'] }}" class="header-btn1">{{ $slider['action_name'] }} <span><i class="fa-solid fa-arrow-right"></i></span></a>
                                 </div>
                             </div>
                         </div>

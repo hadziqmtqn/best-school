@@ -15,6 +15,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ApplicationResource extends Resource
 {
@@ -69,5 +70,11 @@ class ApplicationResource extends Resource
             SocialMedias::class,
             AppAssets::class,
         ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with('galleries');
     }
 }

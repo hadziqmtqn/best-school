@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->longText('description')->nullable();
             $table->enum('type', ['photo', 'video']);
             $table->string('youtube_id')->nullable();
+            $table->string('action_url')->nullable();
+            $table->string('action_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
