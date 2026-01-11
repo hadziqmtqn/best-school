@@ -30,6 +30,11 @@ class ApplicationResource extends Resource
 
     protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Start;
 
+    public static function getNavigationUrl(): string
+    {
+        return self::getUrl('edit', ['record' => Application::first()]);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ApplicationForm::configure($schema);
@@ -61,8 +66,8 @@ class ApplicationResource extends Resource
     {
         return $page->generateNavigationItems([
             EditApplication::class,
+            SocialMedias::class,
             AppAssets::class,
-            SocialMedias::class
         ]);
     }
 }

@@ -16,6 +16,7 @@ class Gallery extends Model implements HasMedia
     protected $fillable = [
         'slug',
         'institution_id',
+        'application_id',
         'name',
         'description',
         'type',

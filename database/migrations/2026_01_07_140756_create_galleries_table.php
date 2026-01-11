@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->uuid('slug');
             $table->unsignedBigInteger('institution_id')->nullable();
+            $table->unsignedBigInteger('application_id')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->enum('type', ['photo', 'video']);
@@ -19,6 +20,7 @@ return new class extends Migration {
             $table->softDeletes();
 
             $table->foreign('institution_id')->references('id')->on('institutions')->cascadeOnDelete();
+            $table->foreign('application_id')->references('id')->on('applications')->cascadeOnDelete();
         });
     }
 

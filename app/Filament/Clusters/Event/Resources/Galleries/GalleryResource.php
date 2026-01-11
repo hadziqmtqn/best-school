@@ -59,7 +59,8 @@ class GalleryResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with('institution');
+            ->with('institution')
+            ->whereNull('application_id');
     }
 
     public static function infolist(Schema $schema): Schema
