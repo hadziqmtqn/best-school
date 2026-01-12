@@ -20,6 +20,7 @@ use Database\Seeders\SchoolManagement\InstitutionSeeder;
 use Database\Seeders\SchoolManagement\NumberOfStudentSeeder;
 use Database\Seeders\SchoolManagement\PageSeeder;
 use Database\Seeders\Setting\ApplicationSeeder;
+use Database\Seeders\Setting\NavigationSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -56,7 +57,8 @@ class DatabaseSeeder extends Seeder
             FacilitySeeder::class,
             ExtracurricularSeeder::class,
             AchievementSeeder::class,
-            PageSeeder::class
+            PageSeeder::class,
+            NavigationSeeder::class
         ]);
     }
 }

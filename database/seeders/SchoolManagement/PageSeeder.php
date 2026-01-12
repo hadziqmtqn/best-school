@@ -34,8 +34,8 @@ class PageSeeder extends Seeder
                 'title' => $title,
                 'content' => $row['content'],
                 'type' => 'page',
-                'visibility' => 'published',
-                'status' => 'public',
+                'status' => 'published',
+                'visibility' => 'public',
                 'allow_comment' => false,
                 'user_id' => 1,
                 'reviewed_by' => 1
@@ -51,6 +51,7 @@ class PageSeeder extends Seeder
     {
         $subNavigation = new SubNavigation();
         $subNavigation->slug = Str::uuid()->toString();
+        $subNavigation->serial_number = SubNavigation::max('serial_number') + 1;
         $subNavigation->navigation_id = $navigationId;
         $subNavigation->category = $category;
         $subNavigation->name = $title;

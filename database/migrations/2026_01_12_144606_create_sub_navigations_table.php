@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('sub_navigations', function (Blueprint $table) {
             $table->id();
             $table->uuid('slug');
-            $table->integer('serial_number')->unique();
+            $table->integer('serial_number');
             $table->unsignedBigInteger('navigation_id');
             $table->string('category')->nullable();
             $table->string('name');
