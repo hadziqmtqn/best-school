@@ -11,19 +11,22 @@ class NavigationSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->create(2, NavigationCategory::SCHOOL_IDENTITY->value);
-        $this->create(3, NavigationCategory::PROGRAM->value);
-        $this->create(4, NavigationCategory::GALLERY->value);
-        $this->create(5, NavigationCategory::EVENT->value);
+        $this->create(NavigationCategory::SCHOOL_IDENTITY->value, NavigationCategory::SCHOOL_IDENTITY->getLabel());
+        $this->create(NavigationCategory::PROGRAM->value, NavigationCategory::PROGRAM->getLabel());
+        $this->create(NavigationCategory::GALLERY->value, NavigationCategory::GALLERY->getLabel());
+        $this->create(NavigationCategory::EVENT->value, NavigationCategory::EVENT->getLabel());
+        $this->create(null, 'SPMB Online', 'https://ppdb.bkn.my.id', true);
     }
 
-    private function create($serialNumber, $category): void
+    private function create($category, $name, $url = null, $openNewTab = false): void
     {
         Navigation::create([
             'slug' => Str::uuid()->toString(),
-            'serial_number' => $serialNumber,
-            'name' => NavigationCategory::tryFrom($category)?->getLabel(),
-            'category' => $category
+            'serial_number' => Navigation::max('serial_number') + 1,
+            'name' => $name,
+            'category' => $category,
+            'url' => $url,
+            'open_new_tab' => $openNewTab
         ]);
     }
 }
