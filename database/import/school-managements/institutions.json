@@ -1,10 +1,15 @@
 [
   {
     "educational_level": "SMA",
-    "name": "SMA Nusantara",
+    "name": "SMAN Nusantara",
     "npsn": "1111111111",
     "email": "smp@nusantara.edu",
     "phone_number": "(021) 12345678",
-    "province": "JAWA BARAT"
+    "province": "JAWA BARAT",
+    "status": "Negeri",
+    "school_establishment_decree": "1/22P/A.OP/1992",
+    "date_establishment_decree": "1998-09-10",
+    "operational_permit_decree": "1000.3/752A-DISDIK/DIKMEN",
+    "date_operational_permit_decree": "2023-10-11"
   }
 ]

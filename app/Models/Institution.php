@@ -29,6 +29,12 @@ class Institution extends Model implements HasMedia
         'village',
         'street',
         'postal_code',
+        'profile',
+        'status',
+        'school_establishment_decree',
+        'date_establishment_decree',
+        'operational_permit_decree',
+        'date_operational_permit_decree'
     ];
 
     public function getSlugOptions(): SlugOptions

@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="header-elements header-elements-1">
                         <div class="site-logo">
-                            <a href="/"><img src="{{ $application['logo'] }}" alt="logo" style="max-width: 50px"></a>
+                            <a href="/"><img src="{{ $application['logo'] }}" alt="logo" style="max-height: 50px"></a>
                         </div>
                         <div class="main-menu main-menu-5">
                             <ul>

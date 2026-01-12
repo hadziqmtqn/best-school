@@ -14,6 +14,7 @@ use App\Filament\Clusters\Reference\Resources\EducationalLevels\EducationalLevel
 use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepartmentResource;
 use App\Filament\Clusters\Reference\Resources\Rombels\RombelResource;
 use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
+use App\Filament\Clusters\SchoolManagement\Resources\Achievements\AchievementResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
@@ -205,6 +206,18 @@ class RoleAccess
                 'create' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'update' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'delete' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            AchievementResource::class => [
+                'view_any' => array_keys(BaseRole::options()),
+                'create' => array_keys(BaseRole::options()),
+                'update' => array_keys(BaseRole::options()),
+                'delete' => array_keys(BaseRole::options()),
                 'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),

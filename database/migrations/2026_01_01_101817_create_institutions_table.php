@@ -21,6 +21,12 @@ return new class extends Migration {
             $table->string('village')->nullable();
             $table->string('street')->nullable();
             $table->string('postal_code')->nullable();
+            $table->longText('profile')->nullable();
+            $table->enum('status', ['Negeri', 'Swasta']);
+            $table->string('school_establishment_decree')->nullable();
+            $table->string('date_establishment_decree')->nullable();
+            $table->string('operational_permit_decree')->nullable();
+            $table->string('date_operational_permit_decree')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
