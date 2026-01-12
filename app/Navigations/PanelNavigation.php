@@ -18,6 +18,7 @@ use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionRes
 use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\NumberOfStudentResource;
 use App\Filament\Clusters\Setting\Resources\Admins\AdminResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
+use App\Filament\Clusters\Setting\Resources\Navigations\NavigationResource;
 use App\Helpers\CanAccess;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Navigation\NavigationBuilder;
@@ -72,6 +73,7 @@ class PanelNavigation
                         ...self::filterResourceNavigationItems(ApplicationResource::class),
                         ...self::filterResourceNavigationItems(RoleResource::class),
                         ...self::filterCustomResourceNavigationItems(AdminResource::class, 'ViewAnyAdmin'),
+                        ...self::filterResourceNavigationItems(NavigationResource::class),
                         ...self::filterClusterNavigationItems(ReferenceCluster::class)
                     ]),
             ]);

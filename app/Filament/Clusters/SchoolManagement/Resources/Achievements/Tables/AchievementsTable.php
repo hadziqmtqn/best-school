@@ -2,6 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Achievements\Tables;
 
+use App\Models\Achievement;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -12,6 +13,7 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -50,6 +52,18 @@ class AchievementsTable
             ->deferFilters(false)
             ->defaultSort('year', 'DESC')
             ->filters([
+                SelectFilter::make('year')
+                    ->label('Tahun')
+                    ->options(function (): array {
+                        return Achievement::select('year')
+                            ->groupBy('year')
+                            ->orderByDesc('year')
+                            ->get()
+                            ->mapWithKeys(fn(Achievement $achievement) => [$achievement->year => $achievement->year])
+                            ->toArray();
+                    })
+                    ->native(false),
+
                 TrashedFilter::make()->native(false)
             ])
             ->recordActions([

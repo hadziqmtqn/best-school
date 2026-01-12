@@ -20,6 +20,7 @@ use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
 use App\Filament\Clusters\SchoolManagement\Resources\NumberOfStudents\NumberOfStudentResource;
 use App\Filament\Clusters\Setting\Resources\Applications\ApplicationResource;
+use App\Filament\Clusters\Setting\Resources\Navigations\NavigationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 
 class RoleAccess
@@ -221,6 +222,18 @@ class RoleAccess
                 'delete_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'restore' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
                 'restore_any' => array_keys(BaseRole::options(['super_admin', 'contributor'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            NavigationResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin'])),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
+                'delete_any' => array_keys(BaseRole::options(['super_admin'])),
+                'restore' => array_keys(BaseRole::options(['super_admin'])),
+                'restore_any' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
             ],
