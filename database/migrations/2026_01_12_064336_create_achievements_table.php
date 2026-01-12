@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('contestant');
             $table->longText('description')->nullable();
+            $table->string('organizer')->nullable();
             $table->year('year');
             $table->string('achievement_level')->nullable();
             $table->timestamps();

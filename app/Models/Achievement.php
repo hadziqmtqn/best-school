@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Achievement extends Model
+class Achievement extends Model implements HasMedia
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'slug',
@@ -18,6 +20,7 @@ class Achievement extends Model
         'name',
         'contestant',
         'description',
+        'organizer',
         'year',
         'achievement_level',
     ];

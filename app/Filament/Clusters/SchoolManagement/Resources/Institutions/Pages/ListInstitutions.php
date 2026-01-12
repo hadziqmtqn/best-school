@@ -16,7 +16,6 @@ class ListInstitutions extends ListRecords
     {
         return [
             CreateAction::make()
-                ->modalWidth('lg')
         ];
     }
 }

@@ -49,8 +49,7 @@ class InstitutionsTable
             ])
             ->recordActions([
                 ActionGroup::make([
-                    EditAction::make()
-                        ->modalWidth('lg'),
+                    EditAction::make(),
 
                     DeleteAction::make(),
 

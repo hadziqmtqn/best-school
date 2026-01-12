@@ -18,6 +18,7 @@ class AchievementFactory extends Factory
             'institution_id' => 1,
             'name' => $this->faker->sentence(),
             'contestant' => $this->faker->name(),
+            'organizer' => $this->faker->company(),
             'description' => $this->faker->realText(),
             'year' => $this->faker->year(),
             'achievement_level' => $this->faker->randomElement(['Nasional', 'Provinsi', 'Kabupaten', 'Internasional']),
