@@ -10,10 +10,14 @@ class ListNavigations extends ListRecords
 {
     protected static string $resource = NavigationResource::class;
 
+    protected ?string $subheading = 'Navigasi pada halaman beranda';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->slideOver()
+                ->modalWidth('lg')
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -36,10 +37,23 @@ class Navigation extends Model
         static::creating(function (Navigation $navigation) {
             $navigation->slug = Str::uuid()->toString();
         });
+
+        static::updated(function (Navigation $navigation) {
+            if ($navigation->category) {
+                SubNavigation::query()
+                    ->where('navigation_id', $navigation->id)
+                    ->delete();
+            }
+        });
     }
 
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function subNavigations(): HasMany
+    {
+        return $this->hasMany(SubNavigation::class, 'navigation_id');
     }
 }

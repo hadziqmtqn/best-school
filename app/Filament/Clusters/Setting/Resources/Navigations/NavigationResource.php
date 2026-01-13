@@ -54,4 +54,11 @@ class NavigationResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with('subNavigations')
+            ->withCount('subNavigations');
+    }
 }
