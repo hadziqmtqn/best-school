@@ -5,7 +5,7 @@ namespace Database\Seeders\SchoolManagement;
 use App\Enums\NavigationCategory;
 use App\Models\Navigation;
 use App\Models\Post;
-use App\Models\SubNavigation;
+use App\Repositories\Settings\SubNavigationRepository;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -41,21 +41,9 @@ class PageSeeder extends Seeder
                 'reviewed_by' => 1
             ]);
 
-            $this->subNavigation($navigation->id, $title, null, $post->id);
+            SubNavigationRepository::subNavigation($navigation->id, $title, null, $post->id);
         }
 
-        $this->subNavigation($navigation->id, 'Pendidik', NavigationCategory::TEACHER->value);
-    }
-
-    private function subNavigation($navigationId, $title, $category = null, $pageId = null): void
-    {
-        $subNavigation = new SubNavigation();
-        $subNavigation->slug = Str::uuid()->toString();
-        $subNavigation->serial_number = SubNavigation::max('serial_number') + 1;
-        $subNavigation->navigation_id = $navigationId;
-        $subNavigation->category = $category;
-        $subNavigation->name = $title;
-        $subNavigation->post_id = $pageId;
-        $subNavigation->save();
+        SubNavigationRepository::subNavigation($navigation->id, 'Pendidik', NavigationCategory::TEACHER->value);
     }
 }

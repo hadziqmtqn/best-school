@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 class SubNavigation extends Model
@@ -33,5 +34,10 @@ class SubNavigation extends Model
         static::creating(function (SubNavigation $subNavigation) {
             $subNavigation->slug = Str::uuid()->toString();
         });
+    }
+
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
     }
 }

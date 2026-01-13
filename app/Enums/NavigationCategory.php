@@ -11,9 +11,12 @@ enum NavigationCategory: string implements HasLabel
     use EnumOption;
 
     case SCHOOL_IDENTITY = 'school_identity';
-    case PROGRAM = 'program';
-    case GALLERY = 'galery';
-    case EVENT = 'event';
+    case EXTRACURICULAR = 'extracuricular';
+    case ACHIEVEMeENT = 'achievement';
+    case PHOTO = 'photo';
+    case VIDEO = 'video';
+    case AGENDA = 'agenda';
+    case ANNOUNCEMENT = 'announcement';
     case TEACHER = 'teacher';
 
     public function getLabel(): string|Htmlable|null
@@ -21,9 +24,12 @@ enum NavigationCategory: string implements HasLabel
         // TODO: Implement getLabel() method.
         return match ($this) {
             self::SCHOOL_IDENTITY => 'Identitas Sekolah',
-            self::PROGRAM => 'Program Sekolah',
-            self::GALLERY => 'Galeri',
-            self::EVENT => 'Acara',
+            self::EXTRACURICULAR => 'Ekstrakurikuler',
+            self::ACHIEVEMeENT => 'Prestasi',
+            self::PHOTO => 'Foto',
+            self::VIDEO => 'Video',
+            self::AGENDA => 'Agenda',
+            self::ANNOUNCEMENT => 'Pengumuman',
             self::TEACHER => 'Pendidik',
         };
     }
