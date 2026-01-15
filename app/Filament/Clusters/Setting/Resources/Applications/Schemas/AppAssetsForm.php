@@ -64,6 +64,24 @@ class AppAssetsForm
 
                                 return $data;
                             })
+                    ]),
+
+                Section::make('Breadcrumb')
+                    ->aside()
+                    ->columnSpanFull()
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('breadcrumb')
+                            ->label('Breadcrumb')
+                            ->disk('s3_public')
+                            ->collection('breadcrumb')
+                            ->visibility('public')
+                            ->image()
+                            ->openable()
+                            ->deletable()
+                            ->maxSize(600)
+                            ->required()
+                            ->helperText('Maksimal 600Kb dan disarankan 1440x502')
+                            ->columnSpanFull()
                     ])
             ]);
     }

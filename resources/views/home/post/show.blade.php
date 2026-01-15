@@ -1,5 +1,5 @@
 <x-home.master :title="$title">
 
-    <x-homepage :title="$title"></x-homepage>
+    <x-home.bread-crumb :title="$title"/>
 
 </x-home.master>

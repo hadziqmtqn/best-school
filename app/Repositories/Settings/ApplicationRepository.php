@@ -18,7 +18,8 @@ class ApplicationRepository
             'logo' => $application?->logo,
             'phoneNumber' => $application?->phone_number,
             'email' => $application?->email,
-            'headerImg' => null
+            'headerImg' => null,
+            'breadcrumbImg' => $application?->breadcrumb
         ];
     }
 }

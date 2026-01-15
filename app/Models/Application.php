@@ -49,4 +49,11 @@ class Application extends Model implements HasMedia
             get: fn() => $this->hasMedia('logo') ? $this->getFirstMediaUrl('logo') : 'https://s3.bkn.my.id/master/school.webp',
         );
     }
+
+    protected function breadcrumb(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->hasMedia('breadcrumb') ? $this->getFirstMediaUrl('breadcrumb') : 'https://raw.githubusercontent.com/Bekenweb/best-assets/refs/heads/main/breadcrumb/breadcrumb.png',
+        );
+    }
 }
