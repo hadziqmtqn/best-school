@@ -78,11 +78,27 @@ class AppAssetsForm
                             ->image()
                             ->openable()
                             ->deletable()
-                            ->maxSize(600)
-                            ->required()
-                            ->helperText('Maksimal 600Kb dan disarankan 1440x502')
+                            ->maxSize(300)
+                            ->helperText('Maksimal 300Kb dan disarankan 1440x502')
                             ->columnSpanFull()
-                    ])
+                    ]),
+
+                Section::make('CTA')
+                    ->aside()
+                    ->columnSpanFull()
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('cta')
+                            ->label('CTA')
+                            ->disk('s3_public')
+                            ->collection('cta')
+                            ->visibility('public')
+                            ->image()
+                            ->openable()
+                            ->deletable()
+                            ->maxSize(300)
+                            ->helperText('Maksimal 300Kb dan disarankan 1170x344')
+                            ->columnSpanFull()
+                    ]),
             ]);
     }
 }

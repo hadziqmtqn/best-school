@@ -40,7 +40,7 @@
 {{ $slot }}
 
 <!--===== CTA STARTS =======-->
-{{--<x-home.cta></x-home.cta>--}}
+<x-home.cta></x-home.cta>
 <!--===== CTA ENDS =======-->
 
 <!--===== FOOTER AREA STARTS =======-->

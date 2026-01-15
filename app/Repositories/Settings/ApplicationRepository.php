@@ -19,7 +19,8 @@ class ApplicationRepository
             'phoneNumber' => $application?->phone_number,
             'email' => $application?->email,
             'headerImg' => null,
-            'breadcrumbImg' => $application?->breadcrumb
+            'breadcrumbImg' => $application?->breadcrumb,
+            'ctaImg' => $application?->cta
         ];
     }
 }

@@ -56,4 +56,11 @@ class Application extends Model implements HasMedia
             get: fn() => $this->hasMedia('breadcrumb') ? $this->getFirstMediaUrl('breadcrumb') : 'https://raw.githubusercontent.com/Bekenweb/best-assets/refs/heads/main/breadcrumb/breadcrumb.png',
         );
     }
+
+    protected function cta(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->hasMedia('cta') ? $this->getFirstMediaUrl('cta') : 'https://raw.githubusercontent.com/Bekenweb/best-assets/refs/heads/main/shapes/cta.png',
+        );
+    }
 }
