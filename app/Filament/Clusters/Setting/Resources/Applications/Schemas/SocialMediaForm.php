@@ -23,13 +23,23 @@ class SocialMediaForm
     {
         $schemas = [];
 
-        foreach (['facebook', 'instagram', 'threads', 'x'] as $item) {
-            $schemas[] = TextInput::make('social_media.' . $item)
-                ->label(ucfirst($item))
+        foreach (self::socialMedias() as $key => $item) {
+            $schemas[] = TextInput::make('social_media.' . $key)
+                ->label($item)
                 ->url()
-                ->placeholder('Masukkan URL Sosial Media');
+                ->placeholder('Masukkan URL profil ' . $item);
         }
-        
+
         return $schemas;
+    }
+
+    private static function socialMedias(): array
+    {
+        return [
+            'facebook' => 'Facebook',
+            'instagram' => 'Instagram',
+            'threads' => 'Threads',
+            'x' => 'X (Twitter)'
+        ];
     }
 }

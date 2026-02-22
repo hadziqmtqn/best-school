@@ -13,6 +13,7 @@ class AppAssetsForm
         return $schema
             ->components([
                 Section::make('Breadcrumb')
+                    ->description('Gambar latar belakang pada detail berita & media di halaman beranda')
                     ->aside()
                     ->columnSpanFull()
                     ->schema([
@@ -25,24 +26,7 @@ class AppAssetsForm
                             ->openable()
                             ->deletable()
                             ->maxSize(300)
-                            ->helperText('Maksimal 300Kb dan disarankan 1440x502')
-                            ->columnSpanFull()
-                    ]),
-
-                Section::make('CTA')
-                    ->aside()
-                    ->columnSpanFull()
-                    ->schema([
-                        SpatieMediaLibraryFileUpload::make('cta')
-                            ->label('CTA')
-                            ->disk('s3_public')
-                            ->collection('cta')
-                            ->visibility('public')
-                            ->image()
-                            ->openable()
-                            ->deletable()
-                            ->maxSize(300)
-                            ->helperText('Maksimal 300Kb dan disarankan 1170x344')
+                            ->helperText('Maksimal 300Kb dan disarankan 1440x502 px')
                             ->columnSpanFull()
                     ]),
             ]);
