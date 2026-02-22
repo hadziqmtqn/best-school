@@ -241,8 +241,8 @@
     <section id="informasi" class="py-5 bg-white">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h6 class="text-uppercase text-muted fw-bold ls-1 mb-2" style="letter-spacing: 2px;">Services</h6>
-                <h2 class="section-title mb-0" style="margin-bottom: 0;">Layanan & Informasi PPDB</h2>
+                <h6 class="text-uppercase text-muted fw-bold ls-2 mb-2">Services</h6>
+                <h2 class="section-title mb-0">Layanan & Informasi PPDB</h2>
                 <p class="text-muted mt-3">Langkah mudah memulai pendaftaran siswa baru.</p>
             </div>
             <div class="row g-4">
@@ -287,11 +287,11 @@
     </section>
 
     <!-- Latest News -->
-    <section id="pengumuman" class="py-5" style="background-color: var(--bg-light);">
+    <section id="pengumuman bg-main-light" class="py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h6 class="text-uppercase text-muted fw-bold ls-1 mb-2" style="letter-spacing: 2px;">Berita</h6>
-                <h2 class="section-title mb-0" style="margin-bottom: 0;">Berita & Info Sekolah</h2>
+                <h6 class="text-uppercase text-muted fw-bold ls-2 mb-2">Berita</h6>
+                <h2 class="section-title mb-0">Berita & Info Sekolah</h2>
                 <p class="text-muted mt-3">Dapatkan informasi terbaru seputar kegiatan dan prestasi sekolah.</p>
             </div>
 
@@ -348,8 +348,8 @@
     <section id="bantuan" class="py-5 bg-white">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h6 class="text-uppercase text-muted fw-bold ls-1 mb-2" style="letter-spacing: 2px;">Help Center</h6>
-                <h2 class="section-title mb-0" style="margin-bottom: 0;">Pertanyaan Sering Diajukan (FAQ)</h2>
+                <h6 class="text-uppercase text-muted fw-bold ls-2 mb-2">Help Center</h6>
+                <h2 class="section-title mb-0">Pertanyaan Sering Diajukan (FAQ)</h2>
                 <p class="text-muted mt-3">Temukan jawaban dari pertanyaan umum seputar pendaftaran.</p>
             </div>
             <div class="row justify-content-center">
@@ -357,7 +357,7 @@
                     <div class="accordion" id="faqAccordion">
                         <div class="accordion-item border-0 mb-3 shadow-sm rounded">
                             <h2 class="accordion-header">
-                                <button class="accordion-button fw-bold rounded" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" style="color: var(--primary-color);">
+                                <button class="accordion-button fw-bold rounded text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
                                     Apa saja syarat pendaftaran siswa baru?
                                 </button>
                             </h2>
@@ -369,7 +369,7 @@
                         </div>
                         <div class="accordion-item border-0 mb-3 shadow-sm rounded">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed fw-bold rounded" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="color: var(--primary-color);">
+                                <button class="accordion-button collapsed fw-bold rounded text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
                                     Bagaimana sistem zonasi bekerja?
                                 </button>
                             </h2>
@@ -383,7 +383,7 @@
                         </div>
                         <div class="accordion-item border-0 mb-3 shadow-sm rounded">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed fw-bold rounded" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="color: var(--primary-color);">
+                                <button class="accordion-button collapsed fw-bold rounded text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
                                     Apakah ada biaya pendaftaran?
                                 </button>
                             </h2>
@@ -422,7 +422,7 @@
                 <div class="modal-body px-4">
                     <img src="https://picsum.photos/seed/class/800/400" class="img-fluid rounded-3 mb-3 w-100"
                          style="max-height: 300px; object-fit: cover;" alt="Detail Image">
-                    <h3 class="fw-bold mb-2" style="color: var(--primary-color);">Pembukaan Gelombang 1 PPDB Tahun
+                    <h3 class="fw-bold mb-2 text-primary">Pembukaan Gelombang 1 PPDB Tahun
                         Ajaran 2024/2025</h3>
                     <div class="d-flex align-items-center text-muted small mb-3">
                         <span class="me-3"><i class="bi bi-calendar"></i> 15 Mei 2024</span>
