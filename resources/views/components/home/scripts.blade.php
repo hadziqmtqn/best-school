@@ -1,21 +1,5 @@
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/jquery-3.7.1.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/bootstrap.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/fontawesome.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/aos.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/counter.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/sidebar.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/magnific-popup.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/mobilemenu.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/owlcarousel.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/swiper-bundle.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/nice-select.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/jquery.counterup.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/waypoints.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/slick-slider.js' }}"></script>
-{{--<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/circle-progress.js' }}"></script>--}}
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/gsap.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/ScrollTrigger.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/Splitetext.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/lightbox.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/plugins/circle-progress.min.js' }}"></script>
-<script src="{{ 'https://hadziqmtqn.github.io/helpy-theme/assets/js/main.js' }}"></script>
+<!-- Bootstrap 5 JS Bundle -->
+<script src="{{ 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' }}"></script>
+
+<!-- Common JavaScript -->
+<script src="{{ 'https://hadziqmtqn.github.io/new-bs-theme/js/main.js' }}"></script>
