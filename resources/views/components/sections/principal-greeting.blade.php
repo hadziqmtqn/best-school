@@ -1,0 +1,66 @@
+<section class="sambutan-v2-section py-5">
+    <div class="container py-lg-5">
+        <div class="row align-items-center g-5">
+            <!-- Left: Artistic Image Frame -->
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="principal-v2-frame">
+                    <div class="frame-decoration-1"></div>
+                    <div class="frame-decoration-2"></div>
+                    <div class="image-inner-wrapper">
+                        <img src="https://picsum.photos/seed/principal-v2/600/750" alt="Kepala Sekolah"
+                             class="img-fluid">
+                        <div class="principal-label-v2">
+                            <span class="badge bg-primary rounded-pill px-3 py-2 mb-2">Pilar Pendidikan</span>
+                            <h5 class="fw-bold text-white mb-0">Ahmad Hidayat Ali, M.Pd</h5>
+                            <p class="text-white-50 small mb-0">Kepala Sekolah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle: Message Area -->
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="sambutan-v2-content position-relative">
+                    <div class="quote-icon-v2">
+                        <i class="bi bi-quote"></i>
+                    </div>
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-2">Pesan Kepemimpinan</h6>
+                    <h2 class="display-6 fw-bold mb-4">Membentuk Karakter & <span class="text-primary">Cetak Juara</span></h2>
+
+                    <div class="message-v2-text pe-lg-5">
+                        <p class="lead-serif-v2 mb-4">
+                            "Selamat datang di lingkungan belajar yang dinamis. Kami tidak hanya mentransfer pengetahuan, tetapi juga menumbuhkan integritas dan kreativitas di setiap langkah siswa kami."
+                        </p>
+                        <p class="text-muted mb-5">
+                            Di SMA Unggulan Nusantara, setiap potensi dikembangkan melalui pendekatan personal yang inovatif. Kami percaya bahwa kolaborasi antara sekolah, siswa, dan orang tua adalah kunci keberhasilan pendidikan masa depan yang gemilang.
+                        </p>
+                    </div>
+
+                    <!-- Stats Integration (Horizontal Strip for V2) -->
+                    <div class="stats-v2-row d-flex flex-wrap gap-4 mt-5">
+                        <div class="stat-v2-box">
+                            <div class="stat-v2-val text-primary">75+</div>
+                            <div class="stat-v2-lbl">Pendidik Berlisensi</div>
+                        </div>
+                        <div class="stat-v2-box separator-v2"></div>
+                        <div class="stat-v2-box">
+                            <div class="stat-v2-val text-primary">1.2k</div>
+                            <div class="stat-v2-lbl">Siswa Berprestasi</div>
+                        </div>
+                        <div class="stat-v2-box separator-v2"></div>
+                        <div class="stat-v2-box">
+                            <div class="stat-v2-val text-primary">45</div>
+                            <div class="stat-v2-lbl">Rombel Modern</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 shadow-primary-sm">
+                            Selami Visi Kami <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="{{ $application['logo'] }}" alt="Logo Sekolah" class="navbar-logo">
             {{ $application['name'] }}
         </a>
@@ -44,7 +44,9 @@
                 @endforeach
             </ul>
             <div class="btn-group-nav d-flex align-items-center">
-                <a href="#" class="btn btn-primary">Daftar Sekarang</a>
+                <a href="{{ auth()->check() ? route('filament.admin.pages.dashboard') : route('filament.admin.auth.login') }}" class="btn btn-primary">
+                    {{ auth()->check() ? 'Dasbor' : 'Masuk' }}
+                </a>
             </div>
         </div>
     </div>

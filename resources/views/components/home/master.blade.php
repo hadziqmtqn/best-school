@@ -9,13 +9,9 @@
     <x-home.head/>
     <style>
         :root {
-            /* Default: Hijau */
             --primary-color: #0d47a1;
-            --primary-color-rgb: 27, 125, 74;
-            /* RGB values for rgba() usage */
             --primary-light: #1976d2;
             --accent-color: #ffca28;
-            /* Emas/Kuning */
             --text-dark: #333333;
             --text-light: #666666;
             --bg-light: #f8f9fa;
@@ -30,7 +26,7 @@
 
 {{ $slot }}
 
-<x-home.cta/>
+<x-sections.cta/>
 
 <!-- Footer -->
 <x-home.footer/>

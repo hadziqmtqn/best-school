@@ -19,7 +19,6 @@ class Application extends Model implements HasMedia
         'description',
         'phone_number',
         'email',
-        'theme',
         'social_media'
     ];
 

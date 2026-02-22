@@ -17,7 +17,6 @@ class ApplicationSeeder extends Seeder
         $application->email = 'superadmin@bkn.my.id';
         $application->phone_number = '6285157088717';
         $application->description = 'Portal informasi terpadu yang menyajikan profil, prestasi, dan agenda kegiatan sebagai wajah digital sekolah yang profesional, transparan, dan mudah diakses publik';
-        $application->theme = 'theme_2';
         $application->social_media = [
             'facebook' => 'https://www.facebook.com/khadziq.muttaqin.17',
             'instagram' => 'https://www.instagram.com/hadziq____',

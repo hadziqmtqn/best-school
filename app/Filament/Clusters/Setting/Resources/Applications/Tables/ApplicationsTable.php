@@ -2,7 +2,6 @@
 
 namespace App\Filament\Clusters\Setting\Resources\Applications\Tables;
 
-use App\Enums\Theme;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -19,9 +18,6 @@ class ApplicationsTable
 
                 TextColumn::make('short_name')
                     ->label('Nama Singkatan'),
-
-                TextColumn::make('theme')
-                    ->formatStateUsing(fn($state): string => Theme::tryFrom($state)?->getLabel() ?? $state)
             ])
             ->filters([
                 //

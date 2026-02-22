@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->json('social_media')->nullable();
-            $table->string('theme')->default('theme_1');
             $table->timestamps();
         });
     }

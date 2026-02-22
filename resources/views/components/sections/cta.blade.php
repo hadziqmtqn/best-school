@@ -1,4 +1,4 @@
-<section class="py-5 text-white text-center" style="background-color: var(--primary-color);">
+<section class="py-5 text-white text-center bg-primary">
     <div class="container">
         <h2 class="fw-bold mb-3">Siap Menjadi Bagian dari Kami?</h2>
         <p class="lead mb-4 opacity-75">Daftarkan diri Anda sekarang dan capai prestasi akademik terbaik.</p>
