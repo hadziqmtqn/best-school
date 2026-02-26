@@ -113,7 +113,7 @@ class NavigationForm
         return [
             Select::make('post_id')
                 ->label('Laman')
-                ->options(NavigationPageRepository::options())
+                ->options(fn(NavigationPageRepository $repository): array => $repository->options())
                 ->native(false)
                 ->reactive()
                 ->afterStateUpdated(function ($state, callable $set): void {

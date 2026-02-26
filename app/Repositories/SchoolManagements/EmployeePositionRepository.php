@@ -6,7 +6,7 @@ use App\Models\EmployeePosition;
 
 class EmployeePositionRepository
 {
-    public static function options($schoolYearId, $institutionId, $personnelDepartmentId): array
+    public function options($schoolYearId, $institutionId, $personnelDepartmentId): array
     {
         return EmployeePosition::query()
             ->with([

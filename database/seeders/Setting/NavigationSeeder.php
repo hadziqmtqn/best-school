@@ -10,6 +10,16 @@ use Illuminate\Support\Str;
 
 class NavigationSeeder extends Seeder
 {
+    protected SubNavigationRepository $subNavigationRepository;
+
+    /**
+     * @param SubNavigationRepository $subNavigationRepository
+     */
+    public function __construct(SubNavigationRepository $subNavigationRepository)
+    {
+        $this->subNavigationRepository = $subNavigationRepository;
+    }
+
     public function run(): void
     {
         $this->create(
@@ -74,7 +84,7 @@ class NavigationSeeder extends Seeder
 
         if ($hasSubNavigation && count($subNavCategories) > 0) {
             foreach ($subNavCategories as $subNavCategory) {
-                SubNavigationRepository::subNavigation(
+                $this->subNavigationRepository->subNavigation(
                     navigationId: $navigation->id,
                     title: NavigationCategory::tryFrom($subNavCategory)->getLabel(),
                     category: $subNavCategory

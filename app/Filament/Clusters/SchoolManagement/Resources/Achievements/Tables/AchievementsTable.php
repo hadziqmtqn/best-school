@@ -2,7 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Achievements\Tables;
 
-use App\Repositories\References\SelectAchievementLevel;
+use App\Repositories\References\SelectAchievementLevelRepository;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -54,17 +54,13 @@ class AchievementsTable
             ->filters([
                 SelectFilter::make('achievement_level')
                     ->label('Level')
-                    ->options(function (): array {
-                        return SelectAchievementLevel::option();
-                    })
+                    ->options(fn(SelectAchievementLevelRepository $repository): array => $repository->option())
                     ->preload()
                     ->native(false),
 
                 SelectFilter::make('year')
                     ->label('Tahun')
-                    ->options(function (): array {
-                        return SelectAchievementLevel::yearOption();
-                    })
+                    ->options(fn(SelectAchievementLevelRepository $repository): array => $repository->yearOption())
                     ->preload()
                     ->native(false),
 

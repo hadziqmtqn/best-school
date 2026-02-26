@@ -6,9 +6,10 @@ use App\Models\EducationalLevel;
 
 class EducationalLevelRepository
 {
-    public static function options(): array
+    public function options(): array
     {
-        return EducationalLevel::get()
+        return EducationalLevel::query()
+            ->get()
             ->mapWithKeys(function (EducationalLevel $educationalLevel) {
                 return [$educationalLevel->id => [
                     'fullName' => $educationalLevel->full_name,

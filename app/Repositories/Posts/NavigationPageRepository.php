@@ -8,7 +8,7 @@ use App\Models\Post;
 
 class NavigationPageRepository
 {
-    public static function options(): array
+    public function options(): array
     {
         return Post::query()
             ->where([

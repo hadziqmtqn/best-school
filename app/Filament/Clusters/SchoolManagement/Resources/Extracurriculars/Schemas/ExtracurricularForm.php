@@ -24,7 +24,7 @@ class ExtracurricularForm
                             ->schema([
                                 Select::make('institution_id')
                                     ->label('Lembaga')
-                                    ->options(InstitutionRepository::options())
+                                    ->options(fn(InstitutionRepository $repository): array => $repository->options())
                                     ->required()
                                     ->native(false),
 

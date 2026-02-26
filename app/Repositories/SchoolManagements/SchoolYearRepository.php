@@ -6,7 +6,7 @@ use App\Models\SchoolYear;
 
 class SchoolYearRepository
 {
-    public static function options(): array
+    public function options(): array
     {
         return SchoolYear::query()
             ->get()

@@ -6,7 +6,7 @@ use App\Models\PersonnelDepartment;
 
 class PersonnelDepartmentRepository
 {
-    public static function options(): array
+    public function options(): array
     {
         return PersonnelDepartment::query()
             ->get()

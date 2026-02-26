@@ -19,7 +19,6 @@ use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Traits\HasRoles;
 
 class AdminForm
 {
@@ -124,7 +123,7 @@ class AdminForm
                                     ->schema([
                                         Select::make('institution_id')
                                             ->label('Lembaga')
-                                            ->options(InstitutionRepository::options())
+                                            ->options(fn(InstitutionRepository $repository): array => $repository->options())
                                             ->required()
                                             ->native(false)
                                             ->dehydrated(false)
@@ -135,7 +134,7 @@ class AdminForm
 
                                         Select::make('personnel_department_id')
                                             ->label('Jabatan')
-                                            ->options(PersonnelDepartmentRepository::options())
+                                            ->options(fn(PersonnelDepartmentRepository $repository): array => $repository->options())
                                             ->required()
                                             ->native(false)
                                             ->dehydrated(false)
@@ -146,20 +145,20 @@ class AdminForm
 
                                         Select::make('user_id')
                                             ->label('Pegawai')
-                                            ->options(function (Get $get): array {
+                                            ->options(function (Get $get, EmployeeRepository $repository): array {
                                                 $institutionId = $get('institution_id');
                                                 $personnelDepartmentId = $get('personnel_department_id');
 
                                                 if (!$institutionId && !$personnelDepartmentId) return [];
 
-                                                return EmployeeRepository::options(institutionId: $institutionId, personnelDepartmentId: $personnelDepartmentId);
+                                                return $repository->options(institutionId: $institutionId, personnelDepartmentId: $personnelDepartmentId);
                                             })
                                             ->required()
                                             ->native(false)
                                             ->reactive()
                                     ])
                             ]),
-                        
+
                         self::security()
                     ])
             ]);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeRepository
 {
-    public static function options($institutionId, $personnelDepartmentId): array
+    public function options($institutionId, $personnelDepartmentId): array
     {
         return Employee::query()
             ->with('user')

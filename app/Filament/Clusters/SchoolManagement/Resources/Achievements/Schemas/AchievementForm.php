@@ -2,7 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Achievements\Schemas;
 
-use App\Repositories\References\SelectAchievementLevel;
+use App\Repositories\References\SelectAchievementLevelRepository;
 use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -22,7 +22,7 @@ class AchievementForm
                     ->schema([
                         Select::make('institution_id')
                             ->label('Lembaga')
-                            ->options(InstitutionRepository::options())
+                            ->options(fn(InstitutionRepository $repository): array => $repository->options())
                             ->required()
                             ->native(false),
 
@@ -48,7 +48,7 @@ class AchievementForm
 
                         Select::make('achievement_level')
                             ->label('Tingkat')
-                            ->options(SelectAchievementLevel::option())
+                            ->options(fn(SelectAchievementLevelRepository $repository): array => $repository->option())
                             ->required()
                             ->native(false),
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class SubNavigationRepository
 {
-    public static function subNavigation($navigationId, $title, $category = null, $pageId = null): void
+    public function subNavigation($navigationId, $title, $category = null, $pageId = null): void
     {
         $subNavigation = new SubNavigation();
         $subNavigation->slug = Str::uuid()->toString();

@@ -54,7 +54,7 @@ class GalleriesTable
             ->filters([
                 SelectFilter::make('institution_id')
                     ->label('Lembaga')
-                    ->options(InstitutionRepository::options())
+                    ->options(fn(InstitutionRepository $repository): array => $repository->options())
                     ->native(false),
 
                 TrashedFilter::make()->native(false)

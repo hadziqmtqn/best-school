@@ -23,7 +23,7 @@ class NumberOfStudentForm
                     ->schema([
                         Select::make('institution_id')
                             ->label('Lembaga')
-                            ->options(InstitutionRepository::options())
+                            ->options(fn(InstitutionRepository $repository): array => $repository->options())
                             ->required()
                             ->dehydrated(false)
                             ->native(false)
@@ -34,7 +34,7 @@ class NumberOfStudentForm
 
                         Select::make('school_year_id')
                             ->label('Tahun Ajaran')
-                            ->options(SchoolYearRepository::options())
+                            ->options(fn(SchoolYearRepository $repository): array => $repository->options())
                             ->required()
                             ->dehydrated(false)
                             ->native(false)
@@ -45,7 +45,7 @@ class NumberOfStudentForm
 
                         Select::make('personnel_department_id')
                             ->label('Jabatan')
-                            ->options(PersonnelDepartmentRepository::options())
+                            ->options(fn(PersonnelDepartmentRepository $repository): array => $repository->options())
                             ->required()
                             ->dehydrated(false)
                             ->native(false)
@@ -56,14 +56,14 @@ class NumberOfStudentForm
 
                         Select::make('employee_position_id')
                             ->label('Pegawai')
-                            ->options(function (Get $get): array {
+                            ->options(function (Get $get, EmployeePositionRepository $repository): array {
                                 $schoolYearId = $get('school_year_id');
                                 $institutionId = $get('institution_id');
                                 $personnelDepartmentId = $get('personnel_department_id');
 
                                 if (!$schoolYearId && !$institutionId && !$personnelDepartmentId) return [];
 
-                                return collect(EmployeePositionRepository::options(
+                                return collect($repository->options(
                                     schoolYearId: $schoolYearId,
                                     institutionId: $institutionId,
                                     personnelDepartmentId: $personnelDepartmentId

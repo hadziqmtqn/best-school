@@ -33,7 +33,11 @@ class InstitutionForm
 
                                 Select::make('educational_level_id')
                                     ->label('Jenjang Pendidikan')
-                                    ->options(collect(EducationalLevelRepository::options())->map(fn($item) => $item['fullName'])->toArray())
+                                    ->options(function (EducationalLevelRepository $repository): array {
+                                        return collect($repository->options())
+                                            ->map(fn($item) => $item['fullName'])
+                                            ->toArray();
+                                    })
                                     ->required()
                                     ->native(false)
                                     ->exists(EducationalLevel::class, 'id'),

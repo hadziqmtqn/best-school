@@ -24,7 +24,7 @@ class AgendaForm
                     ->schema([
                         Select::make('institution_id')
                             ->label('Lembaga')
-                            ->options(InstitutionRepository::options())
+                            ->options(fn(InstitutionRepository $repository): array => $repository->options())
                             ->native(false),
 
                         TextInput::make('name')

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InstitutionRepository
 {
-    public static function options(): array
+    public function options(): array
     {
         $user = auth()->user()->loadMissing('homebaseActive');
 

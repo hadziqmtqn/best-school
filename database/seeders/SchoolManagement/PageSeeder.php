@@ -13,6 +13,16 @@ use Illuminate\Support\Str;
 
 class PageSeeder extends Seeder
 {
+    protected SubNavigationRepository $subNavigationRepository;
+
+    /**
+     * @param SubNavigationRepository $subNavigationRepository
+     */
+    public function __construct(SubNavigationRepository $subNavigationRepository)
+    {
+        $this->subNavigationRepository = $subNavigationRepository;
+    }
+
     /**
      * @throws FileNotFoundException
      */
@@ -41,9 +51,9 @@ class PageSeeder extends Seeder
                 'reviewed_by' => 1
             ]);
 
-            SubNavigationRepository::subNavigation($navigation->id, $title, null, $post->id);
+            $this->subNavigationRepository->subNavigation($navigation->id, $title, null, $post->id);
         }
 
-        SubNavigationRepository::subNavigation($navigation->id, 'Pendidik', NavigationCategory::TEACHER->value);
+        $this->subNavigationRepository->subNavigation($navigation->id, 'Pendidik', NavigationCategory::TEACHER->value);
     }
 }
