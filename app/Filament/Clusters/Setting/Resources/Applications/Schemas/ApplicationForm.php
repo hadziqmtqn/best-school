@@ -4,7 +4,6 @@ namespace App\Filament\Clusters\Setting\Resources\Applications\Schemas;
 
 use App\Utilities\ThemeColor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -30,29 +29,17 @@ class ApplicationForm
                             ->required()
                             ->placeholder('Masukkan nama singkatan'),
 
+                        Textarea::make('motto')
+                            ->label('Motto')
+                            ->placeholder('Masukkan motto singkat')
+                            ->autosize()
+                            ->columnSpanFull(),
+
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->placeholder('Masukkan deskripsi aplikasi')
                             ->autosize()
                             ->columnSpanFull(),
-
-                        SpatieMediaLibraryFileUpload::make('logo')
-                            ->label('Logo')
-                            ->disk('s3_public')
-                            ->collection('logo')
-                            ->visibility('public')
-                            ->acceptedFileTypes(['image/*'])
-                            ->maxSize(300)
-                            ->openable(),
-
-                        SpatieMediaLibraryFileUpload::make('favicon')
-                            ->label('Favicon')
-                            ->disk('s3_public')
-                            ->collection('favicon')
-                            ->visibility('public')
-                            ->acceptedFileTypes(['image/*'])
-                            ->maxSize(30)
-                            ->openable(),
 
                         Select::make('theme_color')
                             ->label('Warna Tema')

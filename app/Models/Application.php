@@ -16,18 +16,21 @@ class Application extends Model implements HasMedia
         'slug',
         'name',
         'short_name',
+        'motto',
         'description',
         'phone_number',
         'email',
         'social_media',
-        'theme_color'
+        'theme_color',
+        'more_info'
     ];
 
     protected function casts(): array
     {
         return [
             'slug' => 'string',
-            'social_media' => 'array'
+            'social_media' => 'array',
+            'more_info' => 'array'
         ];
     }
 
@@ -57,10 +60,10 @@ class Application extends Model implements HasMedia
         );
     }
 
-    protected function cta(): Attribute
+    protected function bannerImage(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->hasMedia('cta') ? $this->getFirstMediaUrl('cta') : 'https://raw.githubusercontent.com/Bekenweb/best-assets/refs/heads/main/shapes/cta.png',
+            get: fn() => $this->hasMedia('banner') ? $this->getFirstMediaUrl('banner') : 'https://hadziqmtqn.github.io/new-bs-theme/assets/hero-1.png',
         );
     }
 }

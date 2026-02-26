@@ -5,10 +5,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="hero-title">Wujudkan Masa Depan Gemilang Bersama Kami</h1>
-                    <p class="lead text-muted mb-4">
-                        Raih prestasi akademik terbaik dan kembangkan potensi diri melalui sistem pembelajaran modern yang inovatif dan berkualitas.
-                    </p>
+                    <h1 class="hero-title">{{ $application['motto'] }}</h1>
+                    <p class="lead text-muted mb-4">{{ $application['description'] }}</p>
                     <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center">
                         <a href="/#informasi" class="btn btn-primary btn-lg px-4 py-3 rounded-4 shadow-sm">
                             <i class="bi bi-pencil-square me-2"></i> Lihat Program
@@ -18,7 +16,7 @@
                 <div class="col-lg-6 mt-5 mt-lg-0">
                     <!-- Hero Image with Floating Badges -->
                     <div class="hero-image-wrapper position-relative">
-                        <img src="{{ 'https://hadziqmtqn.github.io/new-bs-theme/assets/hero-1.png' }}" alt="Siswa Berprestasi" class="hero-img img-fluid rounded-4">
+                        <img src="{{ $application['bannerImg'] }}" alt="Siswa Berprestasi" class="hero-img img-fluid rounded-4">
 
                         <!-- Floating Badge 1: Total Siswa -->
                         <div class="floating-badge badge-1">

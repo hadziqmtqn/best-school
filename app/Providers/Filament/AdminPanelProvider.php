@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('2.5rem')
-            ->favicon(fn() => view('filament.logo'))
+            ->favicon(asset('assets/bekenweb-logo.png'))
             ->homeUrl('/')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

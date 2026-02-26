@@ -20,7 +20,7 @@ class AchievementFactory extends Factory
             'contestant' => $this->faker->name(),
             'organizer' => $this->faker->company(),
             'description' => $this->faker->realText(),
-            'year' => $this->faker->year(),
+            'year' => $this->faker->randomElement(range(2017, now()->year)),
             'achievement_level' => $this->faker->randomElement(['Nasional', 'Provinsi', 'Kabupaten', 'Internasional']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -13,15 +13,15 @@ class ApplicationRepository
 
         return [
             'name' => $application?->name,
-            'title' => null,
             'shortName' => $application?->short_name,
+            'motto' => $application?->motto,
             'description' => $application?->description,
             'logo' => $application?->logo,
             'phoneNumber' => $application?->phone_number,
             'email' => $application?->email,
             'headerImg' => null,
             'breadcrumbImg' => $application?->breadcrumb,
-            'ctaImg' => $application?->cta,
+            'bannerImg' => $application?->banner_image,
             'themeColors' => ThemeColor::getCombination($application?->theme_color)
         ];
     }

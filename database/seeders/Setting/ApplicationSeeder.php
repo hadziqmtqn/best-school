@@ -16,12 +16,17 @@ class ApplicationSeeder extends Seeder
         $application->short_name = 'BS';
         $application->email = 'superadmin@bkn.my.id';
         $application->phone_number = '6285157088717';
+        $application->motto = 'Hari ini berjuang, besok raih kemenangan!';
         $application->description = 'Portal informasi terpadu yang menyajikan profil, prestasi, dan agenda kegiatan sebagai wajah digital sekolah yang profesional, transparan, dan mudah diakses publik';
         $application->social_media = [
             'facebook' => 'https://www.facebook.com/khadziq.muttaqin.17',
             'instagram' => 'https://www.instagram.com/hadziq____',
             'threads' => 'https://www.threads.com/@hadziq____',
             'x' => null,
+        ];
+        $application->more_info = [
+            'accreditation_score' => 'A',
+            'accreditation_name' => 'Terakreditasi Unggul'
         ];
         $application->save();
     }
