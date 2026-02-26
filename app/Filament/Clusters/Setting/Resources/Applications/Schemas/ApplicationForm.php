@@ -2,6 +2,8 @@
 
 namespace App\Filament\Clusters\Setting\Resources\Applications\Schemas;
 
+use App\Utilities\ThemeColor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -51,6 +53,14 @@ class ApplicationForm
                             ->acceptedFileTypes(['image/*'])
                             ->maxSize(30)
                             ->openable(),
+
+                        Select::make('theme_color')
+                            ->label('Warna Tema')
+                            ->helperText('Warna tema halaman beranda')
+                            ->options(collect(ThemeColor::colors())
+                                ->mapWithKeys(fn($theme) => [$theme['color'] => $theme['name']]))
+                            ->required()
+                            ->native(false),
                     ])
             ]);
     }

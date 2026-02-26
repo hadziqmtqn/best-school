@@ -3,6 +3,7 @@
 namespace App\Repositories\Settings;
 
 use App\Models\Application;
+use App\Utilities\ThemeColor;
 
 class ApplicationRepository
 {
@@ -20,7 +21,8 @@ class ApplicationRepository
             'email' => $application?->email,
             'headerImg' => null,
             'breadcrumbImg' => $application?->breadcrumb,
-            'ctaImg' => $application?->cta
+            'ctaImg' => $application?->cta,
+            'themeColors' => ThemeColor::getCombination($application?->theme_color)
         ];
     }
 }

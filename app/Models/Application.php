@@ -19,7 +19,8 @@ class Application extends Model implements HasMedia
         'description',
         'phone_number',
         'email',
-        'social_media'
+        'social_media',
+        'theme_color'
     ];
 
     protected function casts(): array

@@ -9,12 +9,9 @@
     <x-home.head/>
     <style>
         :root {
-            --primary-color: #0d47a1;
-            --primary-light: #1976d2;
-            --accent-color: #ffca28;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --bg-light: #f8f9fa;
+            @foreach($application['themeColors'] as $variable => $value)
+                {{ $variable }}: {{ $value }};
+            @endforeach
         }
     </style>
 </head>
