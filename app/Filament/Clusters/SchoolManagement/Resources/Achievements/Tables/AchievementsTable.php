@@ -2,7 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Achievements\Tables;
 
-use App\Models\Achievement;
+use App\Repositories\References\SelectAchievementLevel;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -52,16 +52,20 @@ class AchievementsTable
             ->deferFilters(false)
             ->defaultSort('year', 'DESC')
             ->filters([
+                SelectFilter::make('achievement_level')
+                    ->label('Level')
+                    ->options(function (): array {
+                        return SelectAchievementLevel::option();
+                    })
+                    ->preload()
+                    ->native(false),
+
                 SelectFilter::make('year')
                     ->label('Tahun')
                     ->options(function (): array {
-                        return Achievement::select('year')
-                            ->groupBy('year')
-                            ->orderByDesc('year')
-                            ->get()
-                            ->mapWithKeys(fn(Achievement $achievement) => [$achievement->year => $achievement->year])
-                            ->toArray();
+                        return SelectAchievementLevel::yearOption();
                     })
+                    ->preload()
                     ->native(false),
 
                 TrashedFilter::make()->native(false)

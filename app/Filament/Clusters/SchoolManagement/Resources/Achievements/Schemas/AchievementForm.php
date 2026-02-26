@@ -2,7 +2,7 @@
 
 namespace App\Filament\Clusters\SchoolManagement\Resources\Achievements\Schemas;
 
-use App\Repositories\References\AchievementLevel;
+use App\Repositories\References\SelectAchievementLevel;
 use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -48,7 +48,7 @@ class AchievementForm
 
                         Select::make('achievement_level')
                             ->label('Tingkat')
-                            ->options(AchievementLevel::option())
+                            ->options(SelectAchievementLevel::option())
                             ->required()
                             ->native(false),
 

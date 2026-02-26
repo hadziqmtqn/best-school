@@ -19,41 +19,45 @@
                         <img src="{{ $application['bannerImg'] }}" alt="Siswa Berprestasi" class="hero-img img-fluid rounded-4">
 
                         <!-- Floating Badge 1: Total Siswa -->
-                        <div class="floating-badge badge-1">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="badge-icon">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div>
-                                    <div class="badge-title">1000+ Siswa Aktif</div>
-                                    <div class="badge-subtitle">Terdaftar Tahun Ini</div>
+                        @if($application['totalStudents'] > 0)
+                            <div class="floating-badge badge-1">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="badge-icon">
+                                        <i class="bi bi-people-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="badge-title">{{ $application['totalStudents'] }} Siswa Aktif</div>
+                                        <div class="badge-subtitle">Terdaftar Tahun Ini</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         <!-- Floating Badge 2: Prestasi Nasional -->
-                        <div class="floating-badge badge-2">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="badge-icon">
-                                    <i class="bi bi-trophy-fill"></i>
-                                </div>
-                                <div>
-                                    <div class="badge-title">Prestasi Nasional</div>
-                                    <div class="badge-subtitle">23+ Penghargaan</div>
+                        @if($application['totalAchievement'] > 0)
+                            <div class="floating-badge badge-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="badge-icon">
+                                        <i class="bi bi-trophy-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="badge-title">Prestasi Nasional</div>
+                                        <div class="badge-subtitle">{{ $application['totalAchievement'] }} Penghargaan</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         <!-- Floating Badge 3: Akreditasi A -->
-                        @if($application['accreditation_score'] && $application['accreditation_name'])
+                        @if($application['accreditationScore'] && $application['accreditationName'])
                             <div class="floating-badge badge-3">
                                 <div class="d-flex align-items-center gap-2">
                                     <div class="badge-icon">
                                         <i class="bi bi-shield-fill-check"></i>
                                     </div>
                                     <div>
-                                        <div class="badge-title">Akreditasi {{ $application['accreditation_score'] }}</div>
-                                        <div class="badge-subtitle">{{ $application['accreditation_name'] }}</div>
+                                        <div class="badge-title">Akreditasi {{ $application['accreditationScore'] }}</div>
+                                        <div class="badge-subtitle">{{ $application['accreditationName'] }}</div>
                                     </div>
                                 </div>
                             </div>
