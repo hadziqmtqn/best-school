@@ -15,6 +15,8 @@ class AppAssets extends EditRecord
 
     protected static ?string $navigationLabel = 'Asset';
 
+    protected static ?string $title = 'Asset';
+
     protected static string | BackedEnum | null $navigationIcon = Phosphor::Image;
 
     public function form(Schema $schema): Schema

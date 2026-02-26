@@ -15,6 +15,8 @@ class SocialMedias extends EditRecord
 
     protected static ?string $navigationLabel = 'Sosial Media';
 
+    protected static ?string $title = 'Sosial Media';
+
     protected static string | BackedEnum | null $navigationIcon = Phosphor::FacebookLogo;
 
     public function form(Schema $schema): Schema

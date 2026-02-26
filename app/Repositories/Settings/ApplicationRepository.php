@@ -19,10 +19,11 @@ class ApplicationRepository
             'logo' => $application?->logo,
             'phoneNumber' => $application?->phone_number,
             'email' => $application?->email,
-            'headerImg' => null,
             'breadcrumbImg' => $application?->breadcrumb,
             'bannerImg' => $application?->banner_image,
-            'themeColors' => ThemeColor::getCombination($application?->theme_color)
+            'themeColors' => ThemeColor::getCombination($application?->theme_color),
+            'accreditation_score' => $application?->more_info['accreditation_score'] ?? null,
+            'accreditation_name' => $application?->more_info['accreditation_name'] ?? null,
         ];
     }
 }

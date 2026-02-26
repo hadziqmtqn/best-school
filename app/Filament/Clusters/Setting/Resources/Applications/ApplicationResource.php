@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Setting\Resources\Applications;
 
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\AppAssets;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\EditApplication;
+use App\Filament\Clusters\Setting\Resources\Applications\Pages\EditMoreInfo;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\ListApplications;
 use App\Filament\Clusters\Setting\Resources\Applications\Pages\SocialMedias;
 use App\Filament\Clusters\Setting\Resources\Applications\Schemas\ApplicationForm;
@@ -60,6 +61,7 @@ class ApplicationResource extends Resource
             'edit' => EditApplication::route('/{record}'),
             'assets' => AppAssets::route('/{record}/assets'),
             'social-media' => SocialMedias::route('/{record}/social-media'),
+            'more-info' => EditMoreInfo::route('/{record}/more-info'),
         ];
     }
 
@@ -69,6 +71,7 @@ class ApplicationResource extends Resource
             EditApplication::class,
             SocialMedias::class,
             AppAssets::class,
+            EditMoreInfo::class
         ]);
     }
 

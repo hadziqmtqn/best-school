@@ -45,17 +45,19 @@
                         </div>
 
                         <!-- Floating Badge 3: Akreditasi A -->
-                        <div class="floating-badge badge-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="badge-icon">
-                                    <i class="bi bi-shield-fill-check"></i>
-                                </div>
-                                <div>
-                                    <div class="badge-title">Akreditasi A</div>
-                                    <div class="badge-subtitle">Terakreditasi Unggul</div>
+                        @if($application['accreditation_score'] && $application['accreditation_name'])
+                            <div class="floating-badge badge-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="badge-icon">
+                                        <i class="bi bi-shield-fill-check"></i>
+                                    </div>
+                                    <div>
+                                        <div class="badge-title">Akreditasi {{ $application['accreditation_score'] }}</div>
+                                        <div class="badge-subtitle">{{ $application['accreditation_name'] }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
