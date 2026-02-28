@@ -46,7 +46,10 @@ class ApplicationRepository
             'totalAchievement' => $this->achievementRepository->total(),
             'totalStudents' => $this->numberOfStudentRepository->totalStudents(),
             'totalClassrooms' => $this->numberOfStudentRepository->totalClassrooms(),
-            'totalEmployees' => $this->employeeRepository->totalActiveEmployees()
+            'totalEmployees' => $this->employeeRepository->totalActiveEmployees(),
+            'ctaTitle' => $application?->more_info['cta_title'] ?? null,
+            'ctaDescription' => $application?->more_info['cta_description'] ?? null,
+            'ctaUrl' => $application?->more_info['cta_url'] ?? '#',
         ];
     }
 }

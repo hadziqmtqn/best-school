@@ -2,11 +2,8 @@
     <div class="container">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6" data-aos="fade-up">
-                <h5 class="fw-bold mb-4 text-warning">PPDB ONLINE</h5>
-                <p class="small opacity-75 mb-4">
-                    Portal resmi Penerimaan Peserta Didik Baru SMA Unggulan Nusantara. Membentuk generasi yang
-                    cerdas, berkarakter, dan berprestasi di tingkat nasional dan internasional.
-                </p>
+                <h5 class="fw-bold mb-4 text-warning">{{ $application['name'] }}</h5>
+                <p class="small opacity-75 mb-4">{{ $application['description'] }}</p>
                 <div class="social-icons">
                     <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
@@ -29,25 +26,24 @@
                     <div class="footer-contact-icon me-3">
                         <i class="bi bi-geo-alt-fill text-warning"></i>
                     </div>
-                    <span class="small opacity-75">Jl. Pendidikan No. 123, Kebayoran Baru, Jakarta Selatan, DKI
-                            Jakarta 12160</span>
+                    <span class="small opacity-75">Jl. Pendidikan No. 123, Kebayoran Baru, Jakarta Selatan, DKI Jakarta 12160</span>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <div class="footer-contact-icon me-3">
                         <i class="bi bi-telephone-fill text-warning"></i>
                     </div>
-                    <span class="small opacity-75">(021) 789-1011</span>
+                    <span class="small opacity-75">{{ $application['phoneNumber'] }}</span>
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="footer-contact-icon me-3">
                         <i class="bi bi-envelope-fill text-warning"></i>
                     </div>
-                    <span class="small opacity-75">info@ppdb-smanusantara.sch.id</span>
+                    <span class="small opacity-75">{{ $application['email'] }}</span>
                 </div>
             </div>
         </div>
         <div class="text-center mt-4 pt-3 border-top border-secondary">
-            <p class="small mb-0">&copy; 2024 SMA Unggulan Nusantara. All Rights Reserved.</p>
+            <p class="small mb-0">&copy; {{ date('Y') }} {{ $application['name'] }}. All Rights Reserved.</p>
         </div>
     </div>
 </footer>

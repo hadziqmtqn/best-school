@@ -26,7 +26,10 @@ class ApplicationSeeder extends Seeder
         ];
         $application->more_info = [
             'accreditation_score' => 'A',
-            'accreditation_name' => 'Terakreditasi Unggul'
+            'accreditation_name' => 'Terakreditasi Unggul',
+            'cta_title' => 'Siap Menjadi Bagian dari Kami?',
+            'cta_description' => 'Daftarkan diri Anda sekarang dan capai prestasi akademik terbaik.',
+            'cta_url' => 'https://ppdb.bkn.my.id'
         ];
         $application->save();
     }
