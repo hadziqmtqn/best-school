@@ -4,6 +4,7 @@ namespace App\Repositories\Settings;
 
 use App\Models\Application;
 use App\Repositories\SchoolManagements\AchievementRepository;
+use App\Repositories\SchoolManagements\EmployeeRepository;
 use App\Repositories\SchoolManagements\NumberOfStudentRepository;
 use App\Utilities\ThemeColor;
 
@@ -11,15 +12,18 @@ class ApplicationRepository
 {
     protected AchievementRepository $achievementRepository;
     protected NumberOfStudentRepository $numberOfStudentRepository;
+    protected EmployeeRepository $employeeRepository;
 
     /**
      * @param AchievementRepository $achievementRepository
      * @param NumberOfStudentRepository $numberOfStudentRepository
+     * @param EmployeeRepository $employeeRepository
      */
-    public function __construct(AchievementRepository $achievementRepository, NumberOfStudentRepository $numberOfStudentRepository)
+    public function __construct(AchievementRepository $achievementRepository, NumberOfStudentRepository $numberOfStudentRepository, EmployeeRepository $employeeRepository)
     {
         $this->achievementRepository = $achievementRepository;
         $this->numberOfStudentRepository = $numberOfStudentRepository;
+        $this->employeeRepository = $employeeRepository;
     }
 
     public function index(): array
@@ -40,7 +44,9 @@ class ApplicationRepository
             'accreditationScore' => $application?->more_info['accreditation_score'] ?? null,
             'accreditationName' => $application?->more_info['accreditation_name'] ?? null,
             'totalAchievement' => $this->achievementRepository->total(),
-            'totalStudents' => $this->numberOfStudentRepository->total()
+            'totalStudents' => $this->numberOfStudentRepository->totalStudents(),
+            'totalClassrooms' => $this->numberOfStudentRepository->totalClassrooms(),
+            'totalEmployees' => $this->employeeRepository->totalActiveEmployees()
         ];
     }
 }

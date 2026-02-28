@@ -7,7 +7,7 @@
                     <div class="frame-decoration-1"></div>
                     <div class="frame-decoration-2"></div>
                     <div class="image-inner-wrapper">
-                        <img src="https://picsum.photos/seed/principal-v2/600/750" alt="Kepala Sekolah" class="img-fluid">
+                        <img src="{{ $leadershipGreeting['avatar'] }}" alt="Kepala Sekolah" class="img-fluid">
                         <div class="principal-label-v2">
                             <span class="badge bg-primary rounded-pill px-3 py-2 mb-2">Pilar Pendidikan</span>
                             <h5 class="fw-bold text-white mb-0">{{ $leadershipGreeting['headMaster'] ?? '-' }}</h5>
@@ -27,28 +27,30 @@
                     <h2 class="display-6 fw-bold mb-4">Membentuk Karakter & <span class="text-primary">Cetak Juara</span></h2>
 
                     <div class="message-v2-text pe-lg-5">
-                        <p class="lead-serif-v2 mb-4">
-                            "Selamat datang di lingkungan belajar yang dinamis. Kami tidak hanya mentransfer pengetahuan, tetapi juga menumbuhkan integritas dan kreativitas di setiap langkah siswa kami."
-                        </p>
-                        <p class="text-muted mb-5">
-                            Di SMA Unggulan Nusantara, setiap potensi dikembangkan melalui pendekatan personal yang inovatif. Kami percaya bahwa kolaborasi antara sekolah, siswa, dan orang tua adalah kunci keberhasilan pendidikan masa depan yang gemilang.
-                        </p>
+                        <p class="lead-serif-v2 mb-4">"{{ $leadershipGreeting['firstParagraph'] }}"</p>
+                        <p class="text-muted mb-5">{{ $leadershipGreeting['limitedParagraph'] }}</p>
                     </div>
 
                     <!-- Stats Integration (Horizontal Strip for V2) -->
                     <div class="stats-v2-row d-flex flex-wrap gap-4 mt-5">
                         <div class="stat-v2-box">
-                            <div class="stat-v2-val text-primary">75+</div>
+                            @php
+                                $totalEmployees = $application['totalEmployees'];
+                            @endphp
+                            <div class="stat-v2-val text-primary">{{ $totalEmployees > 20 ? '20+' : $totalEmployees }}</div>
                             <div class="stat-v2-lbl">Pendidik Berlisensi</div>
                         </div>
                         <div class="stat-v2-box separator-v2"></div>
                         <div class="stat-v2-box">
-                            <div class="stat-v2-val text-primary">1.2k</div>
+                            @php
+                                $totalStudents = $application['totalStudents'];
+                            @endphp
+                            <div class="stat-v2-val text-primary">{{ $totalStudents > 200 ? '200+' : $totalStudents }}</div>
                             <div class="stat-v2-lbl">Siswa Berprestasi</div>
                         </div>
                         <div class="stat-v2-box separator-v2"></div>
                         <div class="stat-v2-box">
-                            <div class="stat-v2-val text-primary">45</div>
+                            <div class="stat-v2-val text-primary">{{ $application['totalClassrooms'] }}</div>
                             <div class="stat-v2-lbl">Rombel Modern</div>
                         </div>
                     </div>

@@ -9,29 +9,28 @@ class LeadershipGreetingRepository
 {
     public function index(): array
     {
-        $leadershipGreeting = LeadershipGreeting::with([
-            'user:id,name',
-            'user.employeePositionActive.personnelDepartment'
-        ])
+        $leadershipGreeting = LeadershipGreeting::with('user.employeePositionActive.personnelDepartment')
             ->first();
-        $message = $leadershipGreeting?->message ?? '';
 
-        $limit = 100;
+        // 1. Bersihkan tag HTML lainnya tapi biarkan <p> untuk penanda
+        // Atau langsung pecah berdasarkan pola </p><p>
+        $paragraphs = preg_split('/<\/p>\s*<p>/', ($leadershipGreeting?->message ?? ''));
 
-        // Ambil bagian awal dengan limit
-        $firstParagraph = Str::limit($message, $limit);
+        // 2. Ambil Paragraf Pertama & bersihkan sisa tag-nya
+        $firstParagraph = isset($paragraphs[0]) ? strip_tags($paragraphs[0]) : '';
 
-        // Ambil sisa teksnya
-        // Jika pesan lebih panjang dari limit, tambahkan "..." di awal sisa teks
-        $remainingText = mb_substr($message, $limit);
-        $limitedParagraph = $remainingText ? '...' . $remainingText : '';
+        // 3. Ambil Sisanya, gabungkan kembali, dan bersihkan tag-nya
+        array_shift($paragraphs); // Hapus paragraf pertama dari array
+        $remainingText = implode(' ', $paragraphs);
+        $limitedParagraph = $remainingText ? '...' . strip_tags($remainingText) : '';
 
         return [
             'headMaster' => $leadershipGreeting?->user?->name,
             'personnelDepartment' => $leadershipGreeting?->user?->employeePositionActive?->personnelDepartment?->name,
+            'avatar' => $leadershipGreeting?->user?->hasMedia('avatar') ? $leadershipGreeting->user->getFirstTemporaryUrl(now()->addDay(), 'avatar') : asset('assets/headmaster.png'),
             'title' => $leadershipGreeting?->title,
             'firstParagraph' => $firstParagraph,
-            'limitedParagraph' => Str::limit($limitedParagraph)
+            'limitedParagraph' => Str::limit($limitedParagraph, 200)
         ];
     }
 }
