@@ -7,12 +7,11 @@
                     <div class="frame-decoration-1"></div>
                     <div class="frame-decoration-2"></div>
                     <div class="image-inner-wrapper">
-                        <img src="https://picsum.photos/seed/principal-v2/600/750" alt="Kepala Sekolah"
-                             class="img-fluid">
+                        <img src="https://picsum.photos/seed/principal-v2/600/750" alt="Kepala Sekolah" class="img-fluid">
                         <div class="principal-label-v2">
                             <span class="badge bg-primary rounded-pill px-3 py-2 mb-2">Pilar Pendidikan</span>
-                            <h5 class="fw-bold text-white mb-0">Ahmad Hidayat Ali, M.Pd</h5>
-                            <p class="text-white-50 small mb-0">Kepala Sekolah</p>
+                            <h5 class="fw-bold text-white mb-0">{{ $leadershipGreeting['headMaster'] ?? '-' }}</h5>
+                            <p class="text-white-50 small mb-0">{{ $leadershipGreeting['personnelDepartment'] ?? '-' }}</p>
                         </div>
                     </div>
                 </div>

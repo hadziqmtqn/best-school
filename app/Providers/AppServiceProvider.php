@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Posts\LeadershipGreetingRepository;
 use App\Repositories\Posts\NavigationPageRepository;
 use App\Repositories\References\EducationalLevelRepository;
 use App\Repositories\References\PersonnelDepartmentRepository;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // POSTS
+        $this->app->bind(LeadershipGreetingRepository::class, LeadershipGreetingRepository::class);
         $this->app->bind(NavigationPageRepository::class, NavigationPageRepository::class);
 
         // REFERENCES

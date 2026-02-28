@@ -30,23 +30,23 @@ class EmployeeSeeder extends Seeder
         $specialDepartments = [6, 8];
 
         // Kepala sekolah
-        $this->seedUsers(1, $schoolYear, $institutionId, 1);
+        $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 1);
 
         // Wakil kepala sekolah
-        $this->seedUsers(1, $schoolYear, $institutionId, 2);
+        $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 2);
 
         // Guru & staff umum
-        $this->seedUsers(20, $schoolYear, $institutionId, fn () =>
+        $this->seedUsers(count: 20, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: fn () =>
         $generalDepartments[array_rand($generalDepartments)]
         );
 
         // Staff khusus
         $this->seedUsers(
-            4,
-            $schoolYear,
-            $institutionId,
-            fn () => $specialDepartments[array_rand($specialDepartments)],
-            fn (User $user) => $user->assignRole(random_int(2, 3))
+            count: 4,
+            schoolYear: $schoolYear,
+            institutionId: (int) $institutionId,
+            departmentResolver: fn () => $specialDepartments[array_rand($specialDepartments)],
+            afterUserCreated: fn (User $user) => $user->assignRole(random_int(2, 3))
         );
     }
 
@@ -64,6 +64,24 @@ class EmployeeSeeder extends Seeder
                 ? $departmentResolver()
                 : $departmentResolver;
 
+            $faker = Factory::create('id_ID');
+
+            $name = $faker->name('male');
+            $username = Str::slug($name);
+
+            if (is_numeric($departmentResolver) && $departmentResolver == 1) {
+                $user->update([
+                    'username' => $username,
+                    'name' => $name,
+                    'email' => $username . '@bkn.my.id',
+                ]);
+
+                Employee::where('user_id', $user->id)
+                    ->update([
+                        'gender' => 'male'
+                    ]);
+            }
+
             $this->createEmployeePosition(
                 $user->id,
                 $schoolYear?->id,
@@ -75,7 +93,7 @@ class EmployeeSeeder extends Seeder
 
     private function createEmployee($userId): void
     {
-        $faker = Factory::create();
+        $faker = Factory::create('id_ID');
 
         // TODO Create Employee
         Employee::create([
