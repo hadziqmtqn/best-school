@@ -3,9 +3,9 @@
 @endphp
 <x-home.master :title="$title">
 
-    <x-home.bread-crumb :title="$title"/>
+    <x-home.page-breadcrumb :title="$title"/>
 
-    <section class="vl-about5 sp2">
+    {{--<section class="vl-about5 sp2">
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-6">
@@ -26,5 +26,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 </x-home.master>

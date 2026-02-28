@@ -8,10 +8,10 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function show(Post $post): View
+    public function page(Post $post): View
     {
         $title = $post->title;
 
-        return \view('home.post.show', compact('title', 'post'));
+        return \view('home.post.page', compact('title', 'post'));
     }
 }

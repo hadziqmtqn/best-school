@@ -13,15 +13,13 @@
                     <li class="nav-item {{ count($navigation['subNavigations']) > 0 ? 'dropdown' : '' }}">
                         <a href="{{ $navigation['url'] ?? '#' }}"
                            target="{{ $navigation['openInNewTab'] ? '_blank' : '_self' }}"
-                           class="nav-link {{ count($navigation['subNavigations']) > 0 ? 'dropdown-toggle' : '' }}"
+                           class="nav-link {{ count($navigation['subNavigations']) > 0 ? 'dropdown-toggle' : '' }} {{ $navigation['activeUrl'] ? 'active' : '' }}"
 
                            @if(count($navigation['subNavigations']) > 0)
                                id="navbarDropdown{{ str_replace(' ', '', $navigation['name']) }}"
                                role="button" data-bs-toggle="dropdown" aria-expanded="false"
                            @endif
                         >
-
-                            {{--<i class="bi bi-{{ $navigation['icon'] }}"></i>--}}
                             {{ $navigation['name'] }}
                         </a>
 
@@ -31,9 +29,8 @@
                                     <li>
                                         <a href="{{ $subNavigation['pageUrl'] ?: ($subNavigation['url'] ?? '#') }}"
                                            target="{{ $subNavigation['openInNewTab'] }}"
-                                           class="dropdown-item"
+                                           class="dropdown-item {{ $subNavigation['activeUrl'] ? 'active' : '' }}"
                                         >
-                                            <i class="bi bi-images me-2"></i>
                                             {{ $subNavigation['name'] }}
                                         </a>
                                     </li>

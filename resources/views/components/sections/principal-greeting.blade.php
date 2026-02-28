@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="mt-5">
-                        <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 shadow-primary-sm">
+                        <a href="{{ route('leadership-greeting.index') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-primary-sm">
                             Selami Visi Kami <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>

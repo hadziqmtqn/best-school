@@ -9,12 +9,17 @@ class LeadershipGreetingRepository
 {
     public function index(): array
     {
-        $leadershipGreeting = LeadershipGreeting::with('user.employeePositionActive.personnelDepartment')
+        $leadershipGreeting = LeadershipGreeting::with([
+            'user.employeePositionActive.institution',
+            'user.employeePositionActive.personnelDepartment',
+        ])
             ->first();
+
+        $message = $leadershipGreeting?->message;
 
         // 1. Bersihkan tag HTML lainnya tapi biarkan <p> untuk penanda
         // Atau langsung pecah berdasarkan pola </p><p>
-        $paragraphs = preg_split('/<\/p>\s*<p>/', ($leadershipGreeting?->message ?? ''));
+        $paragraphs = preg_split('/<\/p>\s*<p>/', ($message ?? ''));
 
         // 2. Ambil Paragraf Pertama & bersihkan sisa tag-nya
         $firstParagraph = isset($paragraphs[0]) ? strip_tags($paragraphs[0]) : '';
@@ -27,10 +32,12 @@ class LeadershipGreetingRepository
         return [
             'headMaster' => $leadershipGreeting?->user?->name,
             'personnelDepartment' => $leadershipGreeting?->user?->employeePositionActive?->personnelDepartment?->name,
+            'institution' => $leadershipGreeting?->user?->employeePositionActive?->institution?->name,
             'avatar' => $leadershipGreeting?->user?->hasMedia('avatar') ? $leadershipGreeting->user->getFirstTemporaryUrl(now()->addDay(), 'avatar') : asset('assets/headmaster.png'),
             'title' => $leadershipGreeting?->title,
             'firstParagraph' => $firstParagraph,
-            'limitedParagraph' => Str::limit($limitedParagraph, 200)
+            'limitedParagraph' => Str::limit($limitedParagraph, 200),
+            'message' => $message
         ];
     }
 }

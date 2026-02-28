@@ -17,23 +17,40 @@ class HomeNavigationRepository
             ->orderBy('serial_number')
             ->get()
             ->map(function (Navigation $navigation) {
+                $mainNavUrl = $navigation->post_id ? route('page', $navigation->post) : null;
+                $externalUrl = $navigation->url;
+                $currentUrl = url()->current();
+
+                // 1. Map dulu sub-navigasinya agar kita punya datanya
+                $mappedSubNavs = $navigation->subNavigations->map(function (SubNavigation $subNavigation) use ($currentUrl) {
+                    $subUrl = $subNavigation->post_id ? route('page', $subNavigation->post) : null;
+                    $subExternalUrl = $subNavigation->url;
+
+                    return [
+                        'name' => $subNavigation->name,
+                        'category' => $subNavigation->category,
+                        'pageUrl' => $subUrl,
+                        'pageSlug' => $subNavigation->post?->slug,
+                        'url' => $subExternalUrl,
+                        'openInNewTab' => $subNavigation->open_new_tab,
+                        'activeUrl' => $currentUrl === $subUrl || $currentUrl === $subExternalUrl,
+                    ];
+                });
+
+                // 2. Cek apakah link utama aktif ATAU ada salah satu sub-nav yang aktif
+                $isParentActive = ($currentUrl === $mainNavUrl || $currentUrl === $externalUrl);
+                $isAnySubActive = $mappedSubNavs->contains('activeUrl', true);
+
                 return [
                     'name' => $navigation->name,
                     'category' => $navigation->category,
-                    'pageUrl' => $navigation->post_id ? route('page.show', $navigation->post) : null,
+                    'pageUrl' => $mainNavUrl,
                     'pageSlug' => $navigation->post?->slug,
-                    'url' => $navigation->url,
+                    'url' => $externalUrl,
                     'openInNewTab' => $navigation->open_new_tab,
-                    'subNavigations' => $navigation->subNavigations->map(function (SubNavigation $subNavigation) {
-                        return [
-                            'name' => $subNavigation->name,
-                            'category' => $subNavigation->category,
-                            'pageUrl' => $subNavigation->post_id ? route('page.show', $subNavigation->post) : null,
-                            'pageSlug' => $subNavigation->post?->slug,
-                            'url' => $subNavigation->url,
-                            'openInNewTab' => $subNavigation->open_new_tab
-                        ];
-                    })->toArray()
+                    // Sekarang activeUrl akan true jika dirinya sendiri aktif ATAU sub-nya aktif
+                    'activeUrl' => $isParentActive || $isAnySubActive,
+                    'subNavigations' => $mappedSubNavs->toArray()
                 ];
             })
             ->toArray();
