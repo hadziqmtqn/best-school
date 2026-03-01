@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Schema;
 
@@ -37,19 +38,24 @@ class AgendaForm
                             ->autosize()
                             ->placeholder('Masukkan deskripsi'),
 
-                        DateTimePicker::make('start_date')
-                            ->label('Mulai')
-                            ->required()
-                            ->native(false)
-                            ->placeholder('Masukkan tanggal mulai')
-                            ->closeOnDateSelection(),
+                        Grid::make()
+                            ->columns()
+                            ->schema([
+                                DateTimePicker::make('start_date')
+                                    ->label('Mulai')
+                                    ->required()
+                                    ->native(false)
+                                    ->placeholder('Masukkan tanggal mulai')
+                                    ->closeOnDateSelection(),
 
-                        DateTimePicker::make('end_date')
-                            ->label('Sampai')
-                            ->required()
-                            ->native(false)
-                            ->placeholder('Masukkan tanggal sampai')
-                            ->closeOnDateSelection(),
+                                DateTimePicker::make('end_date')
+                                    ->label('Sampai')
+                                    ->required()
+                                    ->native(false)
+                                    ->placeholder('Masukkan tanggal sampai')
+                                    ->closeOnDateSelection(),
+                            ]),
+
 
                         TextInput::make('location')
                             ->label('Lokasi')

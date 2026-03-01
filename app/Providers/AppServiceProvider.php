@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Event\AgendaRepository;
 use App\Repositories\Posts\LeadershipGreetingRepository;
 use App\Repositories\Posts\NavigationPageRepository;
 use App\Repositories\References\EducationalLevelRepository;
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // EVENT
+        $this->app->bind(AgendaRepository::class, AgendaRepository::class);
+
         // POSTS
         $this->app->bind(LeadershipGreetingRepository::class, LeadershipGreetingRepository::class);
         $this->app->bind(NavigationPageRepository::class, NavigationPageRepository::class);

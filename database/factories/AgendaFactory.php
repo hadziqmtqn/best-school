@@ -16,6 +16,8 @@ class AgendaFactory extends Factory
     {
         $startDate = $this->faker->dateTimeBetween('-1 years');
 
+        $status = $this->faker->randomElement(array_keys(StatusData::options()));
+
         return [
             'slug' => Str::uuid()->toString(),
             'name' => $this->faker->text(50),
@@ -23,9 +25,9 @@ class AgendaFactory extends Factory
             'start_date' => $startDate,
             'end_date' => Carbon::now()->subMonth(),
             'location' => $this->faker->city,
-            'status' => $this->faker->randomElement(array_keys(StatusData::options())),
+            'status' => $status,
             'published_at' => $startDate,
-            'is_active' => $this->faker->boolean(),
+            'is_active' => $status == StatusData::PUBLISHED->value ?? false,
             'created_at' => $startDate,
             'updated_at' => $startDate,
 

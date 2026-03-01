@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,5 +63,22 @@ class Agenda extends Model
     public function validatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'validated_by');
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function filterByStatus(Builder $query, $status): Builder
+    {
+        return $query->where('status', $status);
+    }
+
+    #[Scope]
+    protected function filterData(Builder $query, $request): Builder
+    {
+        $search = $request['search'] ?? null;
+
+        $query->when($search, fn(Builder $query) => $query->whereLike('name', '%' . $search . '%'));
+
+        return $query;
     }
 }
