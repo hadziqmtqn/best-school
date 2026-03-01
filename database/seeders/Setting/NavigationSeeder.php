@@ -32,8 +32,18 @@ class NavigationSeeder extends Seeder
             name: 'Program',
             hasSubNavigation: true,
             subNavCategories: [
-                NavigationCategory::EXTRACURICULAR->value,
-                NavigationCategory::ACHIEVEMeENT->value
+                [
+                    'name' => NavigationCategory::EXTRACURICULAR->getLabel(),
+                    'category' => null,
+                    'url' => '#',
+                    'openInNewTab' => false
+                ],
+                [
+                    'name' => NavigationCategory::ACHIEVEMENT->getLabel(),
+                    'category' => null,
+                    'url' => '#',
+                    'openInNewTab' => false
+                ]
             ]
         );
 
@@ -42,8 +52,18 @@ class NavigationSeeder extends Seeder
             name: 'Galeri',
             hasSubNavigation: true,
             subNavCategories: [
-                NavigationCategory::PHOTO->value,
-                NavigationCategory::VIDEO->value
+                [
+                    'name' => NavigationCategory::PHOTO->getLabel(),
+                    'category' => null,
+                    'url' => '#',
+                    'openInNewTab' => false
+                ],
+                [
+                    'name' => NavigationCategory::VIDEO->getLabel(),
+                    'category' => null,
+                    'url' => '#',
+                    'openInNewTab' => false
+                ]
             ]
         );
 
@@ -52,8 +72,18 @@ class NavigationSeeder extends Seeder
             name: 'Acara',
             hasSubNavigation: true,
             subNavCategories: [
-                NavigationCategory::AGENDA->value,
-                NavigationCategory::ANNOUNCEMENT->value
+                [
+                    'name' => NavigationCategory::AGENDA->getLabel(),
+                    'category' => null,
+                    'url' => '/agenda',
+                    'openInNewTab' => false
+                ],
+                [
+                    'name' => NavigationCategory::ANNOUNCEMENT->getLabel(),
+                    'category' => null,
+                    'url' => '#',
+                    'openInNewTab' => false
+                ],
             ]
         );
 
@@ -86,8 +116,10 @@ class NavigationSeeder extends Seeder
             foreach ($subNavCategories as $subNavCategory) {
                 $this->subNavigationRepository->subNavigation(
                     navigationId: $navigation->id,
-                    title: NavigationCategory::tryFrom($subNavCategory)->getLabel(),
-                    category: $subNavCategory
+                    name: $subNavCategory['name'],
+                    category: $subNavCategory['category'],
+                    url: $subNavCategory['url'],
+                    openInNewTab: $subNavCategory['openInNewTab']
                 );
             }
         }

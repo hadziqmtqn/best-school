@@ -12,7 +12,7 @@ enum NavigationCategory: string implements HasLabel
 
     case SCHOOL_IDENTITY = 'school_identity';
     case EXTRACURICULAR = 'extracuricular';
-    case ACHIEVEMeENT = 'achievement';
+    case ACHIEVEMENT = 'achievement';
     case PHOTO = 'photo';
     case VIDEO = 'video';
     case AGENDA = 'agenda';
@@ -25,7 +25,7 @@ enum NavigationCategory: string implements HasLabel
         return match ($this) {
             self::SCHOOL_IDENTITY => 'Identitas Sekolah',
             self::EXTRACURICULAR => 'Ekstrakurikuler',
-            self::ACHIEVEMeENT => 'Prestasi',
+            self::ACHIEVEMENT => 'Prestasi',
             self::PHOTO => 'Foto',
             self::VIDEO => 'Video',
             self::AGENDA => 'Agenda',

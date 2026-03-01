@@ -76,8 +76,15 @@ class Agenda extends Model
     protected function filterData(Builder $query, $request): Builder
     {
         $search = $request['search'] ?? null;
+        $month = $request['month'] ?? null;
+        $year = $request['year'] ?? null;
 
         $query->when($search, fn(Builder $query) => $query->whereLike('name', '%' . $search . '%'));
+
+        $query->when(($month || $year), function (Builder $query) use ($month, $year) {
+            $query->whereMonth('start_date', $month);
+            $query->whereYear('start_date', $year);
+        });
 
         return $query;
     }
