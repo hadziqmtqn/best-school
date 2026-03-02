@@ -4,6 +4,7 @@ namespace App\Repositories\Settings;
 
 use App\Models\Navigation;
 use App\Models\SubNavigation;
+use Illuminate\Support\Facades\URL;
 
 class HomeNavigationRepository
 {
@@ -18,27 +19,27 @@ class HomeNavigationRepository
             ->get()
             ->map(function (Navigation $navigation) {
                 $mainNavUrl = $navigation->post_id ? route('page', $navigation->post) : null;
-                $externalUrl = $navigation->url;
+                $url = URL::to($navigation->url);
                 $currentUrl = url()->current();
 
                 // 1. Map dulu sub-navigasinya agar kita punya datanya
                 $mappedSubNavs = $navigation->subNavigations->map(function (SubNavigation $subNavigation) use ($currentUrl) {
                     $subUrl = $subNavigation->post_id ? route('page', $subNavigation->post) : null;
-                    $subExternalUrl = $subNavigation->url;
+                    $url = URL::to($subNavigation->url);
 
                     return [
                         'name' => $subNavigation->name,
                         'category' => $subNavigation->category,
                         'pageUrl' => $subUrl,
                         'pageSlug' => $subNavigation->post?->slug,
-                        'url' => $subExternalUrl,
+                        'url' => $url,
                         'openInNewTab' => $subNavigation->open_new_tab,
-                        'activeUrl' => $currentUrl === $subUrl || $currentUrl === $subExternalUrl,
+                        'activeUrl' => $currentUrl === $subUrl || $currentUrl === $url,
                     ];
                 });
 
                 // 2. Cek apakah link utama aktif ATAU ada salah satu sub-nav yang aktif
-                $isParentActive = ($currentUrl === $mainNavUrl || $currentUrl === $externalUrl);
+                $isParentActive = ($currentUrl === $mainNavUrl || $currentUrl === $url);
                 $isAnySubActive = $mappedSubNavs->contains('activeUrl', true);
 
                 return [
@@ -46,7 +47,7 @@ class HomeNavigationRepository
                     'category' => $navigation->category,
                     'pageUrl' => $mainNavUrl,
                     'pageSlug' => $navigation->post?->slug,
-                    'url' => $externalUrl,
+                    'url' => $url,
                     'openInNewTab' => $navigation->open_new_tab,
                     // Sekarang activeUrl akan true jika dirinya sendiri aktif ATAU sub-nya aktif
                     'activeUrl' => $isParentActive || $isAnySubActive,

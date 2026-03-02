@@ -17,6 +17,7 @@ class AgendaFactory extends Factory
         $startDate = $this->faker->dateTimeBetween('-1 years');
 
         $status = $this->faker->randomElement(array_keys(StatusData::options()));
+        $validated = $status == StatusData::PUBLISHED->value ?? false;
 
         return [
             'slug' => Str::uuid()->toString(),
@@ -27,12 +28,12 @@ class AgendaFactory extends Factory
             'location' => $this->faker->city,
             'status' => $status,
             'published_at' => $startDate,
-            'is_active' => $status == StatusData::PUBLISHED->value ?? false,
+            'is_active' => $validated,
             'created_at' => $startDate,
             'updated_at' => $startDate,
 
             'user_id' => 1,
-            'validated_by' => 1,
+            'validated_by' => $validated ? 1 : null,
             'institution_id' => 1,
         ];
     }

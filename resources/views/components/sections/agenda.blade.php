@@ -10,7 +10,7 @@
                 <p class="text-muted mb-0 pe-lg-5">Ikuti terus perkembangan kegiatan dan jadwal penting sekolah agar tidak ketinggalan momen berharga.</p>
             </div>
             <div class="col-lg-6 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
-                <a href="#" class="btn btn-outline-primary rounded-pill px-4 btn-lg">
+                <a href="{{ route('agenda.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-lg">
                     Lihat Semua Jadwal <i class="bi bi-calendar3 ms-2"></i>
                 </a>
             </div>

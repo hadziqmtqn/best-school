@@ -19,7 +19,7 @@ class AgendaRepository
             ->latest();
 
         if ($isPaginate) {
-            return $agenda->paginate(10)
+            return $agenda->paginate(7)
                 ->withQueryString();
         }else {
             return $agenda->limit($limit)

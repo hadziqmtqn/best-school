@@ -79,12 +79,17 @@ class Agenda extends Model
         $month = $request['month'] ?? null;
         $year = $request['year'] ?? null;
 
-        $query->when($search, fn(Builder $query) => $query->whereLike('name', '%' . $search . '%'));
+        if ($search) {
+            $query->whereLike('name', '%' . $search . '%');
+        }
 
-        $query->when(($month || $year), function (Builder $query) use ($month, $year) {
+        if ($month) {
             $query->whereMonth('start_date', $month);
+        }
+
+        if ($year) {
             $query->whereYear('start_date', $year);
-        });
+        }
 
         return $query;
     }
