@@ -4,7 +4,6 @@ namespace App\Repositories\Settings;
 
 use App\Models\Navigation;
 use App\Models\SubNavigation;
-use Illuminate\Support\Facades\URL;
 
 class HomeNavigationRepository
 {
@@ -19,13 +18,13 @@ class HomeNavigationRepository
             ->get()
             ->map(function (Navigation $navigation) {
                 $mainNavUrl = $navigation->post_id ? route('page', $navigation->post) : null;
-                $url = URL::to($navigation->url);
+                $url =$navigation->url;
                 $currentUrl = url()->current();
 
                 // 1. Map dulu sub-navigasinya agar kita punya datanya
                 $mappedSubNavs = $navigation->subNavigations->map(function (SubNavigation $subNavigation) use ($currentUrl) {
                     $subUrl = $subNavigation->post_id ? route('page', $subNavigation->post) : null;
-                    $url = URL::to($subNavigation->url);
+                    $url =$subNavigation->url;
 
                     return [
                         'name' => $subNavigation->name,
@@ -34,12 +33,12 @@ class HomeNavigationRepository
                         'pageSlug' => $subNavigation->post?->slug,
                         'url' => $url,
                         'openInNewTab' => $subNavigation->open_new_tab,
-                        'activeUrl' => $currentUrl === $subUrl || $currentUrl === $url,
+                        'activeUrl' => $currentUrl === $subUrl || $currentUrl === url($url),
                     ];
                 });
 
                 // 2. Cek apakah link utama aktif ATAU ada salah satu sub-nav yang aktif
-                $isParentActive = ($currentUrl === $mainNavUrl || $currentUrl === $url);
+                $isParentActive = ($currentUrl === $mainNavUrl || $currentUrl === url($url));
                 $isAnySubActive = $mappedSubNavs->contains('activeUrl', true);
 
                 return [

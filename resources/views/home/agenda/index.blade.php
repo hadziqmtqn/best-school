@@ -15,7 +15,7 @@
                             <label class="form-label fw-bold small text-muted text-uppercase" for="search">Cari Agenda</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-success"></i></span>
-                                <input type="text" name="search" id="search" class="form-control border-start-0" placeholder="Ketik kata kunci...">
+                                <input type="search" name="search" id="search" class="form-control border-start-0" value="{{ request('search') }}" placeholder="Ketik kata kunci...">
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-4">
@@ -47,7 +47,7 @@
                 <div class="col-lg-8">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h4 class="fw-bold mb-0">Daftar Agenda</h4>
-                        <span class="badge bg-white text-dark border-0 shadow-sm px-3 py-2 rounded-pill small">Menampilkan 4 Agenda</span>
+                        <span class="badge bg-white text-dark border-0 shadow-sm px-3 py-2 rounded-pill small">Menampilkan {{ count($agendas) }} Agenda</span>
                     </div>
 
                     <div class="agenda-list-v2">
@@ -55,12 +55,14 @@
                             @php
                                 $startDate = $agenda->start_date;
                                 $endDate = $agenda->end_date;
+                                $clock = Carbon::parse($startDate)->isoFormat('HH:mm');
                                 $day = Carbon::parse($startDate)->isoFormat('DD');
                                 $month = Carbon::parse($startDate)->isoFormat('MMM');
 
                                 $name = $agenda->name;
                                 $description = $agenda->description;
                                 $location = $agenda->location;
+                                $institution = $agenda->institution?->name;
                                 $startDateTime = Carbon::parse($startDate)->isoFormat('DD MMM Y HH:mm');
                                 $endDateTime = Carbon::parse($endDate)->isoFormat('DD MMM Y HH:mm');
                             @endphp
@@ -73,21 +75,23 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                            <span class="category-pill-v2 academic">Akademik</span>
-                                            <span class="text-muted small"><i class="bi bi-clock me-1"></i> 08:00 - 13:00 WIB</span>
+                                            <span class="category-pill-v2 academic">{{ $institution }}</span>
+                                            <span class="text-muted small"><i class="bi bi-clock me-1"></i> {{ $clock }} WIB</span>
                                         </div>
                                         <h5 class="fw-bold mb-1">{{ $name }}</h5>
                                         <div class="agenda-v2-footer border-0 p-0 m-0">
                                             <i class="bi bi-geo-alt me-2 text-success"></i>{{ $location }}
                                         </div>
                                     </div>
-                                    <div class="d-none d-md-block">
+                                    <div class="align-self-end align-self-md-center mt-3 mt-md-0">
                                         <button class="btn btn-detail-v2" data-bs-toggle="modal" data-bs-target="#agendaDetailModal">
                                             <i class="bi bi-chevron-right"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('home.agenda.modal-agenda')
                         @endforeach
 
                         @if(count($agendas) === 0)
