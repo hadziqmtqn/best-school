@@ -39,8 +39,12 @@ class PostController extends Controller
             'postCategory:id,name,slug',
             'user'
         ]);
+        $relatedPosts = $this->postRepository->index(
+            inRandomOrder: true,
+            limit: 5
+        );
 
-        return \view('home.post.show', compact('title', 'post'));
+        return \view('home.post.show', compact('title', 'post', 'relatedPosts'));
     }
 
     public function page(Post $post): View

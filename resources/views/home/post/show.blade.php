@@ -1,4 +1,5 @@
 @use(Carbon\Carbon)
+@use(Illuminate\Support\Str)
 
 <x-home.master :title="$title">
 
@@ -52,13 +53,11 @@
 
                     <!-- Widget: Tags -->
                     <div class="card card-sidebar p-4 mb-4">
-                        <h5 class="fw-bold mb-3">Tag Populer</h5>
+                        <h5 class="fw-bold mb-3">Tag</h5>
                         <div>
-                            <a href="#" class="badge-tag">#prestasi</a>
-                            <a href="#" class="badge-tag">#juara</a>
-                            <a href="#" class="badge-tag">#osn</a>
-                            <a href="#" class="badge-tag">#matematika</a>
-                            <a href="#" class="badge-tag">#siswa</a>
+                            @foreach ($post->tags as $tag)
+                                <a href="{{ route('post.index', ['tag' => $tag]) }}" class="badge-tag">#{{ $tag }}</a>
+                            @endforeach
                         </div>
                     </div>
 
@@ -68,41 +67,19 @@
                             <h5 class="fw-bold mb-0">Berita Terkait</h5>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-4 py-3">
-                                <a href="berita-3.html" class="related-news-link d-flex align-items-center gap-3">
-                                    <img src="https://picsum.photos/seed/library/60/60" class="rounded" alt="Thumb"
-                                        width="60">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">10 Mei
-                                            2024</small>
-                                        <span class="fw-bold" style="font-size: 0.9rem;">Peresmian Gedung Perpustakaan
-                                            Baru</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item px-4 py-3">
-                                <a href="berita-2.html" class="related-news-link d-flex align-items-center gap-3">
-                                    <img src="https://picsum.photos/seed/class/60/60" class="rounded" alt="Thumb"
-                                        width="60">
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">15 Mei
-                                            2024</small>
-                                        <span class="fw-bold" style="font-size: 0.9rem;">Pembukaan Gelombang 1
-                                            PPDB</span>
-                                    </div>
-                                </a>
-                            </li>
+                            @foreach ($relatedPosts as $relatedPost)
+                                <li class="list-group-item px-4 py-3">
+                                    <a href="berita-3.html" class="related-news-link d-flex align-items-center gap-3">
+                                        <img src="{{ $relatedPost->thumbnail }}" class="rounded" alt="Thumb" width="60">
+                                        <div>
+                                            <small class="text-muted d-block">{{ Carbon::parse($relatedPost->created_at)->isoFormat('DD MMM Y') }}</small>
+                                            <span class="fw-bold">{{ Str::limit($relatedPost->title, 60) }}</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-
-                    <!-- Widget: CTA -->
-                    <div class="card bg-light border-0 p-4 text-center rounded-4">
-                        <i class="bi bi-pencil-square display-4 text-primary mb-3 d-block"></i>
-                        <h5 class="fw-bold mb-2">Ingin Mendaftar?</h5>
-                        <p class="small text-muted mb-3">Kuota terbatas! Segera daftarkan diri Anda sekarang juga.</p>
-                        <a href="registrasi.html" class="btn btn-primary w-100 rounded-pill">Daftar Sekarang</a>
-                    </div>
-
                 </div>
             </div>
         </div>
