@@ -34,6 +34,11 @@ class PostController extends Controller
     public function show(Post $post): View
     {
         $title = $post->title;
+        $post->load([
+            'institution:id,name',
+            'postCategory:id,name,slug',
+            'user'
+        ]);
 
         return \view('home.post.show', compact('title', 'post'));
     }
