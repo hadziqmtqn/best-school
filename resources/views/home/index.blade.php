@@ -74,13 +74,7 @@
     <!-- Agenda Section (V2: Friendly & Modern) -->
     <x-sections.agenda/>
 
-    <!-- Quick Access / Features -->
-    <x-sections.feature/>
-
     <!-- Latest News -->
     <x-sections.latest-news/>
-
-    <!-- FAQ Section -->
-    <x-sections.faq/>
 
 </x-home.master>

@@ -14,10 +14,8 @@
             <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <h5 class="fw-bold mb-4">Navigasi</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#" class="footer-link">Beranda</a></li>
-                    <li class="mb-2"><a href="#" class="footer-link">Alur Pendaftaran</a></li>
-                    <li class="mb-2"><a href="#" class="footer-link">Media & Dokumen</a></li>
-                    <li class="mb-2"><a href="#" class="footer-link">Berita Sekolah</a></li>
+                    <li class="mb-2"><a href="/" class="footer-link">Beranda</a></li>
+                    <li class="mb-2"><a href="{{ route('post.index') }}" class="footer-link">Berita Sekolah</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="200">

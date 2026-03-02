@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Enums\StatusData;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -87,5 +90,54 @@ class Post extends Model implements HasMedia
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institution::class);
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function filterData(Builder $query, $request): Builder
+    {
+        $search = $request['search'] ?? null;
+        $postCategory = $request['post-category'] ?? null;
+        $institution = $request['institution'] ?? null;
+        $tag = $request['tag'] ?? null;
+
+        if ($search) {
+            $query->whereLike('title', "%$search%");
+            $query->orWhereLike('content', "%$search%");
+        }
+
+        if ($postCategory) {
+            $query->whereHas('postCategory', fn($query) => $query->where('slug', $postCategory));
+        }
+
+        if ($institution) {
+            $query->whereHas('institution', fn($query) => $query->where('slug', $institution));
+        }
+
+        if ($tag) {
+            $query->whereJsonContains('tags', $tag);
+        }
+
+        return $query;
+    }
+
+    #[Scope]
+    protected function filterByStatus(Builder $query, $status): Builder
+    {
+        return $query->where('status', $status);
+    }
+
+    #[Scope]
+    protected function filterByType(Builder $query, $type): Builder
+    {
+        return $query->where('type', $type);
+    }
+
+    // TODO ATTRIBUTES
+    protected function thumbnail(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->hasMedia('thumbanil') ? $this->getFirstMediaUrl('thumbnail') : asset('assets/student-1.png'),
+        );
     }
 }
