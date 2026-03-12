@@ -23,12 +23,12 @@ class NavigationSeeder extends Seeder
     public function run(): void
     {
         $this->create(
-            category: NavigationCategory::SCHOOL_IDENTITY->value,
-            name: NavigationCategory::SCHOOL_IDENTITY->getLabel()
+            name: 'Identitas Sekolah',
+            url: '/school-identity',
+            openNewTab: true
         );
 
         $this->create(
-            category: null,
             name: 'Program',
             hasSubNavigation: true,
             subNavCategories: [
@@ -48,7 +48,6 @@ class NavigationSeeder extends Seeder
         );
 
         $this->create(
-            category: null,
             name: 'Galeri',
             hasSubNavigation: true,
             subNavCategories: [
@@ -68,7 +67,6 @@ class NavigationSeeder extends Seeder
         );
 
         $this->create(
-            category: null,
             name: 'Acara',
             hasSubNavigation: true,
             subNavCategories: [
@@ -88,7 +86,6 @@ class NavigationSeeder extends Seeder
         );
 
         $this->create(
-            category: null,
             name: 'SPMB Online',
             url: 'https://ppdb.bkn.my.id',
             openNewTab: true
@@ -96,11 +93,11 @@ class NavigationSeeder extends Seeder
     }
 
     private function create(
-        $category,
-        $name,
-        $url = null,
-        $openNewTab = false,
-        $hasSubNavigation = false,
+        string $name,
+        ?string $category = null,
+        ?string $url = null,
+        ?bool $openNewTab = false,
+        ?bool $hasSubNavigation = false,
         array $subNavCategories = null
     ): void {
         $navigation = Navigation::create([

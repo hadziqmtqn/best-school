@@ -38,6 +38,7 @@ class ApplicationRepository
             'logo' => $application?->logo,
             'phoneNumber' => $application?->phone_number,
             'email' => $application?->email,
+            'address' => $application?->address,
             'breadcrumbImg' => $application?->breadcrumb,
             'bannerImg' => $application?->banner_image,
             'themeColors' => ThemeColor::getCombination($application?->theme_color),

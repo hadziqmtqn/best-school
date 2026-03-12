@@ -18,6 +18,7 @@ class ApplicationSeeder extends Seeder
         $application->phone_number = '6285157088717';
         $application->motto = 'Hari ini berjuang, besok raih kemenangan!';
         $application->description = 'Portal informasi terpadu yang menyajikan profil, prestasi, dan agenda kegiatan sebagai wajah digital sekolah yang profesional, transparan, dan mudah diakses publik';
+        $application->address = 'Jl. Pendidikan No. 123, Kebayoran Baru, Jakarta Selatan, DKI Jakarta 12160';
         $application->social_media = [
             'facebook' => 'https://www.facebook.com/khadziq.muttaqin.17',
             'instagram' => 'https://www.instagram.com/hadziq____',

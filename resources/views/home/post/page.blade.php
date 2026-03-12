@@ -5,25 +5,23 @@
 
     <x-home.page-breadcrumb :title="$title"/>
 
-    <section class="py-5 bg-white">
-        <div class="container">
+    <section class="py-5 bg-light">
+        <div class="container py-5">
             <div class="row">
-                <!-- Kolom Kiri: Artikel Utama -->
-                <div class="col-lg-8">
-                    <!-- Isi Artikel -->
-                    <div class="article-content">
-                        {!! $post->content !!}
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="content lh-relaxed">
+                                {!! $post->content !!}
+
+                                <hr class="my-4">
+
+                                <x-component.share-to-social-media/>
+                            </div>
+                        </div>
                     </div>
-
-                    <hr class="my-4">
-
-                    <!-- Bagikan Berita -->
-                    <x-component.share-to-social-media/>
                 </div>
-
-                <!-- Kolom Kanan: Sidebar -->
-                <div class="col-lg-4 ps-lg-4 mt-5 mt-lg-0">
-                    <!-- Widget: CTA -->
+                <div class="col-lg-4">
                     <x-component.widget-cta/>
                 </div>
             </div>

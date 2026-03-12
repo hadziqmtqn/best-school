@@ -24,7 +24,7 @@
                     <div class="footer-contact-icon me-3">
                         <i class="bi bi-geo-alt-fill text-warning"></i>
                     </div>
-                    <span class="small opacity-75">Jl. Pendidikan No. 123, Kebayoran Baru, Jakarta Selatan, DKI Jakarta 12160</span>
+                    <span class="small opacity-75">{{ $application['address'] }}</span>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <div class="footer-contact-icon me-3">

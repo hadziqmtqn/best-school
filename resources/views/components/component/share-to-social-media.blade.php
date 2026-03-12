@@ -1,4 +1,4 @@
-<div class="mb-5">
+<div class="mb-3">
     <h6 class="fw-bold text-muted mb-3">Bagikan Berita Ini:</h6>
     <div class="share-buttons">
         <a href="{{ $url ?? '#' }}" class="btn btn-primary"><i class="bi bi-facebook"></i></a>

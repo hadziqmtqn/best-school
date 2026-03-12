@@ -15,7 +15,7 @@ class ApplicationForm
     {
         return $schema
             ->components([
-                Section::make()
+                Section::make('Profil')
                     ->columnSpanFull()
                     ->columns()
                     ->schema([
@@ -41,6 +41,31 @@ class ApplicationForm
                             ->autosize()
                             ->columnSpanFull(),
 
+                    ]),
+
+                Section::make('Kontak')
+                    ->columnSpanFull()
+                    ->columns()
+                    ->schema([
+                        TextInput::make('email')
+                            ->label('Email')
+                            ->email()
+                            ->placeholder('Masukkan Email'),
+
+                        TextInput::make('phone_number')
+                            ->label('No. Telp')
+                            ->maxLength(13)
+                            ->placeholder('Masukkan No. Telp'),
+
+                        TextInput::make('address')
+                            ->label('Alamat')
+                            ->placeholder('Masukkan alamat')
+                            ->columnSpanFull()
+                    ]),
+
+                Section::make('Tampilan Beranda')
+                    ->columnSpanFull()
+                    ->schema([
                         Select::make('theme_color')
                             ->label('Warna Tema')
                             ->helperText('Warna tema halaman beranda')
