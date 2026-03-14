@@ -12,8 +12,12 @@ use LaravelIdea\Helper\App\Models\_IH_Post_QB;
 
 class PostRepository
 {
-    public function index(?array $request = [], ?bool $inRandomOrder = false, ?bool $isPaginate = false, ?int $limit = 3): Collection|LengthAwarePaginator|_IH_Post_QB|AbstractPaginator
-    {
+    public function index(
+        ?array $request = [],
+        ?bool $inRandomOrder = false,
+        ?bool $isPaginate = false,
+        ?int $limit = 3
+    ): Collection|LengthAwarePaginator|_IH_Post_QB|AbstractPaginator {
         $post = Post::query()
             ->with([
                 'postCategory:id,name',

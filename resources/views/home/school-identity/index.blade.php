@@ -1,3 +1,6 @@
+@use(Illuminate\Support\Str)
+@use(Illuminate\Support\Carbon)
+
 <x-home.master :title="$title">
 
     <section id="identitas-sekolah" class="py-5 mt-5 pt-5 bg-main-light">
@@ -65,16 +68,24 @@
 
                 <!-- Kanan: Artikel Random & Promosi -->
                 <div class="col-lg-4" data-aos="fade-left">
-                    <div class="d-flex flex-column h-100 gap-4">
+                    <div class="d-flex flex-column gap-4">
                         <!-- Card Artikel Random (Tanpa Thumbnail) -->
                         <div class="card border-0 shadow-sm rounded-4 flex-grow-1">
                             <div class="card-body p-4">
-                                <span class="badge bg-info-soft text-info rounded-pill px-3 py-2 mb-3 fw-bold">Tips & Trik</span>
-                                <h5 class="fw-bold mb-3 lh-base">Merancang Strategi Belajar yang Efisien untuk Tes Masuk PTN Sejak Kelas 10</h5>
-                                <p class="text-secondary small lh-relaxed mb-4">
-                                    Tidak perlu menunggu kelas 12 untuk mulai belajar soal ujian masuk PTN. Membangun pondasi yang kuat sejak dini dengan manajemen waktu, pemetaan jurusan, dan konsistensi harian 30 menit jauh mengatasi metode belajar kilat. Siapkan masa depanmu lebih awal dan rasakan ketenangannya di tingkat akhir!
-                                </p>
-                                <a href="#" class="text-primary fw-bold text-decoration-none border-bottom border-primary pb-1 d-inline-block">Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i></a>
+                                <span class="badge bg-info-soft text-info rounded-pill px-3 py-2 mb-3 fw-bold">Artikel Terkait</span>
+
+                                @foreach($relatedPosts as $relatedPost)
+                                    <div class="mb-2">
+                                        <a href="{{ route('post.show', $relatedPost->slug) }}" class="text-decoration-none text-primary">
+                                            {{ Str::limit($relatedPost->title) }}
+                                        </a>
+                                    </div>
+                                    <div class="mb-3 text-muted small">{{ Carbon::parse($relatedPost->created_at)->isoFormat('DD MMM Y') }}</div>
+
+                                    @if(!$loop->last)
+                                        <hr>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
 
