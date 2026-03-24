@@ -22,9 +22,9 @@ class ExtracurricularRepository
                 return [
                     'name' => $extracurricular->name,
                     'description' => $extracurricular->description,
-                    'galleries' => $extracurricular->hasMedia('images') ? $extracurricular->getMedia('images')->map(function ($media) {
+                    'galleries' => $extracurricular->getMedia('images')->map(function ($media) {
                         return $media->getUrl();
-                    }) : null
+                    })->toArray()
                 ];
             })
             ->toArray();

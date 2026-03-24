@@ -20,48 +20,50 @@
                                 <ul class="nav nav-tabs nav-fill nav-tabs-scrollable border-0 px-3 py-3" role="tablist">
                                     @foreach($institutions as $key => $institution)
                                         <li class="nav-item" role="presentation">
-                                            <button type="button" class="nav-link fw-bold waves-effect {{ $loop->first ? 'active' : '' }}" role="tab" data-bs-toggle="tab" data-bs-target="#navs-{{ $key }}" aria-controls="navs-{{ $key }}" aria-selected="false" tabindex="-1">
+                                            <a href="{{ route('extracurricular.index', ['institution-slug' => $institution->slug]) }}" type="button" class="nav-link fw-bold waves-effect {{ request('institution-slug') == $institution->slug || $loop->first ? 'active' : '' }}">
                                                 {{ $institution->name }}
-                                            </button>
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
                         <div class="card-body p-4">
-                            <div class="tab-content p-0 m-0 border-0">
-                                {{--@foreach($institutions as $key => $institution)
-                                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="navs-{{ $key }}" role="tabpanel">
+                            <table class="table table-bordered w-100">
+                                <thead>
+                                <tr>
+                                    <th>Ekstrakurikuler</th>
+                                    <th>Galeri</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($extracurriculars as $key => $extracurricular)
+                                        <tr>
+                                            <td>
+                                                <p class="mb-1 fw-bold">{{ $extracurricular['name'] }}</p>
+                                                <p class="mb-0">{{ $extracurricular['description'] }}</p>
+                                            </td>
+                                            <td>
+                                                @if(count($extracurricular['galleries']) > 0)
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#extra-{{ $key }}">Lihat</button>
 
-                                        <h4 class="mb-3">Data Pokok</h4>
-
-                                        <table class="table table-bordered w-100">
-                                            @foreach($institution['baseData'] as $key => $identity)
-                                                <tr>
-                                                    <th style="width: 35%">{{ $key }}</th>
-                                                    <td style="width: 65%">{{ $identity }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </table>
-
-                                        <h4 class="mb-3">Alamat</h4>
-
-                                        <table class="table table-bordered w-100">
-                                            @foreach($institution['address'] as $key => $identity)
-                                                <tr>
-                                                    <th style="width: 35%">{{ $key }}</th>
-                                                    <td style="width: 65%">{{ $identity }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </table>
-
-                                        <h4 class="mb-3">Profil</h4>
-                                        <div class="alert alert-success" role="alert">
-                                            {!! $institution['profile'] !!}
-                                        </div>
-                                    </div>
-                                @endforeach--}}
-                            </div>
+                                                    <x-component.modal1 id-modal="extra-{{ $key }}" title="Galeri Ekstrakurikuler">
+                                                        <div class="row">
+                                                            @foreach($extracurricular['galleries'] as $gallery)
+                                                                <div class="col-md-6">
+                                                                    <a href="{{ $gallery }}" target="_blank">
+                                                                        <img src="{{ $gallery }}" alt="Galery" class="w-100">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </x-component.modal1>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
