@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -72,5 +74,12 @@ class Institution extends Model implements HasMedia
         return Attribute::make(
             get: fn() => $this->hasMedia('logo') ? $this->getFirstMediaUrl('logo') : null,
         );
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function filterBySlug(Builder $query, $slug): Builder
+    {
+        return $query->where('slug', $slug);
     }
 }

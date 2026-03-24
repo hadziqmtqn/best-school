@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Home\AgendaController;
+use App\Http\Controllers\Home\ExtracurricularController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\LeadershipGreetingController;
 use App\Http\Controllers\Home\PostController;
@@ -21,3 +22,5 @@ Route::get('leadership-greeting', [LeadershipGreetingController::class, 'index']
 Route::get('agenda', [AgendaController::class, 'index'])->name('agenda.index');
 
 Route::get('school-identity', [SchoolIdentityController::class, 'index'])->name('school-identity.index');
+
+Route::get('extracurricular', [ExtracurricularController::class, 'index'])->name('extracurricular.index');

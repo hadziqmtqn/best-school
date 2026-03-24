@@ -35,7 +35,7 @@ class NavigationSeeder extends Seeder
                 [
                     'name' => NavigationCategory::EXTRACURICULAR->getLabel(),
                     'category' => null,
-                    'url' => '#',
+                    'url' => '/extracurricular',
                     'openInNewTab' => false
                 ],
                 [

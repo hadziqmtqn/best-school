@@ -11,6 +11,7 @@ use App\Repositories\References\SelectAchievementLevelRepository;
 use App\Repositories\SchoolManagements\AchievementRepository;
 use App\Repositories\SchoolManagements\EmployeePositionRepository;
 use App\Repositories\SchoolManagements\EmployeeRepository;
+use App\Repositories\SchoolManagements\ExtracurricularRepository;
 use App\Repositories\SchoolManagements\InstitutionRepository;
 use App\Repositories\SchoolManagements\NumberOfStudentRepository;
 use App\Repositories\SchoolManagements\SchoolYearRepository;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AchievementRepository::class, AchievementRepository::class);
         $this->app->bind(EmployeePositionRepository::class, EmployeePositionRepository::class);
         $this->app->bind(EmployeeRepository::class, EmployeeRepository::class);
+        $this->app->bind(ExtracurricularRepository::class, ExtracurricularRepository::class);
         $this->app->bind(InstitutionRepository::class, InstitutionRepository::class);
         $this->app->bind(NumberOfStudentRepository::class, NumberOfStudentRepository::class);
         $this->app->bind(SchoolYearRepository::class, SchoolYearRepository::class);
