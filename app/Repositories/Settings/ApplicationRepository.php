@@ -51,6 +51,7 @@ class ApplicationRepository
             'ctaTitle' => $application?->more_info['cta_title'] ?? null,
             'ctaDescription' => $application?->more_info['cta_description'] ?? null,
             'ctaUrl' => $application?->more_info['cta_url'] ?? '#',
+            'ctaBtnLabel' => $application?->more_info['cta_btn_label'] ?? 'Daftar Sekarang',
         ];
     }
 }

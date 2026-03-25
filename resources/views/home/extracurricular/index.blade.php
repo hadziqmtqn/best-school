@@ -1,6 +1,3 @@
-@use(Illuminate\Support\Str)
-@use(Illuminate\Support\Carbon)
-
 <x-home.master :title="$title">
 
     <section id="extracurricular" class="py-5 mt-5 pt-5 bg-main-light">
@@ -69,44 +66,7 @@
                 </div>
 
                 <!-- Kanan: Artikel Random & Promosi -->
-                <div class="col-lg-4" data-aos="fade-left">
-                    <div class="d-flex flex-column gap-4">
-                        <!-- Card Artikel Random (Tanpa Thumbnail) -->
-                        <div class="card border-0 shadow-sm rounded-4 flex-grow-1">
-                            <div class="card-body p-4">
-                                <span class="badge bg-info-soft text-info rounded-pill px-3 py-2 mb-3 fw-bold">Artikel Terkait</span>
-
-                                @foreach($relatedPosts as $relatedPost)
-                                    <div class="mb-2">
-                                        <a href="{{ route('post.show', $relatedPost->slug) }}" class="text-decoration-none text-primary">
-                                            {{ Str::limit($relatedPost->title) }}
-                                        </a>
-                                    </div>
-                                    <div class="mb-3 text-muted small">{{ Carbon::parse($relatedPost->created_at)->isoFormat('DD MMM Y') }}</div>
-
-                                    @if(!$loop->last)
-                                        <hr>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Card Promosi -->
-                        <div class="card bg-primary text-white border-0 shadow-primary rounded-4 overflow-hidden position-relative flex-grow-1">
-                            <!-- Background Decor -->
-                            <div class="position-absolute end-0 bottom-0 opacity-25" style="transform: translate(20%, 20%); pointer-events: none;">
-                                <i class="bi bi-mortarboard-fill" style="font-size: 8rem;"></i>
-                            </div>
-                            <div class="card-body p-4 position-relative z-1 d-flex flex-column justify-content-center">
-                                <h4 class="fw-bold mb-3 mt-1 text-white">Dapatkan Beasiswa Penuh!</h4>
-                                <p class="opacity-75 small lh-relaxed mb-4">
-                                    Berprestasi di akademik atau memiliki kemampuan ekstrakurikuler luar biasa? Daftar sekarang melalui jalur prestasi dan dapatkan pendidikan bebas biaya hingga lulus!
-                                </p>
-                                <a href="{{ $application['ctaUrl'] }}" class="btn btn-warning rounded-pill px-4 py-2 text-dark fw-bold w-100">Info Syarat & Daftar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <x-component.sidebar1/>
             </div>
         </div>
     </section>
