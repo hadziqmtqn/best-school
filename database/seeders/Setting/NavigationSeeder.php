@@ -41,7 +41,7 @@ class NavigationSeeder extends Seeder
                 [
                     'name' => NavigationCategory::ACHIEVEMENT->getLabel(),
                     'category' => null,
-                    'url' => '#',
+                    'url' => '/achievement',
                     'openInNewTab' => false
                 ]
             ]
@@ -79,7 +79,7 @@ class NavigationSeeder extends Seeder
                 [
                     'name' => NavigationCategory::ANNOUNCEMENT->getLabel(),
                     'category' => null,
-                    'url' => '#',
+                    'url' => '/announcement',
                     'openInNewTab' => false
                 ],
             ]
