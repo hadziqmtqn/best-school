@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Navigations\PanelNavigation;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -84,6 +85,10 @@ class AdminPanelProvider extends PanelProvider
                 return PanelNavigation::menus($navigationBuilder);
             })
             ->databaseTransactions()
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
+            ->profile()
+            ->multiFactorAuthentication([
+                AppAuthentication::make(),
+            ]);
     }
 }

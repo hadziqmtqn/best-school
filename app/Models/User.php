@@ -4,6 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthentication;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthenticationRecovery;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,10 +23,10 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRoles, HasSlug, SoftDeletes, InteractsWithMedia;
+    use HasFactory, Notifiable, HasRoles, HasSlug, SoftDeletes, InteractsWithMedia, InteractsWithAppAuthentication, InteractsWithAppAuthenticationRecovery;
 
     /**
      * The attributes that are mass assignable.
@@ -42,7 +48,15 @@ class User extends Authenticatable implements HasMedia
     protected $hidden = [
         'password',
         'remember_token',
+        'app_authentication_secret',
+        'app_authentication_recovery_codes'
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // TODO: Implement canAccessPanel() method.
+        return true;
+    }
 
     /**
      * Get the attributes that should be cast.
