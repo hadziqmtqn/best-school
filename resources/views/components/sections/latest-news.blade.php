@@ -14,7 +14,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="news-card">
                         <div class="news-img-wrapper">
-                            <span class="category-badge" title="{{ $post->postCategory?->name }}">{{ Str::limit($post->postCategory?->name, 10) }}</span>
+                            <span class="category-badge" data-bs-toggle="tooltip" title="{{ $post->postCategory?->name }}">{{ Str::limit($post->postCategory?->name, 10) }}</span>
                             <img src="{{ $post->thumbnail }}" class="news-img" alt="News 2">
                         </div>
                         <div class="card-body">
@@ -22,7 +22,7 @@
                                 <i class="bi bi-calendar3"></i> {{ Carbon::parse($post->created_at)->isoFormat('DD MMM Y') }}
                             </div>
                             <a href="{{ route('post.show', $post->slug) }}" style="text-decoration: none">
-                                <h5 class="card-title fw-bold mb-3">{{ Str::limit($post->title, 80) }}</h5>
+                                <h5 class="card-title fw-bold mb-3">{{ Str::limit($post->title, 50) }}</h5>
                             </a>
                             <p class="card-text text-muted">{{ strip_tags(Str::limit($post->content)) }}</p>
                             <a href="{{ route('post.show', $post->slug) }}" class="btn btn-sm btn-outline-primary mt-3 rounded-pill">Baca Selengkapnya</a>

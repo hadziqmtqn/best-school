@@ -69,7 +69,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach ($relatedPosts as $relatedPost)
                                 <li class="list-group-item px-4 py-3">
-                                    <a href="berita-3.html" class="related-news-link d-flex align-items-center gap-3">
+                                    <a href="{{ route('post.show', $relatedPost->slug) }}" class="related-news-link d-flex align-items-center gap-3">
                                         <img src="{{ $relatedPost->thumbnail }}" class="rounded" alt="Thumb" width="60">
                                         <div>
                                             <small class="text-muted d-block">{{ Carbon::parse($relatedPost->created_at)->isoFormat('DD MMM Y') }}</small>

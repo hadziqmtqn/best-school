@@ -30,7 +30,7 @@ class ApplicationResource extends Resource
 
     protected static ?string $label = 'Aplikasi';
 
-    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Start;
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getNavigationUrl(): string
     {

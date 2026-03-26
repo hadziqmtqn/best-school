@@ -15,9 +15,9 @@ class EditMoreInfo extends EditRecord
 
     protected static string | BackedEnum | null $navigationIcon = Phosphor::InfoDuotone;
 
-    protected static ?string $navigationLabel = 'Informasi Lain';
+    protected static ?string $navigationLabel = 'Lainnya';
 
-    protected static ?string $title = 'Informasi Lain';
+    protected static ?string $title = 'Pengaturan Lainnya';
 
     public function form(Schema $schema): Schema
     {

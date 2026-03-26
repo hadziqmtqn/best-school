@@ -27,7 +27,7 @@ class MoreInfoForm
                             ->placeholder('Nama akreditasi lembaga'),
                     ]),
 
-                Section::make('Call To Action')
+                Section::make('Call To Action (Utama)')
                     ->columnSpanFull()
                     ->collapsible()
                     ->columns()
@@ -49,6 +49,32 @@ class MoreInfoForm
                             ->placeholder('Masukkan URL tujuan'),
 
                         TextInput::make('more_info.cta_btn_label')
+                            ->label('Label Tombol')
+                            ->placeholder('Masukkan label tombol'),
+                    ]),
+
+                Section::make('Call To Action (Sidebar)')
+                    ->columnSpanFull()
+                    ->collapsible()
+                    ->columns()
+                    ->schema([
+                        TextInput::make('more_info.cta_sidebar_title')
+                            ->label('Judul Aksi')
+                            ->placeholder('Masukkan judul aksi')
+                            ->columnSpanFull(),
+
+                        Textarea::make('more_info.cta_sidebar_description')
+                            ->label('Deskripsi')
+                            ->placeholder('Masukkan deskripsi')
+                            ->autosize()
+                            ->columnSpanFull(),
+
+                        TextInput::make('more_info.cta_sidebar_url')
+                            ->label('URL Aksi')
+                            ->url()
+                            ->placeholder('Masukkan URL tujuan'),
+
+                        TextInput::make('more_info.cta_sidebar_btn_label')
                             ->label('Label Tombol')
                             ->placeholder('Masukkan label tombol'),
                     ]),

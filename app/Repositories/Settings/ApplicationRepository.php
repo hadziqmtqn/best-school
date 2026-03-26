@@ -52,6 +52,10 @@ class ApplicationRepository
             'ctaDescription' => $application?->more_info['cta_description'] ?? null,
             'ctaUrl' => $application?->more_info['cta_url'] ?? '#',
             'ctaBtnLabel' => $application?->more_info['cta_btn_label'] ?? 'Daftar Sekarang',
+            'ctaSidebarTitle' => $application?->more_info['cta_sidebar_title'] ?? null,
+            'ctaSidebarDescription' => $application?->more_info['cta_sidebar_description'] ?? null,
+            'ctaSidebarUrl' => $application?->more_info['cta_sidebar_url'] ?? '#',
+            'ctaSidebarBtnLabel' => $application?->more_info['cta_sidebar_btn_label'] ?? 'Daftar Sekarang',
         ];
     }
 }

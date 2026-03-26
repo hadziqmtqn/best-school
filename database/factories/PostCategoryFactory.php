@@ -14,7 +14,7 @@ class PostCategoryFactory extends Factory
 
     public function definition(): array
     {
-        $name = $this->faker->sentence();
+        $name = $this->faker->sentence(2);
 
         return [
             'slug' => Str::slug($name),
