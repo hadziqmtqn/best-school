@@ -1,3 +1,5 @@
+@use(Illuminate\Support\Str)
+
 <x-home.master :title="$title">
 
     <section id="extracurricular" class="py-5 mt-5 pt-5 bg-main-light">
@@ -16,7 +18,28 @@
                             <h5 class="fw-bold mb-0">{{ $title }}</h5>
                         </div>
                         <div class="card-body p-4">
-
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-nowrap w-100">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Lembaga</th>
+                                        <th>Deskripsi</th>
+                                        <th>Tahun</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($achievements as $achievement)
+                                        <tr>
+                                            <td>{{ $achievement->name }}</td>
+                                            <td>{{ $achievement->institution?->name }}</td>
+                                            <td>{{ Str::limit($achievement->description, 70) }}</td>
+                                            <td>{{ $achievement->year }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

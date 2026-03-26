@@ -17,7 +17,7 @@ class AchievementRepository
             ->count();
     }
 
-    public function index(): LengthAwarePaginator|_IH_Achievement_C|array|AbstractPaginator
+    public function index(): LengthAwarePaginator|_IH_Achievement_C|AbstractPaginator
     {
         return Achievement::query()
             ->with('institution:id,name')
