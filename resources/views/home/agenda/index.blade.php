@@ -99,7 +99,7 @@
                         @endif
 
                         <!-- Pagination UI -->
-                        {{ $agendas->links('vendor.pagination.best-pagination') }}
+                        {{ $agendas->links() }}
                     </div>
                 </div>
 
@@ -137,6 +137,8 @@
                             </a>
                         </div>
                     </div>
+
+                    <x-component.widget-cta/>
                 </div>
             </div>
         </div>

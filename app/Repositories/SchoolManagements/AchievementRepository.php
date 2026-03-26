@@ -17,12 +17,12 @@ class AchievementRepository
             ->count();
     }
 
-    public function index(): LengthAwarePaginator|_IH_Achievement_C|AbstractPaginator
+    public function index(?int $perPage = 10): LengthAwarePaginator|_IH_Achievement_C|AbstractPaginator
     {
         return Achievement::query()
             ->with('institution:id,name')
             ->orderByDesc('year')
-            ->paginate(10)
+            ->paginate($perPage)
             ->withQueryString();
     }
 }

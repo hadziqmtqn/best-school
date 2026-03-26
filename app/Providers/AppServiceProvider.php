@@ -18,6 +18,7 @@ use App\Repositories\SchoolManagements\SchoolYearRepository;
 use App\Repositories\Settings\ApplicationRepository;
 use App\Repositories\Settings\HomeNavigationRepository;
 use App\Repositories\Settings\SubNavigationRepository;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -59,6 +60,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::defaultView('vendor.pagination.best-pagination');
     }
 }

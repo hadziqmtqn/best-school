@@ -1,4 +1,5 @@
 @use(Illuminate\Support\Str)
+@use(App\Enums\AchievementLevel)
 
 <x-home.master :title="$title">
 
@@ -24,8 +25,9 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Lembaga</th>
-                                        <th>Deskripsi</th>
                                         <th>Tahun</th>
+                                        <th>Tingkat</th>
+                                        <th>Deskripsi</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -33,13 +35,21 @@
                                         <tr>
                                             <td>{{ $achievement->name }}</td>
                                             <td>{{ $achievement->institution?->name }}</td>
-                                            <td>{{ Str::limit($achievement->description, 70) }}</td>
                                             <td>{{ $achievement->year }}</td>
+                                            <td><span class="badge bg-label-{{ AchievementLevel::tryFrom($achievement->achievement_level)?->getColor() ?? 'secondary' }}">{{ $achievement->achievement_level }}</span></td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="me-4">{{ Str::limit($achievement->description, 70) }}</div>
+                                                    <div data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip-primary" title="{{ $achievement->description }}"><i class="bi bi-info-circle"></i></div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
+                            {{ $achievements->links() }}
                         </div>
                     </div>
                 </div>

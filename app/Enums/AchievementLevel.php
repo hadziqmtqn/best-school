@@ -3,10 +3,11 @@
 namespace App\Enums;
 
 use App\Traits\EnumOption;
+use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
 
-enum AchievementLevel: string implements HasLabel
+enum AchievementLevel: string implements HasLabel, HasColor
 {
     use EnumOption;
 
@@ -25,6 +26,18 @@ enum AchievementLevel: string implements HasLabel
             self::PROVINSI => self::PROVINSI->value,
             self::KABUPATEN => self::KABUPATEN->value,
             self::SEKOLAH => self::SEKOLAH->value,
+        };
+    }
+
+    public function getColor(): string|array|null
+    {
+        // TODO: Implement getColor() method.
+        return match ($this) {
+            self::INTERNASIONAL => 'primary',
+            self::NASIONAL => 'success',
+            self::PROVINSI => 'info',
+            self::KABUPATEN => 'warning',
+            self::SEKOLAH => 'secondary',
         };
     }
 }
