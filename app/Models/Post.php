@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\StatusData;
+use App\Observers\PostObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -15,6 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[ObservedBy([PostObserver::class])]
 class Post extends Model implements HasMedia
 {
     use SoftDeletes, HasSlug, InteractsWithMedia, HasFactory;
@@ -32,7 +35,8 @@ class Post extends Model implements HasMedia
         'visibility',
         'password',
         'allow_comment',
-        'tags'
+        'tags',
+        'unsplash_url'
     ];
 
     protected function casts(): array
@@ -137,7 +141,7 @@ class Post extends Model implements HasMedia
     protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->hasMedia('thumbanil') ? $this->getFirstMediaUrl('thumbnail') : asset('assets/student-1.png'),
+            get: fn() => $this->hasMedia('thumbanil') ? $this->getFirstMediaUrl('thumbnail') : ($this->unsplash_url ?? asset('assets/student-1.png')),
         );
     }
 }

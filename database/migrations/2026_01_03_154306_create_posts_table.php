@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->string('password')->nullable();
             $table->boolean('allow_comment')->default(false);
             $table->json('tags')->nullable();
+            $table->text('unsplash_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
