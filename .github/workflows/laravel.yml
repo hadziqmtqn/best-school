@@ -37,4 +37,6 @@ jobs:
           cd /www/wwwroot/best-school.bkn.my.id/best-school
           git pull origin master
           composer install --no-dev --optimize-autoloader
+          php artisan config:clear
+          php artisan config:cache
           php artisan optimize
