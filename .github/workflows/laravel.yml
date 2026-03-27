@@ -1,0 +1,40 @@
+name: Laravel Deploy to aaPanel
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  # JOB 1: Menjalankan Testing (Opsional tapi disarankan)
+  laravel-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3' # Sesuaikan dengan versi PHP di aaPanel kamu
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    # Kita skip bagian Database & Test jika kamu ingin deploy langsung cepat
+    # Jika ingin test dengan MySQL, GitHub Actions menyediakan 'services' mysql
+
+  # JOB 2: Proses Deploy ke aaPanel via SSH
+  deploy:
+    runs-on: ubuntu-latest
+    needs: laravel-tests # Hanya jalan jika test di atas berhasil
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Deploy to Server via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /www/wwwroot/best-school.bkn.my.id/best-school
+          git pull origin master
+          composer install --no-dev --optimize-autoloader
+          php artisan optimize
