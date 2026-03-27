@@ -6,6 +6,7 @@ use App\Models\Gallery;
 use App\Services\Media\YoutubeService;
 use App\Traits\UnsplashPhotos;
 use Cache;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Request;
 
@@ -79,7 +80,7 @@ class GalleryRepository
         );
     }
 
-    public function video(Request $request): LengthAwarePaginator
+    public function video(HttpRequest $request): LengthAwarePaginator
     {
         $perPage = 6;
         $currentPage = (int) $request->input('page', 1);
