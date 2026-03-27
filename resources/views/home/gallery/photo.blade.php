@@ -22,7 +22,7 @@
                             </span>
                         @endif
 
-                        <a href="{{ $gallery['image'] }}" data-fancybox="gallery" data-caption="Kegiatan Belajar Mengajar di Kelas Modern">
+                        <a href="{{ $gallery['image'] }}" data-fancybox="gallery" data-caption="{{ $gallery['name'] }}">
                             <img src="{{ $gallery['image'] }}" alt="Gallery Image">
                             <div class="gallery-icon"><i class="bi bi-zoom-in"></i></div>
                             <div class="gallery-overlay">

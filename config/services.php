@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'youtube' => [
+        'key' => env('GOOGLE_API_KEY')
+    ],
+
+    'unsplash' => [
+        'access_key' => env('UNSPLASH_ACCESS_KEY')
+    ]
 ];

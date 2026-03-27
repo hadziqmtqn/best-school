@@ -15,7 +15,7 @@ trait UnsplashPhotos
     {
         $response = Http::get("https://api.unsplash.com/search/photos", [
             'query' => $query,
-            'client_id' => config('unplash.access_key'),
+            'client_id' => config('services.unsplash.access_key'),
             'per_page' => $perPage,
             'orientation' => $orientation
         ]);
@@ -27,7 +27,6 @@ trait UnsplashPhotos
                 return [
                     'name' => $item['alt_description'] ?? 'School Photo',
                     'description' => $item['description'] ?? 'Foto kegiatan sekolah',
-                    'type' => 'photo',
                     'image' => $item['urls']['regular'],
                     'photographer' => [
                         'name' => $item['user']['name'],
