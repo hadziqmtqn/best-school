@@ -36,7 +36,7 @@ jobs:
         script: |
           cd /www/wwwroot/best-school.bkn.my.id/best-school
           git pull origin master
-          composer install --no-dev --optimize-autoloader
+          composer install
           php artisan config:clear
           php artisan config:cache
           php artisan optimize
