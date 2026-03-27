@@ -64,10 +64,22 @@ class GalleryForm
                             ->reactive()
                             ->visible(fn(Get $get): bool => $get('type') === 'photo'),
 
+                        SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->disk('s3_public')
+                            ->visibility('public')
+                            ->collection('thumbnail')
+                            ->image()
+                            ->maxSize(300)
+                            ->required()
+                            ->reactive()
+                            ->visible(fn(Get $get): bool => $get('type') === 'video'),
+
                         TextInput::make('youtube_id')
                             ->label('ID Youtube')
                             ->required()
                             ->placeholder('Masukkan ID Video Youtube')
+                            ->reactive()
                             ->visible(fn(Get $get): bool => $get('type') === 'video')
                     ])
             ]);

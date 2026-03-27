@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Event\GalleryRepository;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
@@ -21,15 +22,16 @@ class GalleryController extends Controller
     public function photo(): View
     {
         $title = 'Foto';
-        $galleries = $this->galleryRepository->index();
+        $galleries = $this->galleryRepository->photo();
 
         return \view('home.gallery.photo', compact('title', 'galleries'));
     }
 
-    public function video(): View
+    public function video(Request $request): View
     {
         $title = 'Video';
+        $videos = $this->galleryRepository->video($request);
 
-        return \view('home.gallery.video', compact('title'));
+        return \view('home.gallery.video', compact('title', 'videos'));
     }
 }
