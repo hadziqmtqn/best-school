@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
+use App\Observers\PostObserver;
 use App\Repositories\Event\AgendaRepository;
 use App\Repositories\Event\GalleryRepository;
 use App\Repositories\Posts\LeadershipGreetingRepository;
@@ -62,6 +64,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Paginator
         Paginator::defaultView('vendor.pagination.best-pagination');
+
+        // Observer
+        Post::observe(PostObserver::class);
     }
 }
