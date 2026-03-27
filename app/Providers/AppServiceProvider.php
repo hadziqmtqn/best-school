@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\Event\AgendaRepository;
+use App\Repositories\Event\GalleryRepository;
 use App\Repositories\Posts\LeadershipGreetingRepository;
 use App\Repositories\Posts\NavigationPageRepository;
 use App\Repositories\References\EducationalLevelRepository;
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // EVENT
         $this->app->bind(AgendaRepository::class, AgendaRepository::class);
+        $this->app->bind(GalleryRepository::class, GalleryRepository::class);
 
         // POSTS
         $this->app->bind(LeadershipGreetingRepository::class, LeadershipGreetingRepository::class);

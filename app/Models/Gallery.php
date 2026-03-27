@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,5 +47,12 @@ class Gallery extends Model implements HasMedia
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institution::class);
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function filterByType(Builder $query, $type): Builder
+    {
+        return $query->where('type', $type);
     }
 }
