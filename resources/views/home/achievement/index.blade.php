@@ -3,13 +3,10 @@
 
 <x-home.master :title="$title">
 
-    <section id="extracurricular" class="py-5 mt-5 pt-5 bg-main-light">
+    <section id="achievement" class="py-5 mt-5 pt-5 bg-main-light">
         <div class="container py-lg-5">
-            <div class="text-center mb-5">
-                <h6 class="text-primary fw-bold text-uppercase mb-2 ls-1">{{ $title }}</h6>
-                <h2 class="fw-bold mb-3">Mengenal Lebih Dekat</h2>
-                <p class="text-muted mb-0">Informasi lengkap mengenai {{ $title }} {{ $application['name'] }}.</p>
-            </div>
+
+            <x-home.bread-crumb :title="$title" name="Mengenal Lebih Dekat" description="Informasi lengkap mengenai {{ $title }} {{ $application['name'] }}."/>
 
             <div class="row g-4">
                 <!-- Kiri: Tabs Utama -->

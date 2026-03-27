@@ -7,6 +7,8 @@
     <title>{{ $title }} - {{ $application['name'] }}</title>
 
     <x-home.head/>
+    @stack('styles')
+
     <style>
         :root {
             @foreach($application['themeColors'] as $variable => $value)
@@ -29,6 +31,8 @@
 <x-home.footer/>
 
 <x-home.scripts/>
+
+@stack('scripts')
 </body>
 
 </html>

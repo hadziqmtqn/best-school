@@ -53,13 +53,13 @@ class NavigationSeeder extends Seeder
                 [
                     'name' => NavigationCategory::PHOTO->getLabel(),
                     'category' => null,
-                    'url' => '/gallery?type=photo',
+                    'url' => '/gallery/photo',
                     'openInNewTab' => false
                 ],
                 [
                     'name' => NavigationCategory::VIDEO->getLabel(),
                     'category' => null,
-                    'url' => '/gallery?type=video',
+                    'url' => '/gallery/video',
                     'openInNewTab' => false
                 ]
             ]
