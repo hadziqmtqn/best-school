@@ -6,7 +6,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
-trait UnplashPhotos
+trait UnsplashPhotos
 {
     /**
      * @throws ConnectionException
@@ -29,7 +29,11 @@ trait UnplashPhotos
                     'description' => $item['description'] ?? 'Foto kegiatan sekolah',
                     'type' => 'photo',
                     'image' => $item['urls']['regular'],
-                    'photographer' => $item['user']['name']
+                    'photographer' => [
+                        'name' => $item['user']['name'],
+                        'link' => $item['user']['links']['html'] ?? null
+                    ],
+                    'source' => 'unsplash'
                 ];
             });
         }

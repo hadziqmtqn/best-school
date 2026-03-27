@@ -3,14 +3,14 @@
 namespace App\Repositories\Event;
 
 use App\Models\Gallery;
-use App\Traits\UnplashPhotos;
+use App\Traits\UnsplashPhotos;
 use Cache;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Request;
 
 class GalleryRepository
 {
-    use UnplashPhotos;
+    use UnsplashPhotos;
 
     public function index(): LengthAwarePaginator
     {
@@ -32,15 +32,20 @@ class GalleryRepository
                     'description'  => $item->description,
                     'type' => $item->type,
                     'image' => $media->getFullUrl(), // Ambil URL dari Spatie Media
-                    'photographer' => $item->institution?->name ?? 'Admin',
+                    'photographer' => [
+                        'name' => 'Admin',
+                        'link' => null
+                    ],
+                    'source' => 'internal_assets'
                 ];
             });
         });
 
         // 3. Jika DB ternyata kosong (tidak ada media sama sekali)
         if ($flatGalleries->isEmpty()) {
+            //Cache::clear();
             $unsplashData = Cache::remember('unsplash_school_data', 3600, function() {
-                return $this->getUnsplashPhotos(query: 'school', perPage: 48);
+                return $this->getUnsplashPhotos(query: 'indonesia-young-students', perPage: 48);
             });
 
             $total = $unsplashData->count();
