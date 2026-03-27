@@ -1,0 +1,9 @@
+@if($application['ctaTitle'])
+    <section class="py-5 text-white text-center bg-primary">
+        <div class="container">
+            <h2 class="fw-bold mb-3">{{ $application['ctaTitle'] }}</h2>
+            <p class="lead mb-4 opacity-75">{{ $application['ctaDescription'] }}</p>
+            <a href="{{ $application['ctaUrl'] }}" target="_blank" class="btn btn-warning btn-lg rounded-4 text-dark fw-bold px-5 shadow">Daftar Sekarang</a>
+        </div>
+    </section>
+@endif

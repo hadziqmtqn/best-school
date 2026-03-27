@@ -14,6 +14,7 @@ class PersonnelDepartment extends Model
     protected $fillable = [
         'slug',
         'name',
+        'level',
         'description',
     ];
 

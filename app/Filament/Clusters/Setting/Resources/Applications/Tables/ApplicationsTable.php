@@ -17,7 +17,7 @@ class ApplicationsTable
                     ->label('Nama'),
 
                 TextColumn::make('short_name')
-                    ->label('Nama Singkatan')
+                    ->label('Nama Singkatan'),
             ])
             ->filters([
                 //
@@ -26,7 +26,6 @@ class ApplicationsTable
                 EditAction::make()
                     ->button()
                     ->outlined()
-                    ->modalHeading('Ubah Aplikasi')
                     ->modalWidth('md')
             ])
             ->toolbarActions([

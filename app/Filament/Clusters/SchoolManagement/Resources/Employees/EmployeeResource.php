@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Filament\Clusters\SchoolManagement\Resources\Employees;
+
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\CreateEmployee;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ListEmployees;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Pages\ViewEmployee;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\EducationalHistoriesRelationManager;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\EmployeePositionsRelationManager;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\RelationManagers\HomebasesRelationManager;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Schemas\EmployeeForm;
+use App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables\EmployeesTable;
+use App\Filament\Clusters\SchoolManagement\SchoolManagementCluster;
+use App\Helpers\CanAccess;
+use App\Helpers\UserRole;
+use App\Models\User;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
+
+class EmployeeResource extends Resource
+{
+    protected static ?string $model = User::class;
+
+    protected static ?string $cluster = SchoolManagementCluster::class;
+
+    protected static ?string $navigationLabel = 'Pegawai';
+
+    protected static ?string $label = 'Pegawai';
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    public static function canAccess(): bool
+    {
+        return CanAccess::to('ViewAnyEmployee');
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return EmployeeForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return EmployeesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            HomebasesRelationManager::class,
+            EmployeePositionsRelationManager::class,
+            EducationalHistoriesRelationManager::class
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListEmployees::route('/'),
+            'create' => CreateEmployee::route('/create'),
+            'view' => ViewEmployee::route('/{record}')
+        ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $employee = Auth::user()->loadMissing('homebaseActive');
+
+        return parent::getEloquentQuery()
+            ->with([
+                'employee',
+                'homebaseActive.institution',
+                'homebases.institution',
+                'employeePositions.personnelDepartment',
+                'employeePositionActive.personnelDepartment',
+                'educationalHistories.educationalLevel'
+            ])
+            ->whereHas('employee', function ($query) use ($employee) {
+                if (!UserRole::isSuperAdmin()) {
+                    $query->where('institution_id', $employee->homebaseActive?->institution_id);
+                }
+            });
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'employee.nip', 'employee.nuptk', 'email'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->name;
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'NUPTK' => $record->employee?->nuptk,
+            'Lembaga' => $record->homebaseActive?->institution?->name,
+            'Jabatan' => $record->employeePositionActive?->personnelDepartment?->name
+        ];
+    }
+}

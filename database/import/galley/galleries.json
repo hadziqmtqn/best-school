@@ -1,0 +1,20 @@
+[
+  {
+    "name": "",
+    "description": "",
+    "type": "photo",
+    "youtube_id": null,
+    "action_url": null,
+    "action_name": null,
+    "image": "#"
+  },
+  {
+    "name": "",
+    "description": "",
+    "type": "video",
+    "youtube_id": null,
+    "action_url": null,
+    "action_name": null,
+    "image": null
+  }
+]

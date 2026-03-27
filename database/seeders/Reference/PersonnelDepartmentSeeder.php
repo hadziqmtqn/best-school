@@ -10,10 +10,11 @@ class PersonnelDepartmentSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach ($this->list() as $item) {
+        foreach ($this->list() as $index => $item) {
             PersonnelDepartment::create([
                 'slug' => Str::slug($item),
-                'name' => $item
+                'name' => $item,
+                'level' => $index + 1
             ]);
         }
     }
@@ -23,7 +24,7 @@ class PersonnelDepartmentSeeder extends Seeder
         return [
             'Kepala Sekolah',
             'Wakil Kepala Sekolah',
-            'Guru Kelas',
+            'Wali Kelas',
             'Guru Pengganti',
             'Bendahara',
             'Sekretaris',

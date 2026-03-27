@@ -10,6 +10,8 @@ class EditApplication extends EditRecord
 {
     protected static string $resource = ApplicationResource::class;
 
+    protected static ?string $navigationLabel = 'Umum';
+
     protected function getHeaderActions(): array
     {
         return [

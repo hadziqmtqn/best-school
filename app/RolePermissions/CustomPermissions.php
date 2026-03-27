@@ -14,7 +14,7 @@ class CustomPermissions
 
         foreach ($custom as $slug => $permissionMap) {
             foreach ($permissionMap as $perm => $roles) {
-                $permissions[] = Str::of($perm)->studly()->toString() . ':' . Str::of($slug)->studly()->toString();
+                $permissions[] = Str::of($perm)->studly()->toString() . Str::of($slug)->studly()->toString();
             }
         }
 

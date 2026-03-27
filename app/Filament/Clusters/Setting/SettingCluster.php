@@ -6,6 +6,8 @@ use Filament\Clusters\Cluster;
 
 class SettingCluster extends Cluster
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function canAccess(): bool
     {
         return false;

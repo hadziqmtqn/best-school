@@ -20,9 +20,11 @@ class AdminResource extends Resource
 
     protected static ?string $cluster = SettingCluster::class;
 
+    protected static ?string $label = 'Admin';
+
     public static function canAccess(): bool
     {
-        return CanAccess::to('ViewAny:Admin');
+        return CanAccess::to('ViewAnyAdmin');
     }
 
     protected static bool $shouldRegisterNavigation = false;
@@ -63,6 +65,8 @@ class AdminResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        return parent::getEloquentQuery()
+            ->with(['roles', 'employee', 'homebaseActive.institution', 'employeePositionActive.personnelDepartment'])
+            ->whereHas('roles');
     }
 }

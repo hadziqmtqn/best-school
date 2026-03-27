@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Navigations\PanelNavigation;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -35,6 +36,10 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Teal,
             ])
+            ->brandLogo(fn() => view('filament.logo'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('assets/bekenweb-logo.png'))
+            ->homeUrl('/')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -75,11 +80,15 @@ class AdminPanelProvider extends PanelProvider
                     ])
             ])
             ->topNavigation()
-            ->breadcrumbs(false)
+            ->breadcrumbs()
             ->navigation(function (NavigationBuilder $navigationBuilder): NavigationBuilder {
                 return PanelNavigation::menus($navigationBuilder);
             })
             ->databaseTransactions()
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
+            ->profile()
+            ->multiFactorAuthentication([
+                AppAuthentication::make(),
+            ]);
     }
 }
