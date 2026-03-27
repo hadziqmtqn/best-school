@@ -25,7 +25,6 @@ class NavigationSeeder extends Seeder
         $this->create(
             name: 'Identitas Sekolah',
             url: '/school-identity',
-            openNewTab: true
         );
 
         $this->create(
@@ -54,13 +53,13 @@ class NavigationSeeder extends Seeder
                 [
                     'name' => NavigationCategory::PHOTO->getLabel(),
                     'category' => null,
-                    'url' => '#',
+                    'url' => '/gallery?type=photo',
                     'openInNewTab' => false
                 ],
                 [
                     'name' => NavigationCategory::VIDEO->getLabel(),
                     'category' => null,
-                    'url' => '#',
+                    'url' => '/gallery?type=video',
                     'openInNewTab' => false
                 ]
             ]
