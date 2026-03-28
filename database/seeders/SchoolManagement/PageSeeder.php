@@ -3,6 +3,7 @@
 namespace Database\Seeders\SchoolManagement;
 
 use App\Enums\NavigationCategory;
+use App\Models\Institution;
 use App\Models\Navigation;
 use App\Models\Post;
 use App\Repositories\Settings\SubNavigationRepository;
@@ -36,24 +37,54 @@ class PageSeeder extends Seeder
         $navigation->name = 'Profil';
         $navigation->save();
 
-        foreach ($rows as $row) {
-            $title = $row['title'];
+        // PROFILE
+        $profileRow = $rows[0]['profil'];
+        if ($profileRow) {
+            $profile = $this->createPage(title: $profileRow['title'], content: $profileRow['content']);
+            $this->subNavigationRepository->subNavigation($navigation->id, $profile->title, null, $profile->id);
+        }
 
-            $post = Post::create([
-                'slug' => Str::slug($title),
-                'title' => $title,
-                'content' => $row['content'],
-                'type' => 'page',
-                'status' => 'published',
-                'visibility' => 'public',
-                'allow_comment' => false,
-                'user_id' => 1,
-                'reviewed_by' => 1
-            ]);
+        // VISI MISI
+        $visionRow = $rows[1]['visi_misi'];
+        if ($visionRow) {
+            $vision = $this->createPage(title: $visionRow['title'], content: $visionRow['content']);
+            $this->subNavigationRepository->subNavigation($navigation->id, $vision->title, null, $vision->id);
 
-            $this->subNavigationRepository->subNavigation($navigation->id, $title, null, $post->id);
+            // VISI & MISI SEKOLAH
+            $this->vision($vision->content);
         }
 
         $this->subNavigationRepository->subNavigation($navigation->id, 'Pendidik', NavigationCategory::TEACHER->value);
+    }
+
+    private function vision($content): void
+    {
+        foreach (Institution::all() as $institution) {
+            $page = $this->createPage(
+                title: 'Visi dan Misi ' . $institution->name,
+                content: $content
+            );
+
+            $institution->update([
+                'more_info' => [
+                    'vision_page_id' => $page->id
+                ]
+            ]);
+        }
+    }
+
+    private function createPage($title, $content): Post
+    {
+        return Post::create([
+            'slug' => Str::slug($title),
+            'title' => $title,
+            'content' => $content,
+            'type' => 'page',
+            'status' => 'published',
+            'visibility' => 'public',
+            'allow_comment' => false,
+            'user_id' => 1,
+            'reviewed_by' => 1
+        ]);
     }
 }

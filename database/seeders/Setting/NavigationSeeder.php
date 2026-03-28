@@ -27,7 +27,7 @@ class NavigationSeeder extends Seeder
             url: '/school-identity',
         );
 
-        $this->create(
+        /*$this->create(
             name: 'Program',
             hasSubNavigation: true,
             subNavCategories: [
@@ -44,7 +44,7 @@ class NavigationSeeder extends Seeder
                     'openInNewTab' => false
                 ]
             ]
-        );
+        );*/
 
         $this->create(
             name: 'Galeri',
