@@ -4,7 +4,6 @@ namespace Database\Seeders\SchoolManagement;
 
 use App\Models\EducationalLevel;
 use App\Models\Institution;
-use Faker\Factory;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -18,11 +17,6 @@ class InstitutionSeeder extends Seeder
     public function run(): void
     {
         $rows = json_decode(File::get(database_path('import/school-managements/institutions.json')), true);
-        $faker = Factory::create('id_ID');
-
-        $profile = '<p>' . $faker->realText() . '</p>';
-        $profile .= '<p>' . $faker->realText() . '</p>';
-        $profile .= '<p>' . $faker->realText() . '</p>';
 
         foreach ($rows as $row) {
             $name = $row['name'];
@@ -41,7 +35,7 @@ class InstitutionSeeder extends Seeder
                 'street' => $row['street'],
                 'postal_code' => $row['postal_code'],
                 'status' => $row['status'],
-                'profile' => $profile,
+                'profile' => $row['profile'],
                 'school_establishment_decree' => $row['school_establishment_decree'],
                 'date_establishment_decree' => $row['date_establishment_decree'],
                 'operational_permit_decree' => $row['operational_permit_decree'],

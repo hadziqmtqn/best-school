@@ -26,7 +26,7 @@ class FacilityFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'institution_id' => 1,
+            'institution_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }

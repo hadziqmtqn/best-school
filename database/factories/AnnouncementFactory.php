@@ -25,7 +25,7 @@ class AnnouncementFactory extends Factory
 
             'user_id' => 1,
             'validated_by' => 1,
-            'institution_id' => 1,
+            'institution_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }

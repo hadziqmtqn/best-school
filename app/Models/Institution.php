@@ -36,8 +36,16 @@ class Institution extends Model implements HasMedia
         'school_establishment_decree',
         'date_establishment_decree',
         'operational_permit_decree',
-        'date_operational_permit_decree'
+        'date_operational_permit_decree',
+        'more_info'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'more_info' => 'array'
+        ];
+    }
 
     public function getSlugOptions(): SlugOptions
     {

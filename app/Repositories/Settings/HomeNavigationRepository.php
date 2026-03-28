@@ -17,14 +17,14 @@ class HomeNavigationRepository
             ->orderBy('serial_number')
             ->get()
             ->map(function (Navigation $navigation) {
-                $mainNavUrl = $navigation->post_id ? route('page', $navigation->post) : null;
-                $url =$navigation->url;
+                $mainNavUrl = $navigation->post_id && $navigation->post ? route('page', $navigation->post) : null;
+                $url = $navigation->url;
                 $currentUrl = url()->current();
 
                 // 1. Map dulu sub-navigasinya agar kita punya datanya
                 $mappedSubNavs = $navigation->subNavigations->map(function (SubNavigation $subNavigation) use ($currentUrl) {
-                    $subUrl = $subNavigation->post_id ? route('page', $subNavigation->post) : null;
-                    $url =$subNavigation->url;
+                    $subUrl = $subNavigation->post_id && $subNavigation->post ? route('page', $subNavigation->post) : null;
+                    $url = $subNavigation->url;
 
                     return [
                         'name' => $subNavigation->name,

@@ -34,7 +34,7 @@ class AgendaFactory extends Factory
 
             'user_id' => 1,
             'validated_by' => $validated ? 1 : null,
-            'institution_id' => 1,
+            'institution_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }

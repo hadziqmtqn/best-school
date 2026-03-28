@@ -15,7 +15,7 @@ class AchievementFactory extends Factory
     {
         return [
             'slug' => Str::uuid()->toString(),
-            'institution_id' => 1,
+            'institution_id' => $this->faker->randomElement([1, 2]),
             'name' => $this->faker->sentence(),
             'contestant' => $this->faker->name(),
             'organizer' => $this->faker->company(),

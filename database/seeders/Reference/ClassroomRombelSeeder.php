@@ -11,7 +11,7 @@ class ClassroomRombelSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach (['X', 'XI', 'XII'] as $item) {
+        foreach (['VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as $item) {
             Classroom::create([
                 'slug' => Str::uuid()->toString(),
                 'name' => $item

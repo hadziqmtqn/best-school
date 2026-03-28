@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
+            $table->text('slug');
             $table->string('name');
             $table->unsignedBigInteger('educational_level_id');
             $table->string('npsn')->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->string('date_establishment_decree')->nullable();
             $table->string('operational_permit_decree')->nullable();
             $table->string('date_operational_permit_decree')->nullable();
+            $table->json('more_info')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -8,6 +8,7 @@ use App\Repositories\References\EducationalLevelRepository;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\RichEditor\ToolbarButtonGroup;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -86,7 +87,8 @@ class InstitutionForm
                                     ->columnSpanFull()
                                     ->toolbarButtons([
                                         ['bold', 'italic', 'underline', 'link'],
-                                        ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
+                                        [ToolbarButtonGroup::make('Paragraph', ['paragraph', 'h1', 'h2', 'h3', 'h4', 'h5'])],
+                                        [ToolbarButtonGroup::make('Alignment', ['alignStart', 'alignCenter', 'alignEnd', 'alignJustify'])],
                                         ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
                                         ['table', 'attachFiles'],
                                         ['undo', 'redo'],

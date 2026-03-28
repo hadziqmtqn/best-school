@@ -1,9 +1,28 @@
 [
   {
+    "educational_level": "SMP",
+    "name": "SMP Nusantara",
+    "npsn": "11221122112",
+    "email": "smp@nusantara.edu",
+    "phone_number": "(021) 12345678",
+    "province": "JAWA BARAT",
+    "city": "KABUPATEN BANDUNG",
+    "district": "CICALENGKA",
+    "village": "DAMPIT",
+    "street": "Jlanin Aja",
+    "postal_code": "11211",
+    "status": "Negeri",
+    "school_establishment_decree": "1/22P/A.OP/1995",
+    "date_establishment_decree": "2010-09-10",
+    "operational_permit_decree": "2011.3/752A-DISDIK/DIKMEN",
+    "date_operational_permit_decree": "2024-10-11",
+    "profile": "<h5>Sejarah &amp; Profil Singkat</h5><p>SMP Nusantara didirikan dengan semangat mencerdaskan kehidupan bangsa, memadukan IPTEK dengan penguatan IMTAQ dan karakter building. Sejak berdiri, kami telah menjadi pelopor metode edukasi holistik yang diakui bertaraf internasional.</p><p>Dengan lebih dari ribuan alumni berprestasi, sekolah ini terus mengadopsi kemajuan digital sembari menjaga akar budaya bangsa. Kini kami memiliki lebih dari 75+ pendidik bersertifikasi siap membimbing para siswa menjadi juara di bidang masing-masing.</p>"
+  },
+  {
     "educational_level": "SMA",
     "name": "SMAN Nusantara",
     "npsn": "1111111111",
-    "email": "smp@nusantara.edu",
+    "email": "sma@nusantara.edu",
     "phone_number": "(021) 12345678",
     "province": "JAWA BARAT",
     "city": "KABUPATEN BANDUNG",
@@ -15,6 +34,7 @@
     "school_establishment_decree": "1/22P/A.OP/1992",
     "date_establishment_decree": "1998-09-10",
     "operational_permit_decree": "1000.3/752A-DISDIK/DIKMEN",
-    "date_operational_permit_decree": "2023-10-11"
+    "date_operational_permit_decree": "2023-10-11",
+    "profile": "<h5>Sejarah &amp; Profil Singkat</h5><p>SMA Negeri Nusantara didirikan dengan semangat mencerdaskan kehidupan bangsa, memadukan IPTEK dengan penguatan IMTAQ dan karakter building. Sejak berdiri, kami telah menjadi pelopor metode edukasi holistik yang diakui bertaraf internasional.</p><p>Dengan lebih dari ribuan alumni berprestasi, sekolah ini terus mengadopsi kemajuan digital sembari menjaga akar budaya bangsa. Kini kami memiliki lebih dari 75+ pendidik bersertifikasi siap membimbing para siswa menjadi juara di bidang masing-masing.</p>"
   }
 ]

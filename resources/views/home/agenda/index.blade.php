@@ -28,9 +28,9 @@
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <label class="form-label fw-bold small text-muted text-uppercase" for="years">Bulan</label>
+                            <label class="form-label fw-bold small text-muted text-uppercase" for="years">Tahun</label>
                             <select class="form-select" id="years" name="year">
-                                <option value="" @selected(!request('year'))>Semua Bulan</option>
+                                <option value="" @selected(!request('year'))>Semua Tahun</option>
                                 @foreach($years as $key => $year)
                                     <option value="{{ $key }}" @selected(request('year') == $key)>{{ $year }}</option>
                                 @endforeach
