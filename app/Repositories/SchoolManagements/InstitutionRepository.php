@@ -4,6 +4,7 @@ namespace App\Repositories\SchoolManagements;
 
 use App\Helpers\UserRole;
 use App\Models\Institution;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -47,5 +48,10 @@ class InstitutionRepository
             ],
             'profile' => $institution->profile
         ];
+    }
+
+    public function vision(Institution $institution): ?string
+    {
+        return Post::find($institution->more_info['vision_page_id'] ?? null)?->content;
     }
 }

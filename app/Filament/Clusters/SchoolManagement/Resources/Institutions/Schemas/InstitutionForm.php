@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\SchoolManagement\Resources\Institutions\Schemas;
 
 use App\Filament\GlobalSchemas\IdnLocationForm;
 use App\Models\EducationalLevel;
+use App\Repositories\Posts\NavigationPageRepository;
 use App\Repositories\References\EducationalLevelRepository;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -101,7 +102,13 @@ class InstitutionForm
                                             'tableToggleHeaderRow', 'tableToggleHeaderCell',
                                             'tableDelete',
                                         ],
-                                    ])
+                                    ]),
+
+                                Select::make('more_info.vision_page_id')
+                                    ->label('Halaman Visi dan Misi')
+                                    ->options(fn(NavigationPageRepository $repository): array => $repository->options())
+                                    ->native(false)
+                                    ->columnSpanFull()
                             ]),
 
                         Tabs\Tab::make('Kontak')

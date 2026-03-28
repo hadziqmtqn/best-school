@@ -13,9 +13,8 @@
                 <div class="col-lg-8" data-aos="fade-right">
                     <form action="{{ route('school-identity.index') }}" method="get" class="mb-3">
                         <select class="form-select filter-input" id="institutionFilter" name="institution" onchange="this.form.submit()">
-                            <option value="">Pilih Lembaga</option>
                             @foreach($institutions as $institution)
-                                <option value="{{ $institution->slug }}" @selected(request('institution') == $institution->slug)>
+                                <option value="{{ $institution->slug }}" @selected(request('institution') ? request('institution') == $institution->slug : $loop->first)>
                                     {{ $institution->name }}
                                 </option>
                             @endforeach
@@ -29,6 +28,12 @@
                                     <li class="nav-item" role="presentation">
                                         <button type="button" class="nav-link fw-bold waves-effect active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-school-identity" aria-controls="navs-school-identity" aria-selected="false" tabindex="-1">Identitas</button>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button type="button" class="nav-link fw-bold waves-effect" role="tab" data-bs-toggle="tab" data-bs-target="#navs-vision" aria-controls="navs-vision" aria-selected="false" tabindex="-1">Visi & Misi</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button type="button" class="nav-link fw-bold waves-effect" role="tab" data-bs-toggle="tab" data-bs-target="#navs-extracurricular" aria-controls="navs-extracurricular" aria-selected="false" tabindex="-1">Ekskul</button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -38,8 +43,12 @@
                             {{--==== END SCHOOL IDENTITY ====--}}
 
                             {{--==== START MISSION ====--}}
-                            @include('home.school-identity.identity')
+                            @include('home.school-identity.vision')
                             {{--==== END MISSION ====--}}
+
+                            {{--==== START EXTRACURRICULAR ====--}}
+                            @include('home.extracurricular.index')
+                            {{--==== END EXTRACURRICULAR ====--}}
                         </div>
                     </div>
                 </div>

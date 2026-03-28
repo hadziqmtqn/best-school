@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\Home\AchievementController;
 use App\Http\Controllers\Home\AgendaController;
-use App\Http\Controllers\Home\ExtracurricularController;
 use App\Http\Controllers\Home\GalleryController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\LeadershipGreetingController;
@@ -24,10 +22,6 @@ Route::get('leadership-greeting', [LeadershipGreetingController::class, 'index']
 Route::get('agenda', [AgendaController::class, 'index'])->name('agenda.index');
 
 Route::get('school-identity', [SchoolIdentityController::class, 'index'])->name('school-identity.index');
-
-Route::get('extracurricular', [ExtracurricularController::class, 'index'])->name('extracurricular.index');
-
-Route::get('achievement', [AchievementController::class, 'index'])->name('achievement.index');
 
 Route::prefix('gallery')->group(function () {
     Route::get('/photo', [GalleryController::class, 'photo'])->name('gallery.photo');
