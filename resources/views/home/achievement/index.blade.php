@@ -11,13 +11,10 @@
             <div class="row g-4">
                 <!-- Kiri: Tabs Utama -->
                 <div class="col-lg-8" data-aos="fade-right">
-                    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" data-aos="fade-left">
-                        <div class="card-header bg-primary text-white p-4 border-0">
-                            <h5 class="fw-bold mb-0">{{ $title }}</h5>
-                        </div>
-                        <div class="card-body p-4">
+                    <div class="card table-card">
+                        <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table table-bordered text-nowrap w-100">
+                                <table class="table table-bordered text-nowrap w-100 custom-table">
                                     <thead>
                                     <tr>
                                         <th>Nama</th>

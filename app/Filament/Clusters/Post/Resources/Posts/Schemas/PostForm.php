@@ -11,6 +11,7 @@ use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\RichEditor\ToolbarButtonGroup;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TagsInput;
@@ -54,8 +55,9 @@ class PostForm
                                     ->fileAttachmentsAcceptedFileTypes(['image/*'])
                                     ->placeholder('Masukkan konten')
                                     ->toolbarButtons([
-                                        ['bold', 'italic', 'underline', 'link'],
-                                        ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        [ToolbarButtonGroup::make('Paragraph', ['paragraph', 'h1', 'h2', 'h3', 'h4', 'h5'])],
+                                        [ToolbarButtonGroup::make('Alignment', ['alignStart', 'alignCenter', 'alignEnd', 'alignJustify'])],
                                         ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
                                         ['table', 'attachFiles'],
                                         ['undo', 'redo'],

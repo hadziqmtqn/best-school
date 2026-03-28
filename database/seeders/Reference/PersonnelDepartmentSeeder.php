@@ -10,11 +10,11 @@ class PersonnelDepartmentSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach ($this->list() as $index => $item) {
+        foreach ($this->list() as $item) {
             PersonnelDepartment::create([
-                'slug' => Str::slug($item),
-                'name' => $item,
-                'level' => $index + 1
+                'slug' => Str::slug($item['name']),
+                'name' => $item['name'],
+                'level' => $item['level']
             ]);
         }
     }
@@ -22,18 +22,54 @@ class PersonnelDepartmentSeeder extends Seeder
     private function list(): array
     {
         return [
-            'Kepala Sekolah',
-            'Wakil Kepala Sekolah',
-            'Wali Kelas',
-            'Guru Pengganti',
-            'Bendahara',
-            'Sekretaris',
-            'Guru Bimbingan dan Konseling',
-            'Tata Usaha',
-            'Pustakawan',
-            'Penjaga Sekolah',
-            'Petugas Kebersihan',
-            'Pengemudi/Pesuruh'
+            [
+                'name' => 'Kepala Sekolah',
+                'level' => 1
+            ],
+            [
+                'name' => 'Wakil Kepala Sekolah',
+                'level' => 1
+            ],
+            [
+                'name' => 'Bendahara',
+                'level' => 2
+            ],
+            [
+                'name' => 'Sekretaris',
+                'level' => 2
+            ],
+            [
+                'name' => 'Wali Kelas',
+                'level' => 3
+            ],
+            [
+                'name' => 'Guru Pengganti',
+                'level' => 3
+            ],
+            [
+                'name' => 'Guru Bimbingan dan Konseling',
+                'level' => 3
+            ],
+            [
+                'name' => 'Tata Usaha',
+                'level' => 4
+            ],
+            [
+                'name' => 'Pustakawan',
+                'level' => 4
+            ],
+            [
+                'name' => 'Penjaga Sekolah',
+                'level' => 4
+            ],
+            [
+                'name' => 'Petugas Kebersihan',
+                'level' => 4
+            ],
+            [
+                'name' => 'Pengemudi/Pesuruh',
+                'level' => 4
+            ],
         ];
     }
 }

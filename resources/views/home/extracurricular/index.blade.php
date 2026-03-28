@@ -22,8 +22,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card-body p-4">
-                            <table class="table table-bordered w-100">
+                        <div class="card-body p-0">
+                            <table class="table table-bordered w-100 custom-table">
                                 <thead>
                                 <tr>
                                     <th>Ekstrakurikuler</th>
