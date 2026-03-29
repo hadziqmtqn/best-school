@@ -41,7 +41,7 @@ class SchoolIdentityController extends Controller
         $schoolIdentity = $this->institutionRepository->identity($currentInstitution);
         $vision = $this->institutionRepository->vision($currentInstitution);
         $extracurriculars = $this->extracurricularRepository->index($currentInstitution);
-        $achievements = $this->achievementRepository->index($currentInstitution, 3);
+        $achievements = $this->achievementRepository->index($currentInstitution);
 
         return \view('home.school-identity.index', compact(
             'title',

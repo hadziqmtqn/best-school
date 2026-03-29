@@ -13,10 +13,7 @@
                     <form action="{{ route('agenda.index') }}" class="row g-3 align-items-end" method="GET">
                         <div class="col-lg-4 col-md-12">
                             <label class="form-label fw-bold small text-muted text-uppercase" for="search">Cari Agenda</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-success"></i></span>
-                                <input type="search" name="search" id="search" class="form-control border-start-0" value="{{ request('search') }}" placeholder="Ketik kata kunci...">
-                            </div>
+                            <input type="search" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Ketik kata kunci...">
                         </div>
                         <div class="col-lg-3 col-md-4">
                             <label class="form-label fw-bold small text-muted text-uppercase" for="months">Bulan</label>
@@ -106,7 +103,7 @@
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" data-aos="fade-left">
                         <div class="card-header bg-success text-white p-4 border-0">
-                            <h5 class="fw-bold mb-0"><i class="bi bi-info-circle me-2"></i>Pengumuman Penting</h5>
+                            <h5 class="fw-bold mb-0">Pengumuman Penting</h5>
                         </div>
                         <div class="card-body p-4">
                             <div class="mb-4">

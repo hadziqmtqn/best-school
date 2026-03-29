@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -56,5 +58,23 @@ class Announcement extends Model implements HasMedia
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institution::class);
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function searchData(Builder $query, $search): Builder
+    {
+        if ($search) {
+            $query->whereLike('name', '%' . $search . '%')
+                ->orWhereHas('institution', fn($query) => $query->whereLike('name', '%' . $search . '%'));
+        }
+
+        return $query;
+    }
+
+    #[Scope]
+    protected function filterByStatus(Builder $query, $status): Builder
+    {
+        return $query->where('status', $status);
     }
 }

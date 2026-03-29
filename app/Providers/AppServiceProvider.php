@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Post;
 use App\Observers\PostObserver;
 use App\Repositories\Event\AgendaRepository;
+use App\Repositories\Event\AnnouncementRepository;
 use App\Repositories\Event\GalleryRepository;
 use App\Repositories\Posts\LeadershipGreetingRepository;
 use App\Repositories\Posts\NavigationPageRepository;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // EVENT
         $this->app->bind(AgendaRepository::class, AgendaRepository::class);
+        $this->app->bind(AnnouncementRepository::class, AnnouncementRepository::class);
         $this->app->bind(GalleryRepository::class, GalleryRepository::class);
 
         // POSTS

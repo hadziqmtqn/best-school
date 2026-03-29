@@ -9,7 +9,6 @@
                     <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Lembaga</th>
                         <th>Tahun</th>
                         <th>Tingkat</th>
                         <th>Deskripsi</th>
@@ -19,7 +18,6 @@
                     @foreach($achievements as $achievement)
                         <tr>
                             <td>{{ $achievement->name }}</td>
-                            <td>{{ $achievement->institution?->name }}</td>
                             <td>{{ $achievement->year }}</td>
                             <td><span class="badge bg-label-{{ AchievementLevel::tryFrom($achievement->achievement_level)?->getColor() ?? 'secondary' }}">{{ $achievement->achievement_level }}</span></td>
                             <td>
