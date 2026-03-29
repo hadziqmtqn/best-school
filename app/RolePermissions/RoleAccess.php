@@ -15,6 +15,7 @@ use App\Filament\Clusters\Reference\Resources\PersonnelDepartments\PersonnelDepa
 use App\Filament\Clusters\Reference\Resources\Rombels\RombelResource;
 use App\Filament\Clusters\Reference\Resources\SchoolYears\SchoolYearResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Achievements\AchievementResource;
+use App\Filament\Clusters\SchoolManagement\Resources\EmployeePositions\EmployeePositionResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Institutions\InstitutionResource;
@@ -236,6 +237,15 @@ class RoleAccess
                 'restore_any' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete' => array_keys(BaseRole::options(['super_admin'])),
                 'force_delete_any' => array_keys(BaseRole::options(['super_admin'])),
+            ],
+
+            EmployeePositionResource::class => [
+                'view_any' => array_keys(BaseRole::options(['super_admin'])),
+                'create' => array_keys(BaseRole::options(['super_admin'])),
+                'update' => array_keys(BaseRole::options(['super_admin'])),
+                'delete' => array_keys(BaseRole::options(['super_admin'])),
+                'restore' => array_keys(BaseRole::options(['super_admin'])),
+                'force_delete' => array_keys(BaseRole::options(['super_admin'])),
             ],
         ];
     }

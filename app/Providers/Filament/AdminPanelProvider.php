@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Teal,
             ])
+            ->font('Poppins')
             ->brandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('2.5rem')
             ->favicon(asset('assets/bekenweb-logo.png'))

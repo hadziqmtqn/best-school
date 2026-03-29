@@ -11,6 +11,7 @@ use App\Filament\Clusters\Post\Resources\PostCategories\PostCategoryResource;
 use App\Filament\Clusters\Post\Resources\Posts\PostResource;
 use App\Filament\Clusters\Reference\ReferenceCluster;
 use App\Filament\Clusters\SchoolManagement\Resources\Achievements\AchievementResource;
+use App\Filament\Clusters\SchoolManagement\Resources\EmployeePositions\EmployeePositionResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Extracurriculars\ExtracurricularResource;
 use App\Filament\Clusters\SchoolManagement\Resources\Facilities\FacilityResource;
@@ -51,6 +52,7 @@ class PanelNavigation
                     ->items([
                         ...self::filterResourceNavigationItems(InstitutionResource::class),
                         ...self::filterCustomResourceNavigationItems(EmployeeResource::class, 'ViewAnyEmployee'),
+                        ...self::filterResourceNavigationItems(EmployeePositionResource::class),
                         ...self::filterResourceNavigationItems(FacilityResource::class),
                         ...self::filterResourceNavigationItems(ExtracurricularResource::class),
                         ...self::filterResourceNavigationItems(NumberOfStudentResource::class),

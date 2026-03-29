@@ -43,6 +43,11 @@ class EmployeePosition extends Model
         });
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     // TODO RELATHIONSHIP
     public function institution(): BelongsTo
     {
