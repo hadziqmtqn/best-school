@@ -34,6 +34,9 @@
                                     <li class="nav-item" role="presentation">
                                         <button type="button" class="nav-link fw-bold waves-effect" role="tab" data-bs-toggle="tab" data-bs-target="#navs-extracurricular" aria-controls="navs-extracurricular" aria-selected="false" tabindex="-1">Ekskul</button>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button type="button" class="nav-link fw-bold waves-effect" role="tab" data-bs-toggle="tab" data-bs-target="#navs-achievement" aria-controls="navs-achievement" aria-selected="false" tabindex="-1">Prestasi</button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -49,6 +52,10 @@
                             {{--==== START EXTRACURRICULAR ====--}}
                             @include('home.extracurricular.index')
                             {{--==== END EXTRACURRICULAR ====--}}
+
+                            {{--==== START ACHIEVEMENT ====--}}
+                            @include('home.achievement.index')
+                            {{--==== END ACHIEVEMENT ====--}}
                         </div>
                     </div>
                 </div>

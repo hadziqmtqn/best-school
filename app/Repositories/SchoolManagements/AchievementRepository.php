@@ -4,6 +4,7 @@ namespace App\Repositories\SchoolManagements;
 
 use App\Enums\AchievementLevel;
 use App\Models\Achievement;
+use App\Models\Institution;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use LaravelIdea\Helper\App\Models\_IH_Achievement_C;
@@ -17,12 +18,13 @@ class AchievementRepository
             ->count();
     }
 
-    public function index(?int $perPage = 10): LengthAwarePaginator|_IH_Achievement_C|AbstractPaginator
+    public function index(Institution $institution, ?int $perPage = 10): LengthAwarePaginator|_IH_Achievement_C|AbstractPaginator
     {
         return Achievement::query()
             ->with('institution:id,name')
+            ->institutionId($institution->id)
             ->orderByDesc('year')
-            ->paginate($perPage)
+            ->paginate($perPage, ['*'], 'achievement_page')
             ->withQueryString();
     }
 }

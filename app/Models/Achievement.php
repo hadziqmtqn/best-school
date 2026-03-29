@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -46,5 +48,12 @@ class Achievement extends Model implements HasMedia
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institution::class);
+    }
+
+    // TODO SCOPES
+    #[Scope]
+    protected function institutionId(Builder $query, $institutionId): Builder
+    {
+        return $query->where('institution_id', $institutionId);
     }
 }
