@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\SchoolManagement\Resources\Employees\Tables;
 
 use App\Models\PersonnelDepartment;
+use App\Repositories\SchoolManagements\InstitutionRepository;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -51,6 +52,18 @@ class EmployeesTable
             ->deferLoading()
             ->defaultSort('name')
             ->filters([
+                SelectFilter::make('institution')
+                    ->label('Lembaga')
+                    ->options(fn(InstitutionRepository $institutionRepository): array => $institutionRepository->options())
+                    ->native(false)
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when($data['value'], function (Builder $query) use ($data) {
+                            $query->whereHas('homebaseActive', function ($query) use ($data) {
+                                $query->where('institution_id', $data['value']);
+                            });
+                        });
+                    }),
+
                 SelectFilter::make('personnel_department')
                     ->label('Jabatan')
                     ->options(function (): array {

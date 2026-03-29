@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Home\AgendaController;
+use App\Http\Controllers\Home\AnnouncementController;
 use App\Http\Controllers\Home\GalleryController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\LeadershipGreetingController;
@@ -27,3 +28,5 @@ Route::prefix('gallery')->group(function () {
     Route::get('/photo', [GalleryController::class, 'photo'])->name('gallery.photo');
     Route::get('/video', [GalleryController::class, 'video'])->name('gallery.video');
 });
+
+Route::get('announcement', [AnnouncementController::class, 'index'])->name('announcement.index');

@@ -12,16 +12,18 @@ use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Random\RandomException;
 
 class EmployeeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * @throws RandomException
      */
     public function run(): void
     {
         $schoolYear = SchoolYear::where('is_active', true)->first();
-        $institutionId = Institution::inRandomOrder()->value('id');
+        $institutions = Institution::all();
 
         $generalDepartments = PersonnelDepartment::whereNotIn('id', [1, 2, 6, 8])
             ->pluck('id')
@@ -29,58 +31,59 @@ class EmployeeSeeder extends Seeder
 
         $specialDepartments = [6, 8];
 
-        // Kepala sekolah
-        $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 1);
+        foreach ($institutions as $institution) {
+            $institutionId = $institution->id;
 
-        // Wakil kepala sekolah
-        $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 2);
+            // Kepala sekolah
+            $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 1);
 
-        // Guru & staff umum
-        $this->seedUsers(count: 20, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: fn () =>
-        $generalDepartments[array_rand($generalDepartments)]
-        );
+            // Wakil kepala sekolah
+            $this->seedUsers(count: 1, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: 2);
 
-        // Staff khusus
-        $this->seedUsers(
-            count: 4,
-            schoolYear: $schoolYear,
-            institutionId: (int) $institutionId,
-            departmentResolver: fn () => $specialDepartments[array_rand($specialDepartments)],
-            afterUserCreated: fn (User $user) => $user->assignRole(random_int(2, 3))
-        );
+            // Guru & staff umum
+            $this->seedUsers(count: 20, schoolYear: $schoolYear, institutionId: (int) $institutionId, departmentResolver: fn () =>
+                $generalDepartments[array_rand($generalDepartments)]
+            );
+
+            // Staff khusus
+            $this->seedUsers(
+                count: 4,
+                schoolYear: $schoolYear,
+                institutionId: (int) $institutionId,
+                departmentResolver: fn () => $specialDepartments[array_rand($specialDepartments)],
+                afterUserCreated: fn (User $user) => $user->assignRole(random_int(2, 3))
+            );
+        }
     }
 
     private function seedUsers(int $count, ?SchoolYear $schoolYear, int $institutionId, int|callable $departmentResolver, ?callable $afterUserCreated = null): void
     {
-        User::factory($count)->create()->each(function (User $user) use ($schoolYear, $institutionId, $departmentResolver, $afterUserCreated) {
+        $faker = Factory::create('id_ID');
+
+        for ($i = 0; $i < $count; $i++) {
+            // 1. Acak gender dan nama di awal agar sinkron
+            $gender = $faker->randomElement(['male', 'female']);
+            $name = $faker->name($gender);
+            $username = Str::slug($name);
+
+            // 2. Buat User dengan nama yang sudah sesuai gender
+            $user = User::factory()->create([
+                'name' => $name,
+                'username' => $username,
+                'email' => $username . '@bkn.my.id',
+            ]);
+
             if ($afterUserCreated) {
                 $afterUserCreated($user);
             }
 
-            $this->createEmployee($user->id);
+            // 3. Buat Employee dan teruskan gendernya ke sini
+            $this->createEmployee($user->id, $gender);
             $this->createHomebase($user->id, $institutionId);
 
             $departmentId = is_callable($departmentResolver)
                 ? $departmentResolver()
                 : $departmentResolver;
-
-            $faker = Factory::create('id_ID');
-
-            $name = $faker->name('male');
-            $username = Str::slug($name);
-
-            if (is_numeric($departmentResolver) && $departmentResolver == 1) {
-                $user->update([
-                    'username' => $username,
-                    'name' => $name,
-                    'email' => $username . '@bkn.my.id',
-                ]);
-
-                Employee::where('user_id', $user->id)
-                    ->update([
-                        'gender' => 'male'
-                    ]);
-            }
 
             $this->createEmployeePosition(
                 $user->id,
@@ -88,10 +91,10 @@ class EmployeeSeeder extends Seeder
                 $institutionId,
                 $departmentId
             );
-        });
+        }
     }
 
-    private function createEmployee($userId): void
+    private function createEmployee($userId, string $gender): void
     {
         $faker = Factory::create('id_ID');
 
@@ -103,7 +106,8 @@ class EmployeeSeeder extends Seeder
             'nuptk' => $faker->numerify('##########'),
             'place_of_birth' => $faker->city(),
             'date_of_birth' => $faker->dateTimeBetween('-40 years', now()->subYears(20)),
-            'religion' => 'Islam'
+            'religion' => 'Islam',
+            'gender' => $gender // Gender sekarang tersimpan untuk semua employee
         ]);
     }
 

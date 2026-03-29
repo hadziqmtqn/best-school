@@ -7,7 +7,7 @@ use App\Filament\Clusters\SchoolManagement\Resources\Employees\Actions\EditAccou
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\Actions\EditEmployeeAction;
 use App\Filament\Clusters\SchoolManagement\Resources\Employees\EmployeeResource;
 use App\Models\User;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Group;
@@ -39,12 +39,8 @@ class ViewEmployee extends ViewRecord
                         Section::make('Foto Profil')
                             ->columnSpanFull()
                             ->schema([
-                                SpatieMediaLibraryImageEntry::make('avatar')
-                                    ->label('Foto')
+                                ImageEntry::make('avatar')
                                     ->hiddenLabel()
-                                    ->disk('s3_public')
-                                    ->collection('avatar')
-                                    ->visibility('public')
                                     ->imageWidth('100%')
                                     ->imageHeight('auto')
                             ])
@@ -76,7 +72,7 @@ class ViewEmployee extends ViewRecord
                                     ->isoDate('D MMM Y'),
 
                                 TextEntry::make('employee.gender')
-                                    ->label('JK.')
+                                    ->label('Jenis Kelamin')
                                     ->formatStateUsing(fn($state): string => Gender::tryFrom($state)?->getLabel() ?? $state),
 
                                 TextEntry::make('employee.religion')

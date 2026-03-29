@@ -11,14 +11,14 @@ enum Gender: string implements HasLabel
     use EnumOption;
 
     case MALE = 'male';
-    case FAMALE = 'famale';
+    case FEMALE = 'female';
 
     public function getLabel(): string|Htmlable|null
     {
         // TODO: Implement getLabel() method.
         return match ($this) {
             self::MALE => 'Laki-laki',
-            self::FAMALE => 'Perempuan'
+            self::FEMALE => 'Perempuan'
         };
     }
 }

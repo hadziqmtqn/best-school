@@ -124,7 +124,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser, HasAppAuth
         return Attribute::make(
             get: fn() => $this->hasMedia('avatar')
                 ? $this->getFirstTemporaryUrl(now()->addHour(), 'avatar')
-                : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&size=128&background=00bb00&color=ffffff&rounded=true',
+                : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&size=128&background=00bb00&color=ffffff&rounded=false',
         );
     }
 }
